@@ -1,0 +1,12 @@
+<resources>
+    <!--宽高距离-->
+    <dimen name="dis_40">40dp</dimen>
+    <dimen name="dis_25">25dp</dimen>
+    <dimen name="dis_44">44dp</dimen>
+    <!--间距-->
+    <dimen name="margin_12">12dp</dimen>
+    <dimen name="margin_24">24dp</dimen>
+    <!--字体-->
+    <dimen name="fontSize_14">14sp</dimen>
+    <dimen name="fontSize_18">18sp</dimen>
+</resources>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--系统颜色-->
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="color_primary">#3F51B5</color>
+    <!--自定义颜色-->
+    <color name="white">#FFFFFFFF</color>
+    <color name="transparent">#00000000</color>
+    <color name="colorTitleBg">#f9f9f9</color>
+    <color name="gray">#FFCCCCCC</color>
+    <color name="grey_bg">#c8c8c8</color>
+    <color name="colorBorder">#cdcdcd</color>
+    <color name="colorTitle">#0f0f0f</color>
+    <color name="colorBlue">#2397f3</color>
+    <color name="light_blue">#6593cb</color>
+    <color name="red">#D9534F</color>
+    <color name="colorYellow">#ffbf5b</color>
+
+</resources>
