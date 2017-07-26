@@ -4,9 +4,14 @@
     <dimen name="dis_25">25dp</dimen>
     <dimen name="dis_44">44dp</dimen>
     <!--间距-->
+    <dimen name="margin_3">3dp</dimen>
+    <dimen name="margin_8">8dp</dimen>
+    <dimen name="margin_10">10dp</dimen>
     <dimen name="margin_12">12dp</dimen>
     <dimen name="margin_24">24dp</dimen>
+    <dimen name="margin_49">49dp</dimen>
     <!--字体-->
+    <dimen name="fontSize_10">10sp</dimen>
     <dimen name="fontSize_14">14sp</dimen>
     <dimen name="fontSize_18">18sp</dimen>
 </resources>

@@ -5,9 +5,12 @@
 
     </style>
 
-    <style name="AppTheme.NoActionBar">
+    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
     <!-- 设置弹出窗口的属性，frame叠加，isfloat是否浮动，tarnslucent是否半透明，dim是背景是否变暗 -->
     <style name="Theme_audioDialog" parent="@android:style/Theme.Dialog">
@@ -21,5 +24,17 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="android:textColorPrimary">@color/white</item>
         <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="radioBtn">
+        <item name="android:width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:button">@null</item>
+        <item name="android:background">@null</item>
+        <item name="android:drawablePadding">@dimen/margin_3</item>
+        <item name="android:paddingTop">@dimen/margin_8</item>
+        <item name="android:textSize">@dimen/fontSize_10</item>
+        <item name="android:textColor">@drawable/navigation_bottom_textcolor</item>
     </style>
 </resources>

@@ -21,5 +21,10 @@
     <string name="tooshort">录音时间过短</string>
     <!--app字段相关-->
     <string name="next">下一步</string>
+    <string name="homePage">首页</string>
+    <string name="monitor">监控</string>
+    <string name="device">设备</string>
+    <string name="scene">场景</string>
+
 
 </resources>
