@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 应用主题颜色 -->
+    <integer-array name="default_color_array">
+        <item>0xFF0C89D8</item>
+        <item>0xFFB32CD1</item>
+        <item>0xFFF676C1</item>
+        <item>0xFF04BA19</item>
+        <item>0xFF18D9BF</item>
+    </integer-array>
+
+</resources>

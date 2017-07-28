@@ -25,6 +25,8 @@
     <string name="monitor">监控</string>
     <string name="device">设备</string>
     <string name="scene">场景</string>
+    <string name="app_motive">应用主题</string>
+    <string name="set_app_skin">设置应用主题颜色</string>
 
 
 </resources>

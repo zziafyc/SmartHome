@@ -1,12 +1,16 @@
 package com.zhongyong.smarthome;
 
+import android.content.Intent;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
 
+import com.zhongyong.smarthome.activity.MotiveActivity;
 import com.zhongyong.smarthome.base.BaseActivity;
 import com.zhongyong.smarthome.fragment.DeviceFragment;
 import com.zhongyong.smarthome.fragment.HomeFragment;
@@ -21,6 +25,10 @@ import butterknife.Bind;
 public class MainActivity extends BaseActivity {
     @Bind(R.id.nb_rg_naviBottom)
     RadioGroup mRadioGroup;
+    @Bind(R.id.am_changeTheme_ll)
+    LinearLayout changeThemeLay;
+    @Bind(R.id.nav_view)
+    NavigationView mNavigationView;
     HomeFragment mHomeFragment;
     MonitorFragment mMonitorFragment;
     DeviceFragment mDeviceFragment;
@@ -71,11 +79,20 @@ public class MainActivity extends BaseActivity {
                 }
             }
         });
+
+        changeThemeLay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, MotiveActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
     protected View getLoadingTargetView() {
-        RelativeLayout layout = (RelativeLayout) findViewById(R.id.content);
+        FrameLayout layout = (FrameLayout) findViewById(R.id.am_fl_fragmentcontainer);
         return layout;
     }
 
@@ -120,5 +137,4 @@ public class MainActivity extends BaseActivity {
         }
         mFragmentTransaction.commit();
     }
-
 }

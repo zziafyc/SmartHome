@@ -99,7 +99,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
             }
         };
 
-        NetworkStateReceiver.registerObserver(netObserver,this);
+        NetworkStateReceiver.registerObserver(netObserver, this);
 
         if (hasTitleBar()) {
             setCustomTitle(getTitle());
@@ -134,12 +134,16 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
         return null;
     }
 
-    protected  void onNetworkDisconnect(){
-        viewHelperController.showNetworkError(null);
+    protected void onNetworkDisconnect() {
+        if (viewHelperController != null) {
+            viewHelperController.showNetworkError(null);
+        }
     }
 
-    protected  void onNetworkConnected(){
-        viewHelperController.restore();
+    protected void onNetworkConnected() {
+        if (viewHelperController != null) {
+            viewHelperController.restore();
+        }
     }
 
     /**

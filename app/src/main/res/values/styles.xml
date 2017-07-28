@@ -37,4 +37,17 @@
         <item name="android:textSize">@dimen/fontSize_10</item>
         <item name="android:textColor">@drawable/navigation_bottom_textcolor</item>
     </style>
+
+    <style name="navi_img">
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">40dp</item>
+    </style>
+
+    <style name="navi_text">
+        <item name="android:textSize">@dimen/fontSize_16</item>
+        <item name="android:textColor">@color/colorTitle</item>
+        <item name="android:layout_marginLeft">@dimen/margin_12</item>
+        <item name="android:layout_marginTop">@dimen/margin_10</item>
+    </style>
+
 </resources>

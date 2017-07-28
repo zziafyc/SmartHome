@@ -8,6 +8,7 @@ import com.zhongyong.smarthome.base.BaseFragment;
  */
 
 public class HomeFragment extends BaseFragment {
+
     @Override
     protected int getContentViewLayout() {
         return R.layout.fragment_home;
@@ -30,6 +31,7 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     protected void initListener() {
+
 
     }
 }
