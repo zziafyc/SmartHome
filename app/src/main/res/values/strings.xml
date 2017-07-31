@@ -27,6 +27,9 @@
     <string name="scene">场景</string>
     <string name="app_motive">应用主题</string>
     <string name="set_app_skin">设置应用主题颜色</string>
+    <string name="createPerson">创建人</string>
+    <string name="familyPerson">家人</string>
+    <string name="declare">使用权限开启后成员将有权使用所有设备，请谨慎选择</string>
 
 
 </resources>

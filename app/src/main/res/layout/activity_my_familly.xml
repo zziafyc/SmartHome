@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorContentBg"
+    android:orientation="vertical"
+    tools:context="com.zhongyong.smarthome.activity.MyFamilyActivity">
+
+    <include layout="@layout/common_app_bar"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="46dp"
+        android:layout_marginLeft="@dimen/margin_12"
+        android:gravity="center_vertical"
+        android:text="@string/createPerson"
+        android:textSize="@dimen/fontSize_18"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/top_border"
+        android:paddingBottom="5dp">
+
+        <ImageView
+            android:id="@+id/amf_pic_iv"
+            android:layout_width="@dimen/dis_46"
+            android:layout_height="@dimen/dis_46"
+            android:layout_marginLeft="@dimen/margin_12"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/nickName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_12"
+            android:layout_marginTop="@dimen/margin_8"
+            android:layout_toRightOf="@+id/amf_pic_iv"
+            android:text="方应春"
+            android:textColor="@color/colorTitle"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/nickName"
+            android:layout_marginLeft="@dimen/margin_12"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/amf_pic_iv"
+            android:text="ID:fafjadfjalfdjal"/>
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="46dp"
+        android:layout_marginLeft="@dimen/margin_12"
+        android:gravity="center_vertical"
+        android:text="@string/familyPerson"
+        android:textSize="@dimen/fontSize_18"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/amf_myFamily_rv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/top_border"
+        android:scrollbars="none">
+    </android.support.v7.widget.RecyclerView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_12"
+        android:layout_marginTop="@dimen/margin_12"
+        android:text="@string/declare"/>
+
+</LinearLayout>

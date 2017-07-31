@@ -3,6 +3,7 @@
     <dimen name="dis_40">40dp</dimen>
     <dimen name="dis_25">25dp</dimen>
     <dimen name="dis_44">44dp</dimen>
+    <dimen name="dis_46">46dp</dimen>
     <!--间距-->
     <dimen name="margin_3">3dp</dimen>
     <dimen name="margin_8">8dp</dimen>

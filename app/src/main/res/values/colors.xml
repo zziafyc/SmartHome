@@ -19,6 +19,7 @@
     <color name="light_blue">#6593cb</color>
     <color name="red">#D9534F</color>
     <color name="colorYellow">#ffbf5b</color>
+    <color name="colorContentBg">#eae9e7</color>
 
 
 </resources>

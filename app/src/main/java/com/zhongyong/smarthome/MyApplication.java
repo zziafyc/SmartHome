@@ -7,13 +7,19 @@ import com.zhongyong.smarthome.utils.MyPreference;
 
 public class MyApplication extends Application {
 
-	public static MyPreference mPreference;
+    public static MyPreference mPreference;
+    private static MyApplication instance;
 
-	@Override
-	public void onCreate() {
-		super.onCreate();
+    public static MyApplication getInstance() {
+        return instance;
+    }
 
-		mPreference = new MyPreference(getApplicationContext());
 
-	}
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        instance = this;
+        mPreference = new MyPreference(getApplicationContext());
+
+    }
 }

@@ -5,17 +5,23 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 
 import com.zhongyong.smarthome.activity.MotiveActivity;
+import com.zhongyong.smarthome.activity.MyFamilyActivity;
 import com.zhongyong.smarthome.base.BaseActivity;
 import com.zhongyong.smarthome.fragment.DeviceFragment;
 import com.zhongyong.smarthome.fragment.HomeFragment;
 import com.zhongyong.smarthome.fragment.MonitorFragment;
 import com.zhongyong.smarthome.fragment.SceneFragment;
+import com.zhongyong.smarthome.model.ColorManager;
+import com.zhongyong.smarthome.widget.ColorLinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,12 +29,18 @@ import java.util.List;
 import butterknife.Bind;
 
 public class MainActivity extends BaseActivity {
+    @Bind(R.id.drawer_layout)
+    DrawerLayout mDrawerLayout;
     @Bind(R.id.nb_rg_naviBottom)
     RadioGroup mRadioGroup;
     @Bind(R.id.am_changeTheme_ll)
     LinearLayout changeThemeLay;
     @Bind(R.id.nav_view)
     NavigationView mNavigationView;
+    @Bind(R.id.item1_rv)
+    RelativeLayout item1;
+    @Bind(R.id.titleBar)
+    ColorLinearLayout mLayout;
     HomeFragment mHomeFragment;
     MonitorFragment mMonitorFragment;
     DeviceFragment mDeviceFragment;
@@ -45,7 +57,12 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initViews() {
         initFragment();
+        initTheme();
+    }
 
+    public void initTheme() {
+        ColorManager.getInstance().setSkinColor(MainActivity.this,
+                MyApplication.mPreference.getSkinColorPosition());
     }
 
     @Override
@@ -88,6 +105,14 @@ public class MainActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
+        item1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDrawerLayout.closeDrawer(GravityCompat.START);
+                go(MyFamilyActivity.class);
+            }
+        });
+
     }
 
     @Override
@@ -137,4 +162,5 @@ public class MainActivity extends BaseActivity {
         }
         mFragmentTransaction.commit();
     }
+
 }

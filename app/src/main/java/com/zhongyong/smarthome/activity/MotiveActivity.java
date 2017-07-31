@@ -37,6 +37,7 @@ public class MotiveActivity extends BaseActivity {
             }
             color.setOnClickListener(new OnSkinColorClickListener(i));
         }
+
     }
 
     @Override
