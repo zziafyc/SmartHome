@@ -21,5 +21,11 @@
     <color name="colorYellow">#ffbf5b</color>
     <color name="colorContentBg">#eae9e7</color>
 
+    <color name="green_normal">#37C000</color>
+    <color name="green_pressed">#30A070</color>
+    <color name="purple_normal">#9932CC</color>
+    <color name="purple_pressed">#9F79EE</color>
+
+
 
 </resources>

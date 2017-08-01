@@ -4,6 +4,9 @@
     <dimen name="dis_25">25dp</dimen>
     <dimen name="dis_44">44dp</dimen>
     <dimen name="dis_46">46dp</dimen>
+    <dimen name="dp_10">10dp</dimen>
+    <dimen name="dp_70">70dp</dimen>
+    <dimen name="dp_90">90dp</dimen>
     <!--间距-->
     <dimen name="margin_3">3dp</dimen>
     <dimen name="margin_8">8dp</dimen>

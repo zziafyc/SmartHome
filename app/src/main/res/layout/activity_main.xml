@@ -54,8 +54,6 @@
         android:background="@android:color/white"
         android:clipToPadding="false"
         android:fitsSystemWindows="true"
-        app:arc_cropDirection="cropInside"
-        app:arc_width="96dp"
         app:headerLayout="@layout/nav_header_main"
         app:itemBackground="@android:color/white">
         <!-- 列表部分-->
