@@ -39,6 +39,8 @@ public class MainActivity extends BaseActivity {
     NavigationView mNavigationView;
     @Bind(R.id.item1_rv)
     RelativeLayout item1;
+    @Bind(R.id.item2_rv)
+    RelativeLayout item2;
     @Bind(R.id.titleBar)
     ColorLinearLayout mLayout;
     HomeFragment mHomeFragment;

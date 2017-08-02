@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -11,6 +12,7 @@ import com.yanzhenjie.recyclerview.swipe.SwipeMenu;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuCreator;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuItem;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
+import com.yanzhenjie.recyclerview.swipe.touch.OnItemMoveListener;
 import com.yanzhenjie.recyclerview.swipe.widget.ListItemDecoration;
 import com.zhongyong.smarthome.R;
 import com.zhongyong.smarthome.base.BaseFragment;
@@ -20,6 +22,7 @@ import com.zhongyong.smarthome.base.recyclerview.ViewHolder;
 import com.zhongyong.smarthome.model.Device;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.Bind;
@@ -44,6 +47,7 @@ public class DeviceFragment extends BaseFragment {
     @Override
     protected void initViews() {
         recyclerView.setNestedScrollingEnabled(false);
+        recyclerView.setLongPressDragEnabled(true); // 开启拖拽。
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.addItemDecoration(new ListItemDecoration(ContextCompat.getColor(getActivity(), R.color.grey_bg)));
     }
@@ -89,11 +93,17 @@ public class DeviceFragment extends BaseFragment {
                     return TYPE_HEADER;
                 }
             }
+
+            @Override
+            public void onViewHolderCreated(ViewHolder holder, View itemView) {
+                super.onViewHolderCreated(holder, itemView);
+            }
         };
         mAdapter.addItemViewDelegate(TYPE_HEADER, new StickyDelegate());
         mAdapter.addItemViewDelegate(TYPE_CONTENT, new ContentDelegate());
-        recyclerView.setAdapter(mAdapter);
         // recyclerView.setSwipeMenuCreator(mSwipeMenuCreator);
+        recyclerView.setAdapter(mAdapter);
+
     }
 
     //头部item布局
@@ -141,15 +151,15 @@ public class DeviceFragment extends BaseFragment {
             if (device.getDeviceType() == 1) {
                 holder.setText(R.id.item_deviceName_tv, device.getDeviceName());
                 holder.setText(R.id.item_deviceId_tv, device.getDeviceId());
-                holder.setBackgroundRes(R.id.item_pic_iv,R.drawable.switchpic);
+                holder.setBackgroundRes(R.id.item_pic_iv, R.drawable.switchpic);
             } else if (device.getDeviceType() == 2) {
                 holder.setText(R.id.item_deviceName_tv, device.getDeviceName());
                 holder.setText(R.id.item_deviceId_tv, device.getDeviceId());
-                holder.setBackgroundRes(R.id.item_pic_iv,R.drawable.televisionpic);
+                holder.setBackgroundRes(R.id.item_pic_iv, R.drawable.televisionpic);
             } else if (device.getDeviceType() == 3) {
                 holder.setText(R.id.item_deviceName_tv, device.getDeviceName());
                 holder.setText(R.id.item_deviceId_tv, device.getDeviceId());
-                holder.setBackgroundRes(R.id.item_pic_iv,R.drawable.conditionpic);
+                holder.setBackgroundRes(R.id.item_pic_iv, R.drawable.conditionpic);
             } else {
                 holder.setText(R.id.item_deviceName_tv, device.getDeviceName());
                 holder.setText(R.id.item_deviceId_tv, device.getDeviceId());
@@ -162,10 +172,10 @@ public class DeviceFragment extends BaseFragment {
             holder.setOnClickListener(R.id.item_switch_iv, new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(device.getDeviceStatus()==0){
+                    if (device.getDeviceStatus() == 0) {
                         device.setDeviceStatus(1);
                         holder.setBackgroundRes(R.id.item_switch_iv, R.drawable.switch_on);
-                    }else{
+                    } else {
                         device.setDeviceStatus(0);
                         holder.setBackgroundRes(R.id.item_switch_iv, R.drawable.switch_off);
                     }
@@ -205,6 +215,30 @@ public class DeviceFragment extends BaseFragment {
 
     @Override
     protected void initListener() {
+        OnItemMoveListener mItemMoveListener = new OnItemMoveListener() {
+            @Override
+            public boolean onItemMove(RecyclerView.ViewHolder srcHolder, RecyclerView.ViewHolder targetHolder) {
+
+                int fromPosition = srcHolder.getAdapterPosition();
+                int toPosition = targetHolder.getAdapterPosition();
+                if (mList.get(fromPosition).getDeviceType() > 0 && mList.get(toPosition).getDeviceType() > 0) {
+                    // Item被拖拽时，交换数据，并更新adapter。
+                    Collections.swap(mList, fromPosition, toPosition);
+                    mAdapter.notifyItemMoved(fromPosition, toPosition);
+                }
+                return true;
+            }
+
+            @Override
+            public void onItemDismiss(RecyclerView.ViewHolder srcHolder) {
+                int position = srcHolder.getAdapterPosition();
+                // Item被侧滑删除时，删除数据，并更新adapter。
+                mList.remove(position);
+                mAdapter.notifyItemRemoved(position);
+            }
+        };
+        recyclerView.setOnItemMoveListener(mItemMoveListener);// 监听拖拽，更新UI。
+
 
     }
 }
