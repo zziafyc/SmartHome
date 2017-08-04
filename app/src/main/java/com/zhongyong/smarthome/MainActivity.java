@@ -9,12 +9,14 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 
-import com.zhongyong.smarthome.activity.MotiveActivity;
+import com.zhongyong.smarthome.activity.ThemeSettingActivity;
 import com.zhongyong.smarthome.activity.MyFamilyActivity;
+import com.zhongyong.smarthome.activity.NewSceneActivity;
 import com.zhongyong.smarthome.base.BaseActivity;
 import com.zhongyong.smarthome.fragment.DeviceFragment;
 import com.zhongyong.smarthome.fragment.HomeFragment;
@@ -43,6 +45,8 @@ public class MainActivity extends BaseActivity {
     RelativeLayout item2;
     @Bind(R.id.titleBar)
     ColorLinearLayout mLayout;
+    @Bind(R.id.cab_add_iv)
+    ImageView addIv;
     HomeFragment mHomeFragment;
     MonitorFragment mMonitorFragment;
     DeviceFragment mDeviceFragment;
@@ -84,15 +88,24 @@ public class MainActivity extends BaseActivity {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.nb_rb_homePage:
+                        setCustomTitle("中用智能家居");
+                        addIv.setVisibility(View.GONE);
                         showFragment(mHomeFragment);
+
                         break;
                     case R.id.nb_rb_monitor:
+                        setCustomTitle("视频监控");
+                        addIv.setVisibility(View.GONE);
                         showFragment(mMonitorFragment);
                         break;
                     case R.id.nb_rb_device:
+                        setCustomTitle("智能设备");
+                        addIv.setVisibility(View.GONE);
                         showFragment(mDeviceFragment);
                         break;
                     case R.id.nb_rb_scene:
+                        setCustomTitle("场景布置");
+                        addIv.setVisibility(View.VISIBLE);
                         showFragment(mSceneFragment);
                         break;
                 }
@@ -103,7 +116,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(MainActivity.this, MotiveActivity.class);
+                intent.setClass(MainActivity.this, ThemeSettingActivity.class);
                 startActivity(intent);
             }
         });
@@ -114,7 +127,12 @@ public class MainActivity extends BaseActivity {
                 go(MyFamilyActivity.class);
             }
         });
-
+        addIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                go(NewSceneActivity.class);
+            }
+        });
     }
 
     @Override

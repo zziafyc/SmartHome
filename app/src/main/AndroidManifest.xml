@@ -30,17 +30,17 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.MotiveActivity"
-            android:label="@string/app_name"
+            android:name=".activity.ThemeSettingActivity"
             android:screenOrientation="portrait">
         </activity>
         <activity android:name=".activity.MyFamilyActivity">
         </activity>
+        <activity android:name=".activity.NewSceneActivity"/>
+        <activity android:name=".activity.AddDeviceActivity"/>
     </application>
 
 </manifest>

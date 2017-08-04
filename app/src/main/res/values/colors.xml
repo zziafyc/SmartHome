@@ -14,12 +14,15 @@
     <color name="colorBorder">#cdcdcd</color>
     <color name="colorBlowLabel">#8e8e93</color>
     <color name="colorTitle">#0f0f0f</color>
+    <color name="colorText">#3a444e</color>
+    <color name="colorHint">#d2d2d2</color>
     <color name="black">#FF000000</color>
     <color name="colorBlue">#2397f3</color>
     <color name="light_blue">#6593cb</color>
     <color name="red">#D9534F</color>
     <color name="colorYellow">#ffbf5b</color>
     <color name="colorContentBg">#eae9e7</color>
+    <color name="turnOnRed">#F05079</color>
 
     <color name="green_normal">#37C000</color>
     <color name="green_pressed">#30A070</color>

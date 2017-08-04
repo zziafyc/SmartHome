@@ -1,25 +1,22 @@
-package com.zhongyong.smarthome.fragment;
+package com.zhongyong.smarthome.activity;
 
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.TextView;
 
-import com.yanzhenjie.recyclerview.swipe.SwipeMenu;
-import com.yanzhenjie.recyclerview.swipe.SwipeMenuCreator;
-import com.yanzhenjie.recyclerview.swipe.SwipeMenuItem;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
 import com.yanzhenjie.recyclerview.swipe.touch.OnItemMoveListener;
 import com.yanzhenjie.recyclerview.swipe.widget.ListItemDecoration;
 import com.zhongyong.smarthome.R;
-import com.zhongyong.smarthome.base.BaseFragment;
+import com.zhongyong.smarthome.base.BaseActivity;
 import com.zhongyong.smarthome.base.recyclerview.ItemViewDelegate;
 import com.zhongyong.smarthome.base.recyclerview.MultiItemTypeAdapter;
 import com.zhongyong.smarthome.base.recyclerview.ViewHolder;
 import com.zhongyong.smarthome.model.Device;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,63 +25,39 @@ import java.util.List;
 import butterknife.Bind;
 
 /**
- * Created by fyc on 2017/7/26.
+ * Created by fyc on 2017/8/3.
  */
 
-public class DeviceFragment extends BaseFragment {
+public class AddDeviceActivity extends BaseActivity {
     private static final int TYPE_HEADER = 51;
     private static final int TYPE_CONTENT = 52;
+    @Bind(R.id.title_right)
+    TextView finishTv;
     @Bind(R.id.fd_devices_sv)
     SwipeMenuRecyclerView recyclerView;
     MultiItemTypeAdapter<Device> mAdapter;
     List<Device> mList = new ArrayList<>();
+    List<Device> mChooseList=new ArrayList<>();
 
     @Override
-    protected int getContentViewLayout() {
-        return R.layout.fragment_device;
+    protected int getContentViewLayoutID() {
+        return R.layout.activity_add_device;
     }
 
     @Override
     protected void initViews() {
+        setCustomTitle("新增设备");
+        finishTv.setVisibility(View.VISIBLE);
+        finishTv.setText("完成");
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setLongPressDragEnabled(true); // 开启拖拽。
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.addItemDecoration(new ListItemDecoration(ContextCompat.getColor(getActivity(), R.color.grey_bg)));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.addItemDecoration(new ListItemDecoration(ContextCompat.getColor(this, R.color.grey_bg)));
     }
-
-    /**
-     * 菜单创建器。
-     */
-    private SwipeMenuCreator mSwipeMenuCreator = new SwipeMenuCreator() {
-        @Override
-        public void onCreateMenu(SwipeMenu swipeLeftMenu, SwipeMenu swipeRightMenu, int viewType) {
-            if (viewType == TYPE_CONTENT) {
-                int width1 = getResources().getDimensionPixelSize(R.dimen.dp_90);
-                int width2 = getResources().getDimensionPixelSize(R.dimen.dp_70);
-                int height = ViewGroup.LayoutParams.MATCH_PARENT;
-                SwipeMenuItem updateItem = new SwipeMenuItem(getActivity())
-                        .setBackground(new ColorDrawable(Color.parseColor("#ffbf5b")))
-                        .setWidth(width1)
-                        .setHeight(height)
-                        .setText("修改昵称")
-                        .setTextSize(16)
-                        .setTextColor(Color.WHITE);
-                SwipeMenuItem deleteItem = new SwipeMenuItem(getActivity())
-                        .setBackground(new ColorDrawable(Color.parseColor("#f43530")))
-                        .setWidth(width2)
-                        .setHeight(height)
-                        .setText("删除")
-                        .setTextSize(16)
-                        .setTextColor(Color.WHITE);
-                swipeRightMenu.addMenuItem(updateItem); // 添加菜单到右侧。
-                swipeRightMenu.addMenuItem(deleteItem);
-            }
-        }
-    };
 
     @Override
     protected void initAdapter() {
-        mAdapter = new MultiItemTypeAdapter<Device>(getActivity(), mList) {
+        mAdapter = new MultiItemTypeAdapter<Device>(this, mList) {
             @Override
             public int getItemViewType(int position) {
                 if (mList.get(position).getDeviceType() > 0) {
@@ -101,9 +74,7 @@ public class DeviceFragment extends BaseFragment {
         };
         mAdapter.addItemViewDelegate(TYPE_HEADER, new StickyDelegate());
         mAdapter.addItemViewDelegate(TYPE_CONTENT, new ContentDelegate());
-        // recyclerView.setSwipeMenuCreator(mSwipeMenuCreator);
         recyclerView.setAdapter(mAdapter);
-
     }
 
     //头部item布局
@@ -138,7 +109,7 @@ public class DeviceFragment extends BaseFragment {
 
         @Override
         public int getItemViewLayoutId() {
-            return R.layout.item_menu_content;
+            return R.layout.item_device_choose;
         }
 
         @Override
@@ -157,20 +128,22 @@ public class DeviceFragment extends BaseFragment {
             } else if (device.getDeviceType() == 3) {
                 holder.setBackgroundRes(R.id.item_pic_iv, R.drawable.conditionpic);
             }
-            if (device.getDeviceStatus() == 0) {
-                holder.setBackgroundRes(R.id.item_switch_iv, R.drawable.switch_off);
+            if (device.isChoose()) {
+                holder.setImageResource(R.id.item_choose_img,R.drawable.xuanzehaoyou_dagou);
             } else {
-                holder.setBackgroundRes(R.id.item_switch_iv, R.drawable.switch_on);
+                holder.setImageResource(R.id.item_choose_img,R.drawable.xuanzehaoyou_kuang);
             }
-            holder.setOnClickListener(R.id.item_switch_iv, new View.OnClickListener() {
+            holder.setOnClickListener(R.id.item_choose_img, new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (device.getDeviceStatus() == 0) {
-                        device.setDeviceStatus(1);
-                        holder.setBackgroundRes(R.id.item_switch_iv, R.drawable.switch_on);
+                    if (device.isChoose()) {
+                        mChooseList.remove(device);
+                        device.setChoose(false);
+                        holder.setBackgroundRes(R.id.item_choose_img, R.drawable.xuanzehaoyou_kuang);
                     } else {
-                        device.setDeviceStatus(0);
-                        holder.setBackgroundRes(R.id.item_switch_iv, R.drawable.switch_off);
+                        mChooseList.add(device);
+                        device.setChoose(true);
+                        holder.setBackgroundRes(R.id.item_choose_img, R.drawable.xuanzehaoyou_dagou);
                     }
                 }
             });
@@ -231,7 +204,14 @@ public class DeviceFragment extends BaseFragment {
             }
         };
         recyclerView.setOnItemMoveListener(mItemMoveListener);// 监听拖拽，更新UI。
-
-
+        finishTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EventBus.getDefault().post(mChooseList);
+                finish();
+            }
+        });
     }
+
 }
+

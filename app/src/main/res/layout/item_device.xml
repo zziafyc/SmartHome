@@ -1,10 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:background="@drawable/top_border">
+                android:layout_height="100dp"
+                android:background="@drawable/bottom_border">
 
     <ImageView
-        android:id="@+id/item_pic_iv"
+        android:id="@+id/itemAdd_pic_iv"
         android:layout_width="@dimen/dis_46"
         android:layout_height="@dimen/dis_46"
         android:layout_centerVertical="true"
@@ -13,41 +14,28 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/margin_12"
-        android:layout_toRightOf="@+id/item_pic_iv"
         android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/margin_12"
+        android:layout_toRightOf="@+id/itemAdd_pic_iv"
         android:paddingBottom="5dp">
 
         <TextView
-            android:id="@+id/item_deviceName_tv"
+            android:id="@+id/itemAdd_nickName_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_12"
             android:layout_marginTop="@dimen/margin_8"
-            android:layout_toRightOf="@+id/amf_pic_iv"
             android:text="方应春"
             android:textColor="@color/colorTitle"/>
 
         <TextView
-            android:id="@+id/item_deviceId_tv"
+            android:id="@+id/itemAdd_ID_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/item_deviceName_tv"
+            android:layout_below="@+id/itemAdd_nickName_tv"
             android:layout_marginLeft="@dimen/margin_12"
             android:layout_marginTop="5dp"
             android:text="ID:fafjadfjalfdjal"/>
-
-        <ImageView
-
-            android:id="@+id/item_switch_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/margin_12"
-            android:layout_marginTop="@dimen/margin_8"
-            android:background="@drawable/switch_on"/>
-
 
     </RelativeLayout>
 

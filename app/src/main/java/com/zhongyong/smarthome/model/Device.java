@@ -13,6 +13,7 @@ public class Device implements Serializable {
     private int deviceStatus;// 设备是否在线；0、1
     private int deviceType;
     private int flag;  //标志，确定头部的几种类型 1、2、3
+    private boolean isChoose;  //该设备是否已被场景选中
 
     public Device(String deviceName, String deviceId, int deviceStatus, int deviceType) {
         this.deviceName = deviceName;
@@ -63,5 +64,13 @@ public class Device implements Serializable {
 
     public void setFlag(int flag) {
         this.flag = flag;
+    }
+
+    public boolean isChoose() {
+        return isChoose;
+    }
+
+    public void setChoose(boolean choose) {
+        isChoose = choose;
     }
 }

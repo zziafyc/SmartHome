@@ -11,7 +11,7 @@ import com.zhongyong.smarthome.model.ColorManager;
 
 import butterknife.Bind;
 
-public class MotiveActivity extends BaseActivity {
+public class ThemeSettingActivity extends BaseActivity {
     @Bind(R.id.cab_titleBack_iv)
     ImageView backIv;
     private final int[] layouts = {R.id.skin_01, R.id.skin_02, R.id.skin_03, R.id.skin_04, R.id.skin_05};
@@ -75,7 +75,7 @@ public class MotiveActivity extends BaseActivity {
                 View view = findViewById(layouts[i]);
                 View selected = view.findViewById(R.id.motive_item_selected);
                 selected.setVisibility(i == position ? View.VISIBLE : View.GONE);
-                ColorManager.getInstance().setSkinColor(MotiveActivity.this,
+                ColorManager.getInstance().setSkinColor(ThemeSettingActivity.this,
                         position);
             }
         }

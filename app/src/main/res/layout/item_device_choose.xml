@@ -13,9 +13,9 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/margin_12"
         android:layout_toRightOf="@+id/item_pic_iv"
-        android:layout_centerVertical="true"
         android:paddingBottom="5dp">
 
         <TextView
@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_12"
-            android:layout_marginTop="@dimen/margin_8"
+            android:layout_marginTop="18dp"
             android:layout_toRightOf="@+id/amf_pic_iv"
             android:text="方应春"
             android:textColor="@color/colorTitle"/>
@@ -34,19 +34,23 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/item_deviceName_tv"
             android:layout_marginLeft="@dimen/margin_12"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="8dp"
             android:text="ID:fafjadfjalfdjal"/>
 
-        <ImageView
-
-            android:id="@+id/item_switch_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <RelativeLayout
+            android:id="@+id/item_choose_Rv"
+            android:layout_width="32dp"
+            android:layout_height="match_parent"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/margin_12"
-            android:layout_marginTop="@dimen/margin_8"
-            android:background="@drawable/switch_on"/>
+            android:layout_marginRight="5dp">
+
+            <ImageView
+                android:id="@+id/item_choose_img"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/xuanzehaoyou_kuang"/>
+        </RelativeLayout>
 
 
     </RelativeLayout>

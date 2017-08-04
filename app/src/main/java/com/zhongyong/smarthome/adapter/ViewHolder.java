@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
+import android.text.TextUtils;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -117,8 +118,10 @@ public class ViewHolder {
      * @param text  显示文字
      */
     public void setText(int resId, CharSequence text) {
-        TextView view = getSubView(resId);
-        view.setText(text);
+        if (!TextUtils.isEmpty(text)) {
+            TextView view = getSubView(resId);
+            view.setText(text);
+        }
     }
 
     public void setTextVisible(int resId, boolean show) {
@@ -162,16 +165,16 @@ public class ViewHolder {
     }
 
     public void setImage(int resId, int path) {
-            final ImageView img = getSubView(resId);
-            Glide.with(mContext).load(path).asBitmap().centerCrop().into(new BitmapImageViewTarget(img) {
-                @Override
-                protected void setResource(Bitmap resource) {
-                    RoundedBitmapDrawable circularBitmapDrawable =
-                            RoundedBitmapDrawableFactory.create(mContext.getResources(), resource);
-                    circularBitmapDrawable.setCornerRadius(5);
-                    img.setImageDrawable(circularBitmapDrawable);
-                }
-            });
+        final ImageView img = getSubView(resId);
+        Glide.with(mContext).load(path).asBitmap().centerCrop().into(new BitmapImageViewTarget(img) {
+            @Override
+            protected void setResource(Bitmap resource) {
+                RoundedBitmapDrawable circularBitmapDrawable =
+                        RoundedBitmapDrawableFactory.create(mContext.getResources(), resource);
+                circularBitmapDrawable.setCornerRadius(5);
+                img.setImageDrawable(circularBitmapDrawable);
+            }
+        });
     }
 
     public void setImageAutofit(int resId, String path) {

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:orientation="vertical">
+
+    <include layout="@layout/common_app_bar"/>
+
+
+    <com.baoyz.swipemenulistview.SwipeMenuListView
+        android:id="@+id/sn_devices_lv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:divider="@null"
+        android:scrollbars="none">
+
+    </com.baoyz.swipemenulistview.SwipeMenuListView>
+
+    <com.melnykov.fab.FloatingActionButton
+        android:id="@+id/ft_single_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="24dp"
+        android:layout_marginRight="24dp"
+        android:src="@drawable/add_floating"/>
+
+
+</FrameLayout>
