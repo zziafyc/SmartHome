@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="12dp">
+
+        <ImageView
+            android:id="@+id/image_right"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:background="@mipmap/somebody_s"/>
+
+        <TextView
+            android:id="@+id/text_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="6dp"
+            android:layout_toLeftOf="@+id/image_right"
+            android:background="@drawable/message_right2"
+            android:gravity="left"
+            android:maxEms="15"
+            android:paddingBottom="10dp"
+            android:paddingLeft="13dp"
+            android:paddingRight="15dp"
+            android:paddingTop="10dp"
+            android:text="我最近过得很好，这边天气也不错。哈哈"
+            android:textSize="14dp"/>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

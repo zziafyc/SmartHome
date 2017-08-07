@@ -15,6 +15,9 @@
             android:id="@+id/fh_video_iv"
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
             android:background="@mipmap/room"/>
 
         <ImageView
@@ -24,166 +27,72 @@
             android:layout_centerInParent="true"
             android:background="@drawable/pause"/>
 
-        <RelativeLayout
-            android:id="@+id/fh_bottom_ll"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_below="@+id/fh_video_iv"
-            android:background="@color/black">
-
-            <ImageView
-                android:id="@+id/fh_select_iv"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="20dp"
-                android:background="@drawable/select_video"/>
-
-            <TextView
-                android:id="@+id/fh_mode_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="高清"
-                android:textColor="@color/white"
-                android:textSize="18sp"/>
-
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/more"/>
-
-        </RelativeLayout>
-
     </RelativeLayout>
-    <!--主页面下面模块-->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="250dp">
 
-        <LinearLayout
+    <RelativeLayout
+        android:id="@+id/fh_bottom_ll"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_below="@+id/fh_video_iv"
+        android:background="@color/black">
+
+        <ImageView
+            android:id="@+id/fh_select_iv"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/pause2"/>
+
+        <TextView
+            android:id="@+id/fh_mode_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:orientation="vertical">
+            android:text="高清"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
 
-            <ImageView
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:background="@drawable/select_speak"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:text="呼叫小度"
-                android:textColor="@color/colorTitle"
-                android:textSize="@dimen/fontSize_16"/>
-        </LinearLayout>
-
-        <LinearLayout
-
-            android:id="@+id/part1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/switchhome"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="@dimen/margin_8"
-                android:paddingBottom="5dp"
-                android:text="切换房间"
-                android:textColor="@color/colorTitle"
-                android:textSize="@dimen/fontSize_16"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/part2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_alignBottom="@+id/fh_mode_tv"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/switchhome"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="@dimen/margin_8"
-                android:text="聊天记录"
-                android:textColor="@color/colorTitle"
-                android:textSize="@dimen/fontSize_16"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/part3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_marginTop="30dp"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_marginLeft="15dp"
-                android:background="@drawable/switchhome"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="@dimen/margin_8"
-                android:text="呼叫小度"
-                android:textColor="@color/colorTitle"
-                android:textSize="@dimen/fontSize_16"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/part4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginTop="30dp"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_marginRight="15dp"
-                android:background="@drawable/switchhome"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="@dimen/margin_8"
-                android:text="呼叫小度"
-                android:textColor="@color/colorTitle"
-                android:textSize="@dimen/fontSize_16"/>
-        </LinearLayout>
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/quanping"/>
 
     </RelativeLayout>
+    <!--主页面下面模块-->
 
+    <!--滑动解锁模块-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/textView"
+            android:visibility="gone"/>
+
+        <com.zhongyong.smarthome.widget.SlideUnlockView
+            xmlns:test="http://schemas.android.com/apk/res/com.zhongyong.speechawake"
+            android:id="@+id/slideUnlockView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            test:slideUnlockBackgroundResource="@drawable/jiesuo_bg2"
+            test:slideUnlockBlockResource="@drawable/jiesuo_button"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="右滑召唤小度"
+            android:layout_centerInParent="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/fontSize_15"/>
+    </RelativeLayout>
 
 </LinearLayout>

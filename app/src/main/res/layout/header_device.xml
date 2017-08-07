@@ -241,7 +241,7 @@
             android:layout_marginBottom="@dimen/margin_8"
             android:layout_marginLeft="@dimen/margin_12"
             android:text="全文"
-            android:textColor="@color/colorText"
+            android:textColor="@color/colorBlue"
             android:textSize="@dimen/fontSize_14"/>
 
     </LinearLayout>

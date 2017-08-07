@@ -115,6 +115,7 @@ public class MainActivity extends BaseActivity {
         changeThemeLay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mDrawerLayout.closeDrawer(GravityCompat.START);
                 Intent intent = new Intent();
                 intent.setClass(MainActivity.this, ThemeSettingActivity.class);
                 startActivity(intent);
