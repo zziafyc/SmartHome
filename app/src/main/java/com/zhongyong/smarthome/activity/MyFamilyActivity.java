@@ -41,7 +41,7 @@ public class MyFamilyActivity extends BaseActivity {
         setCustomTitle("我的家");
         moreIv.setVisibility(View.VISIBLE);
         backIv.setVisibility(View.VISIBLE);
-        ImageUtils.setCircleImage(createPersonIv,"http://opor07of8.bkt.clouddn.com/Screenshot_2017-05-05-10-00-29-71.png");
+        ImageUtils.setCircleImage(createPersonIv, "http://opor07of8.bkt.clouddn.com/Screenshot_2017-05-05-10-00-29-71.png");
 
     }
 
@@ -89,12 +89,8 @@ public class MyFamilyActivity extends BaseActivity {
 
     @Override
     protected void initListener() {
-        backIv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
+        backIv.setOnClickListener((view) -> {
+            finish();
         });
-
     }
 }
