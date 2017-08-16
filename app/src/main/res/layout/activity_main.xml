@@ -103,7 +103,7 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/img2"
                     android:gravity="center"
-                    android:text="网关信息"/>
+                    android:text="日程提醒"/>
 
             </RelativeLayout>
 
@@ -124,7 +124,7 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/img3"
                     android:gravity="center"
-                    android:text="消息通知"/>
+                    android:text="语音备忘"/>
 
             </RelativeLayout>
 
@@ -145,7 +145,7 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/img4"
                     android:gravity="center"
-                    android:text="服务支持"/>
+                    android:text="声纹管理"/>
 
             </RelativeLayout>
 

@@ -18,7 +18,9 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
     <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE"/>
-    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
+    <uses-permission android:name="com.zhongyong.smarthome.permission.C2D_MESSAGE"/>
 
     <application
         android:name=".MyApplication"
@@ -41,14 +43,15 @@
         <service
             android:name="com.baidu.speech.VoiceRecognitionService"
             android:exported="false"/>
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-      <activity android:name="com.zhongyong.speechawake.WakeUpActivity"/>
-      <activity android:name="com.zhongyong.speechawake.NewActivity"/>
+        <activity android:name="com.zhongyong.speechawake.WakeUpActivity"/>
+        <activity android:name="com.zhongyong.speechawake.NewActivity"/>
         <activity
             android:name=".activity.ThemeSettingActivity"
             android:screenOrientation="portrait">
@@ -57,6 +60,10 @@
         </activity>
         <activity android:name=".activity.NewSceneActivity"/>
         <activity android:name=".activity.AddDeviceActivity"/>
+        <activity android:name=".activity.SearchDeviceActivity"/>
     </application>
+    <permission
+        android:name="com.zhongyong.smarthome.permission.C2D_MESSAGE"
+        android:protectionLevel="signature"/>
 
 </manifest>

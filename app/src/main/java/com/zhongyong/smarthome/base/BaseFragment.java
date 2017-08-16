@@ -80,9 +80,9 @@ public abstract class BaseFragment extends Fragment {
     protected abstract void initListener();
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mContext = context;
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mContext = activity;
     }
 
     @Override

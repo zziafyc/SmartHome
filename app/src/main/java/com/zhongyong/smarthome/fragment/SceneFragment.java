@@ -64,6 +64,14 @@ public class SceneFragment extends BaseFragment {
                         }
                     }
                 });
+                holder.setOnClickListener(R.id.delete, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //需要删除item，和重置position
+                        mList.remove(bean);
+                        resetListRemove(mList, bean.getPosition());
+                    }
+                });
                 holder.setOnClickListener(R.id.item_scene_cv, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -100,5 +108,15 @@ public class SceneFragment extends BaseFragment {
     @Override
     protected void initListener() {
 
+    }
+
+    public void resetListRemove(List<Scene> list, int position) {
+        for (int i = 0; i < list.size(); i++) {
+            int flag = list.get(i).getPosition();
+            if (flag > position) {
+                list.get(i).setPosition(flag-1);
+            }
+        }
+        mAdapter.notifyDataSetChanged();
     }
 }

@@ -18,6 +18,7 @@
         android:layout_marginTop="12dp"/>
 
     <ImageView
+        android:id="@+id/delete"
         android:layout_width="18dp"
         android:layout_height="18dp"
         android:layout_gravity="right"

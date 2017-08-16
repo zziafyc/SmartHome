@@ -8,15 +8,16 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
-import com.zhongyong.smarthome.activity.ThemeSettingActivity;
 import com.zhongyong.smarthome.activity.MyFamilyActivity;
 import com.zhongyong.smarthome.activity.NewSceneActivity;
+import com.zhongyong.smarthome.activity.SearchDeviceActivity;
+import com.zhongyong.smarthome.activity.ThemeSettingActivity;
 import com.zhongyong.smarthome.base.BaseActivity;
 import com.zhongyong.smarthome.fragment.DeviceFragment;
 import com.zhongyong.smarthome.fragment.HomeFragment;
@@ -47,6 +48,8 @@ public class MainActivity extends BaseActivity {
     ColorLinearLayout mLayout;
     @Bind(R.id.cab_add_iv)
     ImageView addIv;
+    @Bind(R.id.title_right)
+    TextView rightTv;
     HomeFragment mHomeFragment;
     MonitorFragment mMonitorFragment;
     DeviceFragment mDeviceFragment;
@@ -86,30 +89,39 @@ public class MainActivity extends BaseActivity {
         mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId) {
-                    case R.id.nb_rb_homePage:
-                        setCustomTitle("中用智能家居");
-                        addIv.setVisibility(View.GONE);
-                        showFragment(mHomeFragment);
+                    switch (checkedId) {
 
-                        break;
-                    case R.id.nb_rb_monitor:
-                        setCustomTitle("视频监控");
-                        addIv.setVisibility(View.GONE);
-                        showFragment(mMonitorFragment);
-                        break;
-                    case R.id.nb_rb_device:
-                        setCustomTitle("智能设备");
-                        addIv.setVisibility(View.GONE);
-                        showFragment(mDeviceFragment);
-                        break;
-                    case R.id.nb_rb_scene:
-                        setCustomTitle("场景布置");
-                        addIv.setVisibility(View.VISIBLE);
-                        showFragment(mSceneFragment);
-                        break;
+                        case R.id.nb_rb_homePage:
+                            setCustomTitle("中用智能家居");
+                            addIv.setVisibility(View.GONE);
+                            rightTv.setVisibility(View.GONE);
+                            showFragment(mHomeFragment);
+
+                            break;
+                        case R.id.nb_rb_monitor:
+                            setCustomTitle("视频监控");
+                            addIv.setVisibility(View.GONE);
+                            rightTv.setVisibility(View.GONE);
+                            showFragment(mMonitorFragment);
+                            break;
+                        case R.id.nb_rb_device:
+                            setCustomTitle("智能设备");
+                            addIv.setVisibility(View.GONE);
+                            if (SearchDeviceActivity.count > 0) {
+                                rightTv.setVisibility(View.VISIBLE);
+                            } else {
+                                rightTv.setVisibility(View.GONE);
+                            }
+                            showFragment(mDeviceFragment);
+                            break;
+                        case R.id.nb_rb_scene:
+                            setCustomTitle("场景布置");
+                            addIv.setVisibility(View.VISIBLE);
+                            rightTv.setVisibility(View.GONE);
+                            showFragment(mSceneFragment);
+                            break;
+                    }
                 }
-            }
         });
 
         changeThemeLay.setOnClickListener(new View.OnClickListener() {
@@ -136,12 +148,12 @@ public class MainActivity extends BaseActivity {
         });
     }
 
-    @Override
+   /* @Override
     protected View getLoadingTargetView() {
         FrameLayout layout = (FrameLayout) findViewById(R.id.am_fl_fragmentcontainer);
         return layout;
     }
-
+*/
     private void initFragment() {
         mFragmentManager = getSupportFragmentManager();
         mFragmentList = new ArrayList<>();

@@ -2,11 +2,13 @@ package com.zhongyong.smarthome.fragment;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.support.v4.content.ContextCompat;
+import android.os.Build;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.yanzhenjie.recyclerview.swipe.SwipeMenu;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuCreator;
@@ -15,6 +17,7 @@ import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
 import com.yanzhenjie.recyclerview.swipe.touch.OnItemMoveListener;
 import com.yanzhenjie.recyclerview.swipe.widget.ListItemDecoration;
 import com.zhongyong.smarthome.R;
+import com.zhongyong.smarthome.activity.SearchDeviceActivity;
 import com.zhongyong.smarthome.base.BaseFragment;
 import com.zhongyong.smarthome.base.recyclerview.ItemViewDelegate;
 import com.zhongyong.smarthome.base.recyclerview.MultiItemTypeAdapter;
@@ -36,6 +39,9 @@ public class DeviceFragment extends BaseFragment {
     private static final int TYPE_CONTENT = 52;
     @Bind(R.id.fd_devices_sv)
     SwipeMenuRecyclerView recyclerView;
+    @Bind(R.id.fd_deviceSearch_rv)
+    RelativeLayout searchRv;
+    TextView rightTv;
     MultiItemTypeAdapter<Device> mAdapter;
     List<Device> mList = new ArrayList<>();
 
@@ -46,10 +52,16 @@ public class DeviceFragment extends BaseFragment {
 
     @Override
     protected void initViews() {
+        rightTv = (TextView) getActivity().findViewById(R.id.title_right);
+        rightTv.setVisibility(View.GONE);
+        searchRv.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.GONE);
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setLongPressDragEnabled(true); // 开启拖拽。
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.addItemDecoration(new ListItemDecoration(ContextCompat.getColor(getActivity(), R.color.grey_bg)));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            recyclerView.addItemDecoration(new ListItemDecoration(getActivity().getColor(R.color.grey_bg)));
+        }
     }
 
     /**
@@ -231,7 +243,29 @@ public class DeviceFragment extends BaseFragment {
             }
         };
         recyclerView.setOnItemMoveListener(mItemMoveListener);// 监听拖拽，更新UI。
+        searchRv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                go(SearchDeviceActivity.class);
+            }
+        });
+        rightTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                go(SearchDeviceActivity.class);
+            }
+        });
+    }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (SearchDeviceActivity.count > 0) {
+            rightTv.setVisibility(View.VISIBLE);
+            rightTv.setText("搜索");
+            recyclerView.setVisibility(View.VISIBLE);
+            searchRv.setVisibility(View.GONE);
+            mAdapter.notifyDataSetChanged();
+        }
     }
 }

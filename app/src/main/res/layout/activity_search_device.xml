@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <include layout="@layout/common_app_bar"/>
+
+    <com.zhongyong.smarthome.widget.RadarView
+        android:id="@+id/device_search"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/titleBar"
+        android:layout_centerInParent="true"
+        app:circle_color="@color/colorAccent"
+        app:circle_colorx="#fd7293"
+        app:circle_colorxx="#fcb8cb"
+        app:circle_colorxxx="#fde9f2"/>
+
+    <TextView
+        android:id="@+id/device_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="55dp"
+        android:text="一共搜索到了10台设备"
+        android:textSize="@dimen/fontSize_16"/>
+
+</RelativeLayout>
