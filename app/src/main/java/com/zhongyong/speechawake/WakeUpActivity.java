@@ -114,13 +114,9 @@ public class WakeUpActivity extends BaseActivity {
                     } else {
 
                     }
-                    //广播接收到之后就注销掉
-                    unregisterReceiver(mReceiver);
                     break;
                 case Contants.ACTION_GET_GATEWAYINFO:
                     MyApplication.gatewayInfo = (GatewayInfo) intent.getSerializableExtra("gatewayInfo");
-                    //广播接收到之后就注销掉
-                    unregisterReceiver(mReceiver);
                     break;
 
             }
