@@ -65,8 +65,11 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initViews() {
+
+        //
         initFragment();
         initTheme();
+
     }
 
     public void initTheme() {
