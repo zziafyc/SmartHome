@@ -1,6 +1,5 @@
 package com.zhongyong.smarthome.activity;
 
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -52,7 +51,7 @@ public class AddDeviceActivity extends BaseActivity {
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setLongPressDragEnabled(true); // 开启拖拽。
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.addItemDecoration(new ListItemDecoration(ContextCompat.getColor(this, R.color.grey_bg)));
+        recyclerView.addItemDecoration(new ListItemDecoration(getResources().getColor(R.color.grey_bg)));
     }
 
     @Override
