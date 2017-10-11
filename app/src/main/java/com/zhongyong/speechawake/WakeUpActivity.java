@@ -150,7 +150,7 @@ public class WakeUpActivity extends BaseActivity {
         initialEnv();
         initialTts();
         initialListener();
-        //智能设备
+        //智能设备1
         registerReceiver(mReceiver, new IntentFilter(Contants.ACTION_CALLBACK));
     }
 
