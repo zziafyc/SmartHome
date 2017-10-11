@@ -27,6 +27,7 @@ import com.baidu.tts.client.TtsMode;
 import com.fbee.zllctl.Contants;
 import com.fbee.zllctl.DeviceInfo;
 import com.fbee.zllctl.GatewayInfo;
+import com.fbee.zllctl.ZigbeeUtil;
 import com.zhongyong.smarthome.MyApplication;
 import com.zhongyong.smarthome.R;
 import com.zhongyong.smarthome.base.BaseActivity;
@@ -95,11 +96,24 @@ public class WakeUpActivity extends BaseActivity {
                     int uid = deviceInfo.getUId();
                     int deviceType = deviceInfo.getDeviceId();
                     int profileId = deviceInfo.getProfileId();
+                    int ZoneType = deviceInfo.getZoneType();
                     if (isExist(uid) == -1) {
                         MyApplication.deviceInfos.add(deviceInfo);
                         if (deviceType == 0x0000 || deviceType == 0x0002 || deviceType == 0x0009 || deviceType == 0x0202 || (deviceType == 0x0200 && profileId == 0x0104)) {
+                            //开关设备
                             MyApplication.switchDeviceInfos.add(deviceInfo);
-                            Log.e(TAG, "已搜索到设备");
+                        } else if (deviceType == 0x0302) {
+                            //温湿度传感器
+                            MyApplication.sensorDeviceInfos.add(deviceInfo);
+                        } else if (deviceType == 0x0402 && ZoneType == 0x0015) {
+                            //门磁传感器
+                            MyApplication.doorDeviceInfos.add(deviceInfo);
+                        }else if(deviceType== 0x0402&&ZoneType==0x002B){
+                            //气体传感器
+                            MyApplication.gasDeviceInfos.add(deviceInfo);
+                        }else if(deviceType== 0x0402&&ZoneType==0x8001){
+                            //一氧化碳传感器
+                            MyApplication.cogasDeviceInfos.add(deviceInfo);
                         }
                     } else {
                         MyApplication.deviceInfos.set(isExist(uid), deviceInfo);
@@ -340,7 +354,7 @@ public class WakeUpActivity extends BaseActivity {
                 String s = Arrays.toString(results.toArray(new String[results.size()]));
                 final String lastResult = s.substring(1, s.length() - 1);
                 Log.e(TAG, "语音识别結果：" + lastResult + "\r\n");
-                if (!(lastResult.contains("百度") || lastResult.contains("小度")|| lastResult.contains("小杜"))) {
+                if (!(lastResult.contains("百度") || lastResult.contains("小度") || lastResult.contains("小杜"))) {
                     if (isWake) {
                         MessageModel personModel = new MessageModel(lastResult, 1);
                         mList.add(personModel);
@@ -417,6 +431,24 @@ public class WakeUpActivity extends BaseActivity {
                                         MyApplication.mSerial.setDeviceState(deviceInfo, 0);
                                         deviceInfo.setDeviceState((byte) 0);
                                     }
+                                } else {
+                                    Log.e(TAG, "没有搜索到设备");
+                                    text = "sorry，没有搜索到设备";
+                                }
+                            } else if (lastResult.contains("温湿度")) {
+                                DeviceInfo deviceInfo = MyApplication.sensorDeviceInfos.get(0);
+                                int sensordata = deviceInfo.getSensordata();
+                                text = "当前温度：" + ZigbeeUtil.getThValue(sensordata) + ",湿度：" + ZigbeeUtil.getTbValue(sensordata);
+
+                            } else if (lastResult.contains("门状态")) {
+                                if (MyApplication.doorDeviceInfos != null && MyApplication.doorDeviceInfos.size() > 0) {
+                                    DeviceInfo deviceInfo = MyApplication.doorDeviceInfos.get(0);
+                                    if (deviceInfo.getSensordata() == 0) {
+                                        text = "门当前状态为：关闭";
+                                    } else {
+                                        text = "门当前状态为：打开";
+                                    }
+
                                 } else {
                                     Log.e(TAG, "没有搜索到设备");
                                     text = "sorry，没有搜索到设备";

@@ -15,6 +15,10 @@ public class MyApplication extends Application {
     public static Serial mSerial;
     public static ArrayList<DeviceInfo> deviceInfos = new ArrayList<>();
     public static ArrayList<DeviceInfo> switchDeviceInfos = new ArrayList<>();
+    public static ArrayList<DeviceInfo> sensorDeviceInfos = new ArrayList<>();
+    public static ArrayList<DeviceInfo> doorDeviceInfos = new ArrayList<>();
+    public static ArrayList<DeviceInfo> gasDeviceInfos = new ArrayList<>();
+    public static ArrayList<DeviceInfo> cogasDeviceInfos = new ArrayList<>();
     public static GatewayInfo gatewayInfo;
     //主题设置
     public static MyPreference mPreference;
