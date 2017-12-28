@@ -104,14 +104,14 @@ public class WakeUpActivity extends BaseActivity {
                             MyApplication.switchDeviceInfos.add(deviceInfo);
                         } else if (deviceType == 0x0302) {
                             //温湿度传感器
-                            MyApplication.sensorDeviceInfos.add(deviceInfo);
+                            MyApplication.thtbDeviceInfos.add(deviceInfo);
                         } else if (deviceType == 0x0402 && ZoneType == 0x0015) {
                             //门磁传感器
                             MyApplication.doorDeviceInfos.add(deviceInfo);
-                        }else if(deviceType== 0x0402&&ZoneType==0x002B){
+                        } else if (deviceType == 0x0402 && ZoneType == 0x002B) {
                             //气体传感器
                             MyApplication.gasDeviceInfos.add(deviceInfo);
-                        }else if(deviceType== 0x0402&&ZoneType==0x8001){
+                        } else if (deviceType == 0x0402 && ZoneType == 0x8001) {
                             //一氧化碳传感器
                             MyApplication.cogasDeviceInfos.add(deviceInfo);
                         }
@@ -436,7 +436,7 @@ public class WakeUpActivity extends BaseActivity {
                                     text = "sorry，没有搜索到设备";
                                 }
                             } else if (lastResult.contains("温湿度")) {
-                                DeviceInfo deviceInfo = MyApplication.sensorDeviceInfos.get(0);
+                                DeviceInfo deviceInfo = MyApplication.thtbDeviceInfos.get(0);
                                 int sensordata = deviceInfo.getSensordata();
                                 text = "当前温度：" + ZigbeeUtil.getThValue(sensordata) + ",湿度：" + ZigbeeUtil.getTbValue(sensordata);
 

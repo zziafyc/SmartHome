@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bottom_border">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="65dp">
+
+        <ImageView
+            android:id="@+id/itemAdd_pic_iv"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_12"
+            android:background="@drawable/gateway"/>
+
+        <RelativeLayout
+            android:id="@+id/itemAdd_name_log"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_12"
+            android:layout_marginTop="12dp"
+            android:layout_toRightOf="@+id/itemAdd_pic_iv">
+
+            <TextView
+                android:id="@+id/itemAdd_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_12"
+                android:text="我的网关"
+                android:textColor="@color/colorTitle"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/itemAdd_name_log"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_12"
+            android:layout_marginTop="8dp"
+            android:layout_toRightOf="@+id/itemAdd_pic_iv"
+            android:paddingBottom="5dp">
+
+            <TextView
+                android:id="@+id/itemAdd_ip_log"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_12"
+                android:text="网关IP："
+                android:textColor="@color/colorTitle"/>
+
+            <TextView
+                android:id="@+id/itemAdd_ip_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_12"
+                android:layout_toRightOf="@+id/itemAdd_ip_log"
+                android:text=""
+                android:textColor="@color/colorBlue"/>
+
+            <TextView
+                android:id="@+id/itemAdd_unit_log"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_12"
+                android:layout_toRightOf="@id/itemAdd_ip_tv"
+                android:text="单元ID："
+                android:textColor="@color/colorTitle"/>
+
+            <TextView
+                android:id="@+id/itemAdd_id_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_12"
+                android:layout_toRightOf="@+id/itemAdd_unit_log"
+                android:text=""
+                android:textColor="@color/colorBlue"/>
+
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>

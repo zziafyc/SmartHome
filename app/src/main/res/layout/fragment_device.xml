@@ -27,7 +27,8 @@
         android:layout_height="65dp"
         android:layout_marginTop="@dimen/margin_12"
         android:background="@drawable/top_bottom_border"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/footer_deviceAdd_iv"

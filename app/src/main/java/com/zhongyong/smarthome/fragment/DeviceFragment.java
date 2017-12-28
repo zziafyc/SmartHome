@@ -16,6 +16,7 @@ import com.yanzhenjie.recyclerview.swipe.SwipeMenuItem;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
 import com.yanzhenjie.recyclerview.swipe.touch.OnItemMoveListener;
 import com.yanzhenjie.recyclerview.swipe.widget.ListItemDecoration;
+import com.zhongyong.jamod.ModBusTestActivity;
 import com.zhongyong.smarthome.R;
 import com.zhongyong.smarthome.activity.SearchDeviceActivity;
 import com.zhongyong.smarthome.base.BaseFragment;
@@ -246,7 +247,8 @@ public class DeviceFragment extends BaseFragment {
         searchRv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                go(SearchDeviceActivity.class);
+                //go(SearchDeviceActivity.class);
+                go(ModBusTestActivity.class);
             }
         });
         rightTv.setOnClickListener(new View.OnClickListener() {

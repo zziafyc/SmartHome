@@ -11,17 +11,10 @@
         android:orientation="horizontal">
 
         <RadioButton
-            android:id="@+id/nb_rb_homePage"
-            style="@style/radioBtn"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:drawableTop="@drawable/navi_homepage"
-            android:text="@string/homePage"/>
-
-        <RadioButton
             android:id="@+id/nb_rb_monitor"
             style="@style/radioBtn"
             android:layout_height="wrap_content"
+            android:checked="true"
             android:drawableTop="@drawable/discoverbtn"
             android:text="@string/monitor"/>
 
@@ -39,6 +32,13 @@
             android:layout_height="wrap_content"
             android:drawableTop="@drawable/mebtn"
             android:text="@string/scene"/>
+
+        <RadioButton
+            android:id="@+id/nb_rb_homePage"
+            style="@style/radioBtn"
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/navi_homepage"
+            android:text="@string/my"/>
 
     </RadioGroup>
 </LinearLayout>

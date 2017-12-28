@@ -19,8 +19,8 @@ import com.zhongyong.smarthome.activity.NewSceneActivity;
 import com.zhongyong.smarthome.activity.SearchDeviceActivity;
 import com.zhongyong.smarthome.activity.ThemeSettingActivity;
 import com.zhongyong.smarthome.base.BaseActivity;
-import com.zhongyong.smarthome.fragment.DeviceFragment;
 import com.zhongyong.smarthome.fragment.HomeFragment;
+import com.zhongyong.smarthome.fragment.ModBusGatewayFragment;
 import com.zhongyong.smarthome.fragment.MonitorFragment;
 import com.zhongyong.smarthome.fragment.SceneFragment;
 import com.zhongyong.smarthome.model.ColorManager;
@@ -52,8 +52,9 @@ public class MainActivity extends BaseActivity {
     TextView rightTv;
     HomeFragment mHomeFragment;
     MonitorFragment mMonitorFragment;
-    DeviceFragment mDeviceFragment;
+    //DeviceFragment mDeviceFragment;
     SceneFragment mSceneFragment;
+    ModBusGatewayFragment mModBusGatewayFragment;
     private FragmentManager mFragmentManager;
     private FragmentTransaction mFragmentTransaction;
     List<Fragment> mFragmentList;
@@ -65,8 +66,6 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initViews() {
-
-        //
         initFragment();
         initTheme();
 
@@ -92,39 +91,37 @@ public class MainActivity extends BaseActivity {
         mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                    switch (checkedId) {
-
-                        case R.id.nb_rb_homePage:
-                            setCustomTitle("中用智能家居");
-                            addIv.setVisibility(View.GONE);
+                switch (checkedId) {
+                    case R.id.nb_rb_monitor:
+                        setCustomTitle("视频监控");
+                        addIv.setVisibility(View.GONE);
+                        rightTv.setVisibility(View.GONE);
+                        showFragment(mMonitorFragment);
+                        break;
+                    case R.id.nb_rb_device:
+                        setCustomTitle("智能设备");
+                        addIv.setVisibility(View.GONE);
+                        if (SearchDeviceActivity.count > 0) {
+                            rightTv.setVisibility(View.VISIBLE);
+                        } else {
                             rightTv.setVisibility(View.GONE);
-                            showFragment(mHomeFragment);
-
-                            break;
-                        case R.id.nb_rb_monitor:
-                            setCustomTitle("视频监控");
-                            addIv.setVisibility(View.GONE);
-                            rightTv.setVisibility(View.GONE);
-                            showFragment(mMonitorFragment);
-                            break;
-                        case R.id.nb_rb_device:
-                            setCustomTitle("智能设备");
-                            addIv.setVisibility(View.GONE);
-                            if (SearchDeviceActivity.count > 0) {
-                                rightTv.setVisibility(View.VISIBLE);
-                            } else {
-                                rightTv.setVisibility(View.GONE);
-                            }
-                            showFragment(mDeviceFragment);
-                            break;
-                        case R.id.nb_rb_scene:
-                            setCustomTitle("场景布置");
-                            addIv.setVisibility(View.VISIBLE);
-                            rightTv.setVisibility(View.GONE);
-                            showFragment(mSceneFragment);
-                            break;
-                    }
+                        }
+                        showFragment(mModBusGatewayFragment);
+                        break;
+                    case R.id.nb_rb_scene:
+                        setCustomTitle("场景布置");
+                        addIv.setVisibility(View.VISIBLE);
+                        rightTv.setVisibility(View.GONE);
+                        showFragment(mSceneFragment);
+                        break;
+                    case R.id.nb_rb_homePage:
+                        setCustomTitle("我的");
+                        addIv.setVisibility(View.GONE);
+                        rightTv.setVisibility(View.GONE);
+                        showFragment(mHomeFragment);
+                        break;
                 }
+            }
         });
 
         changeThemeLay.setOnClickListener(new View.OnClickListener() {
@@ -151,24 +148,26 @@ public class MainActivity extends BaseActivity {
         });
     }
 
-   /* @Override
-    protected View getLoadingTargetView() {
-        FrameLayout layout = (FrameLayout) findViewById(R.id.am_fl_fragmentcontainer);
-        return layout;
-    }
-*/
+    /* @Override
+     protected View getLoadingTargetView() {
+         FrameLayout layout = (FrameLayout) findViewById(R.id.am_fl_fragmentcontainer);
+         return layout;
+     }
+ */
     private void initFragment() {
         mFragmentManager = getSupportFragmentManager();
         mFragmentList = new ArrayList<>();
-        mHomeFragment = new HomeFragment();
         mMonitorFragment = new MonitorFragment();
-        mDeviceFragment = new DeviceFragment();
+        mModBusGatewayFragment = new ModBusGatewayFragment();
+        //mDeviceFragment = new DeviceFragment();
         mSceneFragment = new SceneFragment();
+        mHomeFragment = new HomeFragment();
         mFragmentList.add(mHomeFragment);
         mFragmentList.add(mMonitorFragment);
-        mFragmentList.add(mDeviceFragment);
+        //mFragmentList.add(mDeviceFragment);
         mFragmentList.add(mSceneFragment);
-        showFragment(mHomeFragment);
+        mFragmentList.add(mModBusGatewayFragment);
+        showFragment(mMonitorFragment);
 
 
     }

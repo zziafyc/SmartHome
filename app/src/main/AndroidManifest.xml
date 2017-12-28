@@ -22,6 +22,10 @@
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
     <uses-permission android:name="com.zhongyong.smarthome.permission.C2D_MESSAGE"/>
 
+    <permission
+        android:name="com.zhongyong.smarthome.permission.C2D_MESSAGE"
+        android:protectionLevel="signature"/>
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -61,9 +65,10 @@
         <activity android:name=".activity.NewSceneActivity"/>
         <activity android:name=".activity.AddDeviceActivity"/>
         <activity android:name=".activity.SearchDeviceActivity"/>
+        <activity android:name="com.zhongyong.jamod.ModBusTestActivity"/>
+        <activity android:name="com.zhongyong.jamod.CreateModbusIpActivity"/>
+        <activity android:name="com.zhongyong.jamod.EnvironmentDetectorDetailActivity"/>
     </application>
-    <permission
-        android:name="com.zhongyong.smarthome.permission.C2D_MESSAGE"
-        android:protectionLevel="signature"/>
+
 
 </manifest>

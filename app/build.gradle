@@ -56,5 +56,6 @@ dependencies {
     compile 'com.zhy:magic-viewpager:1.0.1'
     /*floatingActionButton的使用,依附于listView、recyclerView*/
     compile 'com.melnykov:floatingactionbutton:1.3.0'
+    compile 'com.google.code.gson:gson:2.6.2'
 
 }

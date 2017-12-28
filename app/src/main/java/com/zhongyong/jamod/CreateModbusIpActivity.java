@@ -1,0 +1,94 @@
+package com.zhongyong.jamod;
+
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import com.google.gson.reflect.TypeToken;
+import com.zhongyong.smarthome.R;
+import com.zhongyong.smarthome.base.BaseActivity;
+import com.zhongyong.smarthome.utils.SharePreferenceUtils;
+import com.zhongyong.smarthome.utils.StringUtils;
+
+import org.greenrobot.eventbus.EventBus;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.Bind;
+
+/**
+ * Created by fyc on 2017/12/28.
+ */
+
+public class CreateModbusIpActivity extends BaseActivity {
+    @Bind(R.id.title_right)
+    TextView rightTv;
+    @Bind(R.id.acn_edt_ip)
+    EditText ipEdt;
+    @Bind(R.id.acn_edt_id)
+    EditText idEdt;
+    @Bind(R.id.acn_edt_name)
+    EditText nameEdt;
+    @Bind(R.id.title_tv_message)
+    TextView titleTv;
+    List<ModBusGateWayModel> mModBusGateWayModels;
+
+    @Override
+    protected int getContentViewLayoutID() {
+        return R.layout.activity_gateway_add;
+    }
+
+    @Override
+    protected void initViews() {
+        titleTv.setText("编辑网关信息");
+        rightTv.setText("保存");
+        rightTv.setVisibility(View.VISIBLE);
+
+    }
+
+    @Override
+    protected void initAdapter() {
+
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    protected void initListener() {
+        rightTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (StringUtils.isEmpty(nameEdt.getText().toString())) {
+                    showToast("请输入网关名称");
+                    return;
+
+                }
+                if (StringUtils.isEmpty(ipEdt.getText().toString())) {
+                    showToast("请输入正确的IP地址");
+                    return;
+
+                }
+                if (StringUtils.isEmpty(idEdt.getText().toString())) {
+                    showToast("请输入正确的单元ID");
+                    return;
+
+                }
+                ModBusGateWayModel newModel = new ModBusGateWayModel(nameEdt.getText().toString(), ipEdt.getText().toString(), Integer.parseInt(idEdt.getText().toString()));
+                mModBusGateWayModels = (List<ModBusGateWayModel>) SharePreferenceUtils.get(CreateModbusIpActivity.this, "modBusGateWayModels", new TypeToken<List<ModBusGateWayModel>>() {
+                }.getType());
+                if (mModBusGateWayModels == null) {
+                    mModBusGateWayModels = new ArrayList<>();
+                }
+                mModBusGateWayModels.add(newModel);
+                SharePreferenceUtils.put(CreateModbusIpActivity.this, "modBusGateWayModels", mModBusGateWayModels);
+                EventBus.getDefault().post(newModel);
+                finish();
+            }
+        });
+
+    }
+}

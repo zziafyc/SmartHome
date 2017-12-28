@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <include layout="@layout/common_app_bar"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_12"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginLeft="@dimen/margin_12"
+            android:layout_marginTop="0.5dp"
+            android:background="@drawable/bottom_border"
+            android:gravity="center"
+            android:text="请输入网关名称"
+            android:textColor="@color/colorTitle"
+            android:textSize="16sp"/>
+
+        <EditText
+            android:id="@+id/acn_edt_name"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginLeft="@dimen/margin_12"
+            android:background="@drawable/bottom_border"
+            android:hint="输入网关名称"
+            android:paddingRight="@dimen/margin_12"
+            android:singleLine="true"
+            android:textColor="@color/colorText"
+            android:textCursorDrawable="@drawable/edittext_cursor"
+            android:textSize="14sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/acn_f_referred"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_12"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginLeft="@dimen/margin_12"
+            android:layout_marginTop="0.5dp"
+            android:background="@drawable/bottom_border"
+            android:gravity="center"
+            android:text="请输入IP地址"
+            android:textColor="@color/colorTitle"
+            android:textSize="16sp"/>
+
+        <EditText
+            android:id="@+id/acn_edt_ip"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginLeft="@dimen/margin_12"
+            android:background="@drawable/bottom_border"
+            android:hint="输入正确的ip地址"
+            android:paddingRight="@dimen/margin_12"
+            android:singleLine="true"
+            android:textColor="@color/colorText"
+            android:textCursorDrawable="@drawable/edittext_cursor"
+            android:textSize="14sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_12"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginLeft="@dimen/margin_12"
+            android:layout_marginTop="0.5dp"
+            android:background="@drawable/bottom_border"
+            android:gravity="center"
+            android:text="请输入单元ID"
+            android:textColor="@color/colorTitle"
+            android:textSize="16sp"/>
+
+        <EditText
+            android:id="@+id/acn_edt_id"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginLeft="@dimen/margin_12"
+            android:background="@drawable/bottom_border"
+            android:hint="输入正确的单元ID"
+            android:inputType="number"
+            android:paddingRight="@dimen/margin_12"
+            android:singleLine="true"
+            android:textColor="@color/colorText"
+            android:textCursorDrawable="@drawable/edittext_cursor"
+            android:textSize="14sp"/>
+    </LinearLayout>
+
+</LinearLayout>
