@@ -68,6 +68,8 @@
         <activity android:name="com.zhongyong.jamod.ModBusTestActivity"/>
         <activity android:name="com.zhongyong.jamod.CreateModbusIpActivity"/>
         <activity android:name="com.zhongyong.jamod.EnvironmentDetectorDetailActivity"/>
+        <activity android:name="com.zhongyong.jamod.ZigBeeDetailActivity"/>
+        <activity android:name="com.zhongyong.jamod.ModBusGateWayActivity"/>
     </application>
 
 

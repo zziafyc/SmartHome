@@ -1,5 +1,7 @@
 package com.zhongyong.jamod;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -33,6 +35,7 @@ public class CreateModbusIpActivity extends BaseActivity {
     @Bind(R.id.title_tv_message)
     TextView titleTv;
     List<ModBusGateWayModel> mModBusGateWayModels;
+    String preferenceGateWay;
 
     @Override
     protected int getContentViewLayoutID() {
@@ -44,6 +47,13 @@ public class CreateModbusIpActivity extends BaseActivity {
         titleTv.setText("编辑网关信息");
         rightTv.setText("保存");
         rightTv.setVisibility(View.VISIBLE);
+        Intent intent = getIntent();
+        if (intent != null) {
+            Bundle bundle = intent.getExtras();
+            if (bundle != null) {
+                preferenceGateWay = bundle.getString("preferenceGateWay");
+            }
+        }
 
     }
 
@@ -78,13 +88,13 @@ public class CreateModbusIpActivity extends BaseActivity {
 
                 }
                 ModBusGateWayModel newModel = new ModBusGateWayModel(nameEdt.getText().toString(), ipEdt.getText().toString(), Integer.parseInt(idEdt.getText().toString()));
-                mModBusGateWayModels = (List<ModBusGateWayModel>) SharePreferenceUtils.get(CreateModbusIpActivity.this, "modBusGateWayModels", new TypeToken<List<ModBusGateWayModel>>() {
+                mModBusGateWayModels = (List<ModBusGateWayModel>) SharePreferenceUtils.get(CreateModbusIpActivity.this, preferenceGateWay, new TypeToken<List<ModBusGateWayModel>>() {
                 }.getType());
                 if (mModBusGateWayModels == null) {
                     mModBusGateWayModels = new ArrayList<>();
                 }
                 mModBusGateWayModels.add(newModel);
-                SharePreferenceUtils.put(CreateModbusIpActivity.this, "modBusGateWayModels", mModBusGateWayModels);
+                SharePreferenceUtils.put(CreateModbusIpActivity.this, preferenceGateWay, mModBusGateWayModels);
                 EventBus.getDefault().post(newModel);
                 finish();
             }

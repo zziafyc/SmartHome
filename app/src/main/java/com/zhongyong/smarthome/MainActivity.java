@@ -20,7 +20,7 @@ import com.zhongyong.smarthome.activity.SearchDeviceActivity;
 import com.zhongyong.smarthome.activity.ThemeSettingActivity;
 import com.zhongyong.smarthome.base.BaseActivity;
 import com.zhongyong.smarthome.fragment.HomeFragment;
-import com.zhongyong.smarthome.fragment.ModBusGatewayFragment;
+import com.zhongyong.smarthome.fragment.IntelligentCampusFragment;
 import com.zhongyong.smarthome.fragment.MonitorFragment;
 import com.zhongyong.smarthome.fragment.SceneFragment;
 import com.zhongyong.smarthome.model.ColorManager;
@@ -54,7 +54,8 @@ public class MainActivity extends BaseActivity {
     MonitorFragment mMonitorFragment;
     //DeviceFragment mDeviceFragment;
     SceneFragment mSceneFragment;
-    ModBusGatewayFragment mModBusGatewayFragment;
+   // ModBusGatewayFragment mModBusGatewayFragment;
+    IntelligentCampusFragment mIntelligentCampusFragment;
     private FragmentManager mFragmentManager;
     private FragmentTransaction mFragmentTransaction;
     List<Fragment> mFragmentList;
@@ -106,7 +107,7 @@ public class MainActivity extends BaseActivity {
                         } else {
                             rightTv.setVisibility(View.GONE);
                         }
-                        showFragment(mModBusGatewayFragment);
+                        showFragment(mIntelligentCampusFragment);
                         break;
                     case R.id.nb_rb_scene:
                         setCustomTitle("场景布置");
@@ -158,7 +159,8 @@ public class MainActivity extends BaseActivity {
         mFragmentManager = getSupportFragmentManager();
         mFragmentList = new ArrayList<>();
         mMonitorFragment = new MonitorFragment();
-        mModBusGatewayFragment = new ModBusGatewayFragment();
+       // mModBusGatewayFragment = new ModBusGatewayFragment();
+        mIntelligentCampusFragment=new IntelligentCampusFragment();
         //mDeviceFragment = new DeviceFragment();
         mSceneFragment = new SceneFragment();
         mHomeFragment = new HomeFragment();
@@ -166,7 +168,8 @@ public class MainActivity extends BaseActivity {
         mFragmentList.add(mMonitorFragment);
         //mFragmentList.add(mDeviceFragment);
         mFragmentList.add(mSceneFragment);
-        mFragmentList.add(mModBusGatewayFragment);
+        //mFragmentList.add(mModBusGatewayFragment);
+        mFragmentList.add(mIntelligentCampusFragment);
         showFragment(mMonitorFragment);
 
 

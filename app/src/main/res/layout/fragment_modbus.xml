@@ -5,6 +5,8 @@
               android:layout_marginBottom="@dimen/margin_49"
               android:orientation="vertical">
 
+    <include layout="@layout/common_app_bar"/>
+
     <com.baoyz.swipemenulistview.SwipeMenuListView
         android:id="@+id/gatewaysLv"
         android:layout_width="match_parent"

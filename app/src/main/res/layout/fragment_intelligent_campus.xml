@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+    <RelativeLayout
+        android:id="@+id/item_library"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/bottom_border">
+
+        <ImageView
+            android:id="@+id/itemAdd_pic_iv"
+            android:layout_width="@dimen/dis_46"
+            android:layout_height="@dimen/dis_46"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_12"
+            android:background="@drawable/library"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_12"
+            android:layout_toRightOf="@+id/itemAdd_pic_iv"
+            android:paddingBottom="5dp">
+
+            <TextView
+                android:id="@+id/itemAdd_nickName_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_12"
+                android:layout_marginTop="@dimen/margin_8"
+                android:text="图书馆（library）"
+                android:textColor="@color/colorTitle"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/item_classroom"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/bottom_border">
+
+        <ImageView
+            android:id="@+id/itemAdd_pic_iv2"
+            android:layout_width="@dimen/dis_46"
+            android:layout_height="@dimen/dis_46"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_12"
+            android:background="@drawable/classroom"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_12"
+            android:layout_toRightOf="@+id/itemAdd_pic_iv2"
+            android:paddingBottom="5dp">
+
+            <TextView
+                android:id="@+id/itemAdd_nickName_tv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_12"
+                android:layout_marginTop="@dimen/margin_8"
+                android:text="教室（classroom）"
+                android:textColor="@color/colorTitle"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/item_kitchen"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/bottom_border">
+
+        <ImageView
+            android:id="@+id/itemAdd_pic_iv3"
+            android:layout_width="@dimen/dis_46"
+            android:layout_height="@dimen/dis_46"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_12"
+            android:background="@drawable/kitchen"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_12"
+            android:layout_toRightOf="@+id/itemAdd_pic_iv3"
+            android:paddingBottom="5dp">
+
+            <TextView
+                android:id="@+id/itemAdd_nickName_tv3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_12"
+                android:layout_marginTop="@dimen/margin_8"
+                android:text="厨房（kitchen）"
+                android:textColor="@color/colorTitle"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/item_laboratory"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/bottom_border">
+
+        <ImageView
+            android:id="@+id/itemAdd_pic_iv4"
+            android:layout_width="@dimen/dis_46"
+            android:layout_height="@dimen/dis_46"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_12"
+            android:background="@drawable/laboratory"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_12"
+            android:layout_toRightOf="@+id/itemAdd_pic_iv4"
+            android:paddingBottom="5dp">
+
+            <TextView
+                android:id="@+id/itemAdd_nickName_tv4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_12"
+                android:layout_marginTop="@dimen/margin_8"
+                android:text="实验室（laboratory）"
+                android:textColor="@color/colorTitle"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>
