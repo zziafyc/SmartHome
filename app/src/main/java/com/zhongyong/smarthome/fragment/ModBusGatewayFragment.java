@@ -8,9 +8,9 @@ import android.widget.AdapterView;
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.google.gson.reflect.TypeToken;
-import com.zhongyong.jamod.CreateModbusIpActivity;
-import com.zhongyong.jamod.EnvironmentDetectorDetailActivity;
-import com.zhongyong.jamod.ModBusGateWayModel;
+import com.zhongyong.jamod.activity.CreateModbusActivity;
+import com.zhongyong.jamod.activity.EnvironmentDetectorDetailActivity;
+import com.zhongyong.jamod.model.ModBusGateWayModel;
 import com.zhongyong.smarthome.R;
 import com.zhongyong.smarthome.adapter.ViewHolder;
 import com.zhongyong.smarthome.base.BaseFragment;
@@ -82,7 +82,7 @@ public class ModBusGatewayFragment extends BaseFragment {
             footer.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    go(CreateModbusIpActivity.class);
+                    go(CreateModbusActivity.class);
                 }
             });
         }

@@ -1,4 +1,4 @@
-package com.zhongyong.jamod;
+package com.zhongyong.jamod.utils;
 
 import net.wimpi.modbus.Modbus;
 import net.wimpi.modbus.ModbusException;
@@ -15,7 +15,7 @@ import java.net.InetAddress;
  * Created by fyc on 2017/12/25.
  */
 
-public class ModBusTcpClient {
+public class ModBusTcpClientUtil {
     private static final int port = Modbus.DEFAULT_PORT;
     private String ip;
     private int uniId;
@@ -27,7 +27,7 @@ public class ModBusTcpClient {
     private ReadMultipleRegistersRequest mRequest;
     private ReadMultipleRegistersResponse mResponse;
 
-    public ModBusTcpClient(String ip, int uniId, int ref, int count) {
+    public ModBusTcpClientUtil(String ip, int uniId, int ref, int count) {
         this.ip = ip;
         this.uniId = uniId;
         this.ref = ref;

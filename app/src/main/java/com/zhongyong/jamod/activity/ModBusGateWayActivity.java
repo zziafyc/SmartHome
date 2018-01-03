@@ -1,4 +1,4 @@
-package com.zhongyong.jamod;
+package com.zhongyong.jamod.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.google.gson.reflect.TypeToken;
+import com.zhongyong.jamod.model.ModBusGateWayModel;
 import com.zhongyong.smarthome.R;
 import com.zhongyong.smarthome.adapter.ViewHolder;
 import com.zhongyong.smarthome.base.BaseActivity;
@@ -101,7 +102,7 @@ public class ModBusGateWayActivity extends BaseActivity {
                 public void onClick(View v) {
                     Bundle bundle = new Bundle();
                     bundle.putString("preferenceGateWay", preferenceGateWay);
-                    go(CreateModbusIpActivity.class, bundle);
+                    go(CreateModbusActivity.class, bundle);
                 }
             });
         }

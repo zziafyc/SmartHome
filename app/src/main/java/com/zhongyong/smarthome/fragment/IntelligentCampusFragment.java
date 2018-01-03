@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
 
-import com.zhongyong.jamod.ZigBeeDetailActivity;
+import com.zhongyong.jamod.activity.ZigBeeDetailActivity;
 import com.zhongyong.smarthome.R;
 import com.zhongyong.smarthome.base.BaseFragment;
 

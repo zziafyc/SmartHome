@@ -1,4 +1,4 @@
-package com.zhongyong.jamod;
+package com.zhongyong.jamod.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.gson.reflect.TypeToken;
+import com.zhongyong.jamod.model.ModBusGateWayModel;
 import com.zhongyong.smarthome.R;
 import com.zhongyong.smarthome.base.BaseActivity;
 import com.zhongyong.smarthome.utils.SharePreferenceUtils;
@@ -23,7 +24,7 @@ import butterknife.Bind;
  * Created by fyc on 2017/12/28.
  */
 
-public class CreateModbusIpActivity extends BaseActivity {
+public class CreateModbusActivity extends BaseActivity {
     @Bind(R.id.title_right)
     TextView rightTv;
     @Bind(R.id.acn_edt_ip)
@@ -88,13 +89,13 @@ public class CreateModbusIpActivity extends BaseActivity {
 
                 }
                 ModBusGateWayModel newModel = new ModBusGateWayModel(nameEdt.getText().toString(), ipEdt.getText().toString(), Integer.parseInt(idEdt.getText().toString()));
-                mModBusGateWayModels = (List<ModBusGateWayModel>) SharePreferenceUtils.get(CreateModbusIpActivity.this, preferenceGateWay, new TypeToken<List<ModBusGateWayModel>>() {
+                mModBusGateWayModels = (List<ModBusGateWayModel>) SharePreferenceUtils.get(CreateModbusActivity.this, preferenceGateWay, new TypeToken<List<ModBusGateWayModel>>() {
                 }.getType());
                 if (mModBusGateWayModels == null) {
                     mModBusGateWayModels = new ArrayList<>();
                 }
                 mModBusGateWayModels.add(newModel);
-                SharePreferenceUtils.put(CreateModbusIpActivity.this, preferenceGateWay, mModBusGateWayModels);
+                SharePreferenceUtils.put(CreateModbusActivity.this, preferenceGateWay, mModBusGateWayModels);
                 EventBus.getDefault().post(newModel);
                 finish();
             }

@@ -65,11 +65,11 @@
         <activity android:name=".activity.NewSceneActivity"/>
         <activity android:name=".activity.AddDeviceActivity"/>
         <activity android:name=".activity.SearchDeviceActivity"/>
-        <activity android:name="com.zhongyong.jamod.ModBusTestActivity"/>
-        <activity android:name="com.zhongyong.jamod.CreateModbusIpActivity"/>
-        <activity android:name="com.zhongyong.jamod.EnvironmentDetectorDetailActivity"/>
-        <activity android:name="com.zhongyong.jamod.ZigBeeDetailActivity"/>
-        <activity android:name="com.zhongyong.jamod.ModBusGateWayActivity"/>
+        <activity android:name="com.zhongyong.jamod.activity.ModBusTestActivity"/>
+        <activity android:name="com.zhongyong.jamod.activity.CreateModbusActivity"/>
+        <activity android:name="com.zhongyong.jamod.activity.EnvironmentDetectorDetailActivity"/>
+        <activity android:name="com.zhongyong.jamod.activity.ZigBeeDetailActivity"/>
+        <activity android:name="com.zhongyong.jamod.activity.ModBusGateWayActivity"/>
     </application>
 
 

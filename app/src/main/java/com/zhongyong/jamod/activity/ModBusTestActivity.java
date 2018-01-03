@@ -1,4 +1,4 @@
-package com.zhongyong.jamod;
+package com.zhongyong.jamod.activity;
 
 import android.os.Handler;
 import android.os.Message;
@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.zhongyong.jamod.utils.ModBusTcpClientUtil;
 import com.zhongyong.smarthome.R;
 import com.zhongyong.smarthome.base.BaseActivity;
 
@@ -27,7 +28,7 @@ public class ModBusTestActivity extends BaseActivity {
     @Bind(R.id.response)
     TextView responseTv;
     private Timer mTimer;
-    private ModBusTcpClient client;
+    private ModBusTcpClientUtil client;
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -66,7 +67,7 @@ public class ModBusTestActivity extends BaseActivity {
             @Override
             public void run() {
                 //这个两个参数需要传递
-                client = new ModBusTcpClient("192.168.0.11", 1, 0, 6);
+                client = new ModBusTcpClientUtil("192.168.0.11", 1, 0, 6);
                 String response = client.sendRequest();
                 Log.e(TAG, "消息已发送！ ");
                 if (!TextUtils.isEmpty(response)) {

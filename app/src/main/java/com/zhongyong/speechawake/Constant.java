@@ -35,4 +35,13 @@ public class Constant {
 
     public static final String VAD_SEARCH = "search";
     public static final String VAD_INPUT = "input";
+    public static final  String ZIGBEE_SN_01="111169";
+    public static final  String ZIGBEE_SN_02="111659";
+    public static final  String ZIGBEE_SN_03="111924";
+    public static final  String ZIGBEE_SN_04="111807";
+
+    public static final  String ZIGBEE_SN_LIBRARY="112e9112";
+    public static final  String ZIGBEE_SN_CLASSROOM="";
+    public static final  String ZIGBEE_SN_KITCHEN="";
+    public static final  String ZIGBEE_SN_LABORATORY="";
 }

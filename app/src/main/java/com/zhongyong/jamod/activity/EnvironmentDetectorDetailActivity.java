@@ -1,4 +1,4 @@
-package com.zhongyong.jamod;
+package com.zhongyong.jamod.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,9 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.ListView;
 
+import com.zhongyong.jamod.model.EnvironmentFactorModel;
+import com.zhongyong.jamod.model.ModBusGateWayModel;
+import com.zhongyong.jamod.utils.ModBusTcpClientUtil;
 import com.zhongyong.smarthome.R;
 import com.zhongyong.smarthome.adapter.ViewHolder;
 import com.zhongyong.smarthome.base.BaseActivity;
@@ -32,7 +35,7 @@ public class EnvironmentDetectorDetailActivity extends BaseActivity {
     List<EnvironmentFactorModel> mList = new ArrayList<>();
     BasicAdapter<EnvironmentFactorModel> mAdapter;
     private Timer mTimer;
-    private ModBusTcpClient client;
+    private ModBusTcpClientUtil client;
     private String ip;
     private int uniId;
     private Handler mHandler = new Handler() {
@@ -93,7 +96,7 @@ public class EnvironmentDetectorDetailActivity extends BaseActivity {
             @Override
             public void run() {
                 //这个两个参数需要传递
-                client = new ModBusTcpClient(ip, uniId, 0, 6);
+                client = new ModBusTcpClientUtil(ip, uniId, 0, 6);
                 String response = client.sendRequest();
                 Log.e(TAG, "消息已发送！ ");
                 if (!TextUtils.isEmpty(response)) {

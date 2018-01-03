@@ -118,16 +118,6 @@ public class WakeUpActivity extends BaseActivity {
                     } else {
                         MyApplication.deviceInfos.set(isExist(uid), deviceInfo);
                     }
-
-                    if (MyApplication.gatewayInfo != null) {
-                        if (MyApplication.gatewayInfo.DevSum == 0) {
-                            break;
-                        }
-                        if (MyApplication.gatewayInfo.DevSum == MyApplication.deviceInfos.size()) {
-                        }
-                    } else {
-
-                    }
                     break;
                 case Contants.ACTION_GET_GATEWAYINFO:
                     MyApplication.gatewayInfo = (GatewayInfo) intent.getSerializableExtra("gatewayInfo");
