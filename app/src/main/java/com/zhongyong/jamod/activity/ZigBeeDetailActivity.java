@@ -25,7 +25,7 @@ import com.zhongyong.smarthome.R;
 import com.zhongyong.smarthome.base.BaseActivity;
 import com.zhongyong.smarthome.utils.SharePreferenceUtils;
 import com.zhongyong.smarthome.utils.SnackBarUtils;
-import com.zhongyong.speechawake.Constant;
+import com.zhongyong.speechawake.Constants;
 
 import butterknife.Bind;
 
@@ -42,10 +42,11 @@ public class ZigBeeDetailActivity extends BaseActivity {
     TextView mGatewayTv;
     @Bind(R.id.connect_show)
     TextView connectStateTv;
+    @Bind(R.id.progressBar)
+    ProgressBar mProgressBar;
     private String flag;
     private ZigBeeSceneModel mSceneModel;
     private String preferenceZigBee;
-    private ProgressBar mProgressBar;
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -152,6 +153,7 @@ public class ZigBeeDetailActivity extends BaseActivity {
                         imageView1.setBackgroundResource(R.drawable.switch_close);
                         twoSwitchModel.setLeftState("0");
                     }
+                    changeDeviceState(Constants.LIBRARY_TWOSWITCH_LEFT_UID);
                 }
             });
             ImageView imageView2 = (ImageView) findViewById(R.id.item2_Iv);
@@ -165,6 +167,7 @@ public class ZigBeeDetailActivity extends BaseActivity {
                         imageView2.setBackgroundResource(R.drawable.switch_close);
                         twoSwitchModel.setRightState("0");
                     }
+                    changeDeviceState(Constants.LIBRARY_TWOSWITCH_RIGHT_UID);
                 }
             });
             //三路墙面开关
@@ -200,6 +203,7 @@ public class ZigBeeDetailActivity extends BaseActivity {
                         imageView3.setBackgroundResource(R.drawable.switch_close);
                         threeSwitchModel.setLeftState("0");
                     }
+                    changeDeviceState(Constants.LIBRARY_THREESWITCH_LEFT_UID);
                 }
             });
             ImageView imageView4 = (ImageView) findViewById(R.id.item4_Iv);
@@ -213,6 +217,7 @@ public class ZigBeeDetailActivity extends BaseActivity {
                         imageView4.setBackgroundResource(R.drawable.switch_close);
                         threeSwitchModel.setMiddleState("0");
                     }
+                    changeDeviceState(Constants.LIBRARY_THREESWITCH_MIDDLE_UID);
                 }
             });
             ImageView imageView5 = (ImageView) findViewById(R.id.item5_Iv);
@@ -226,6 +231,7 @@ public class ZigBeeDetailActivity extends BaseActivity {
                         imageView5.setBackgroundResource(R.drawable.switch_close);
                         threeSwitchModel.setRightState("0");
                     }
+                    changeDeviceState(Constants.LIBRARY_THREESWITCH_RIGHT_UID);
                 }
             });
         } else if (flag.equals("classroom")) {
@@ -259,6 +265,7 @@ public class ZigBeeDetailActivity extends BaseActivity {
                         imageView1.setBackgroundResource(R.drawable.switch_close);
                         oneSwitchModel.setState("0");
                     }
+                    changeDeviceState(Constants.CLASSROOM_ONESWITCH_UID);
                 }
             });
             //二路墙面开关
@@ -288,6 +295,7 @@ public class ZigBeeDetailActivity extends BaseActivity {
                         imageView2.setBackgroundResource(R.drawable.switch_close);
                         twoSwitchModel.setLeftState("0");
                     }
+                    changeDeviceState(Constants.CLASSROOM_TWOSWITCH_LEFT_UID);
                 }
             });
             ImageView imageView3 = (ImageView) findViewById(R.id.item3_classroom_Iv);
@@ -301,6 +309,7 @@ public class ZigBeeDetailActivity extends BaseActivity {
                         imageView3.setBackgroundResource(R.drawable.switch_close);
                         twoSwitchModel.setRightState("0");
                     }
+                    changeDeviceState(Constants.CLASSROOM_TWOSWITCH_RIGHT_UID);
                 }
             });
         } else if (flag.equals("kitchen")) {
@@ -312,6 +321,21 @@ public class ZigBeeDetailActivity extends BaseActivity {
         //注册网关、连接网关
         registerReceiver(mReceiver, new IntentFilter(Contants.ACTION_CALLBACK));
 
+    }
+
+    private void changeDeviceState(int uId) {
+        if (MyApplication.switchDeviceInfos != null && MyApplication.switchDeviceInfos.size() > 0) {
+            for (DeviceInfo deviceInfo : MyApplication.switchDeviceInfos) {
+                if (deviceInfo.getUId() == uId) {
+                    if (deviceInfo.getDeviceState() == 0) {
+                        deviceInfo.setDeviceState((byte) 1);
+                    } else {
+                        deviceInfo.setDeviceState((byte) 0);
+                    }
+                    break;
+                }
+            }
+        }
     }
 
     @Override
@@ -337,6 +361,7 @@ public class ZigBeeDetailActivity extends BaseActivity {
         connectStateTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mProgressBar.setVisibility(View.VISIBLE);
                 connect();
             }
         });
@@ -363,13 +388,13 @@ public class ZigBeeDetailActivity extends BaseActivity {
                     final String[] boxip = MyApplication.mSerial.getGatewayIps(ret);
                     final String[] boxsnid = MyApplication.mSerial.getBoxSnids(ret);
                     if (flag.equals("library")) {
-                        chooseConnect(boxip, boxsnid, Constant.ZIGBEE_SN_LIBRARY);
+                        chooseConnect(boxip, boxsnid, Constants.ZIGBEE_SN_LIBRARY);
                     } else if (flag.equals("classroom")) {
-                        chooseConnect(boxip, boxsnid, Constant.ZIGBEE_SN_CLASSROOM);
+                        chooseConnect(boxip, boxsnid, Constants.ZIGBEE_SN_CLASSROOM);
                     } else if (flag.equals("kitchen")) {
-                        chooseConnect(boxip, boxsnid, Constant.ZIGBEE_SN_KITCHEN);
+                        chooseConnect(boxip, boxsnid, Constants.ZIGBEE_SN_KITCHEN);
                     } else if (flag.equals("laboratory")) {
-                        chooseConnect(boxip, boxsnid, Constant.ZIGBEE_SN_LABORATORY);
+                        chooseConnect(boxip, boxsnid, Constants.ZIGBEE_SN_LABORATORY);
                     }
                 }
             }
@@ -391,6 +416,7 @@ public class ZigBeeDetailActivity extends BaseActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            mProgressBar.setVisibility(View.GONE);
                             connectStateTv.setText("已连接");
                             SnackBarUtils.with(mCoordinatorLayout)
                                     .setBgColor(SnackBarUtils.COLOR_WARNING)

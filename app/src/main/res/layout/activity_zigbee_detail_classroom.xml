@@ -1,279 +1,296 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    <include layout="@layout/common_app_bar"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <android.support.design.widget.CoordinatorLayout
-        android:id="@+id/layout"
+        <include layout="@layout/common_app_bar"/>
+
+        <android.support.design.widget.CoordinatorLayout
+            android:id="@+id/layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:background="@drawable/bottom_border"
+                        android:paddingLeft="12dp">
+
+                        <ImageView
+                            android:id="@+id/im_iv_theme"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/gateway2"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="12dp"
+                            android:layout_toRightOf="@+id/im_iv_theme"
+                            android:text="zigbee网关信息"
+                            android:textColor="@color/colorBlue"
+                            android:textSize="16sp"/>
+
+                        <TextView
+                            android:id="@+id/connect_show"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="@dimen/margin_24"
+                            android:text="连接"
+                            android:textColor="@color/colorBlue"
+                            android:textSize="14sp"/>
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/gatewayTvLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/margin_12"
+                            android:background="@null"
+                            android:padding="12dp"
+                            android:text="网关IP："
+                            android:textColor="@color/colorTitle"
+                            android:textSize="14sp"/>
+
+                        <TextView
+                            android:id="@+id/gatewayTv"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:hint="请连接网关"
+                            android:textColor="@color/colorTitle"
+                            android:textSize="14sp"/>
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:background="@drawable/top_bottom_border"
+                        android:paddingLeft="12dp">
+
+                        <ImageView
+                            android:id="@+id/im_iv_deviceLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/devices2"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="12dp"
+                            android:layout_toRightOf="@+id/im_iv_deviceLabel"
+                            android:text="相关设备信息"
+                            android:textColor="@color/colorBlue"
+                            android:textSize="16sp"/>
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bottom_border"
+                            android:paddingLeft="@dimen/margin_24">
+
+                            <TextView
+                                android:id="@+id/switch_left"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginTop="@dimen/margin_8"
+                                android:text="开关"
+                                android:textColor="@color/colorTitle"
+                                android:textSize="14sp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/switch_left"
+                                android:layout_marginBottom="@dimen/margin_12"
+                                android:layout_marginTop="8dp"
+                                android:text="单面开关"
+                                android:textColor="@color/colorBlue"
+                                android:textSize="14sp"/>
+
+                            <ImageView
+                                android:id="@+id/item1_classroom_Iv"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="@dimen/margin_24"
+                                android:background="@drawable/switch_close"/>
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bottom_border"
+                            android:paddingLeft="@dimen/margin_24">
+
+                            <TextView
+                                android:id="@+id/switch_left3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginTop="@dimen/margin_8"
+                                android:text="开关（左侧）"
+                                android:textColor="@color/colorTitle"
+                                android:textSize="14sp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/switch_left3"
+                                android:layout_marginBottom="@dimen/margin_8"
+                                android:layout_marginTop="8dp"
+                                android:text="二路墙面开关"
+                                android:textColor="@color/colorBlue"
+                                android:textSize="14sp"/>
+
+                            <ImageView
+                                android:id="@+id/item2_classroom_Iv"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="@dimen/margin_24"
+                                android:background="@drawable/switch_close"/>
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bottom_border"
+                            android:paddingLeft="@dimen/margin_24">
+
+                            <TextView
+                                android:id="@+id/switch_left5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginTop="@dimen/margin_12"
+                                android:text="开关（右侧）"
+                                android:textColor="@color/colorTitle"
+                                android:textSize="14sp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/switch_left5"
+                                android:layout_marginBottom="@dimen/margin_12"
+                                android:layout_marginTop="12dp"
+                                android:text="二路墙面开关"
+                                android:textColor="@color/colorBlue"
+                                android:textSize="14sp"/>
+
+                            <ImageView
+                                android:id="@+id/item3_classroom_Iv"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="@dimen/margin_24"
+                                android:background="@drawable/switch_close"/>
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/modBusConnect"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="55dp"
+                            android:background="@drawable/bottom_border"
+                            android:paddingLeft="@dimen/margin_12">
+
+                            <TextView
+                                android:id="@+id/modbusTv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginTop="@dimen/margin_8"
+                                android:text="modBus网关相关"
+                                android:textColor="@color/colorBlue"
+                                android:textSize="14sp"/>
+
+                            <ImageView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="30dp"
+                                android:background="@drawable/express"/>
+                        </RelativeLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+            </ScrollView>
+        </android.support.design.widget.CoordinatorLayout>
+
+        <include layout="@layout/common_app_bar"/>
+    </LinearLayout>
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:background="@drawable/bottom_border"
-                    android:paddingLeft="12dp">
-
-                    <ImageView
-                        android:id="@+id/im_iv_theme"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:background="@drawable/gateway2"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="12dp"
-                        android:layout_toRightOf="@+id/im_iv_theme"
-                        android:text="zigbee网关信息"
-                        android:textColor="@color/colorBlue"
-                        android:textSize="16sp"/>
-
-                    <TextView
-                        android:id="@+id/connect_show"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="@dimen/margin_24"
-                        android:text="连接"
-                        android:textColor="@color/colorBlue"
-                        android:textSize="14sp"/>
-                </RelativeLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/gatewayTvLabel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/margin_12"
-                        android:background="@null"
-                        android:padding="12dp"
-                        android:text="网关IP："
-                        android:textColor="@color/colorTitle"
-                        android:textSize="14sp"/>
-
-                    <TextView
-                        android:id="@+id/gatewayTv"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@null"
-                        android:text="192.168.1.12"
-                        android:textColor="@color/colorTitle"
-                        android:textSize="14sp"/>
-                </LinearLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:background="@drawable/top_bottom_border"
-                    android:paddingLeft="12dp">
-
-                    <ImageView
-                        android:id="@+id/im_iv_deviceLabel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:background="@drawable/devices2"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="12dp"
-                        android:layout_toRightOf="@+id/im_iv_deviceLabel"
-                        android:text="相关设备信息"
-                        android:textColor="@color/colorBlue"
-                        android:textSize="16sp"/>
-                </RelativeLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:orientation="vertical">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/bottom_border"
-                        android:paddingLeft="@dimen/margin_24">
-
-                        <TextView
-                            android:id="@+id/switch_left"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginTop="@dimen/margin_8"
-                            android:text="开关"
-                            android:textColor="@color/colorTitle"
-                            android:textSize="14sp"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/switch_left"
-                            android:layout_marginBottom="@dimen/margin_12"
-                            android:layout_marginTop="8dp"
-                            android:text="单面开关"
-                            android:textColor="@color/colorBlue"
-                            android:textSize="14sp"/>
-
-                        <ImageView
-                            android:id="@+id/item1_classroom_Iv"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginRight="@dimen/margin_24"
-                            android:background="@drawable/switch_close"/>
-                    </RelativeLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:orientation="vertical">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/bottom_border"
-                        android:paddingLeft="@dimen/margin_24">
-
-                        <TextView
-                            android:id="@+id/switch_left3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginTop="@dimen/margin_8"
-                            android:text="开关（左侧）"
-                            android:textColor="@color/colorTitle"
-                            android:textSize="14sp"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/switch_left3"
-                            android:layout_marginBottom="@dimen/margin_8"
-                            android:layout_marginTop="8dp"
-                            android:text="二路墙面开关"
-                            android:textColor="@color/colorBlue"
-                            android:textSize="14sp"/>
-
-                        <ImageView
-                            android:id="@+id/item2_classroom_Iv"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginRight="@dimen/margin_24"
-                            android:background="@drawable/switch_close"/>
-                    </RelativeLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:orientation="vertical">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/bottom_border"
-                        android:paddingLeft="@dimen/margin_24">
-
-                        <TextView
-                            android:id="@+id/switch_left5"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginTop="@dimen/margin_12"
-                            android:text="开关（右侧）"
-                            android:textColor="@color/colorTitle"
-                            android:textSize="14sp"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/switch_left5"
-                            android:layout_marginBottom="@dimen/margin_12"
-                            android:layout_marginTop="12dp"
-                            android:text="二路墙面开关"
-                            android:textColor="@color/colorBlue"
-                            android:textSize="14sp"/>
-
-                        <ImageView
-                            android:id="@+id/item3_classroom_Iv"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginRight="@dimen/margin_24"
-                            android:background="@drawable/switch_close"/>
-                    </RelativeLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/modBusConnect"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:orientation="vertical">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="55dp"
-                        android:background="@drawable/bottom_border"
-                        android:paddingLeft="@dimen/margin_12">
-
-                        <TextView
-                            android:id="@+id/modbusTv"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginTop="@dimen/margin_8"
-                            android:text="modBus网关相关"
-                            android:textColor="@color/colorBlue"
-                            android:textSize="14sp"/>
-
-                        <ImageView
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginRight="30dp"
-                            android:background="@drawable/express"/>
-                    </RelativeLayout>
-
-                </LinearLayout>
-            </LinearLayout>
-        </ScrollView>
-    </android.support.design.widget.CoordinatorLayout>
-
-    <include layout="@layout/common_app_bar"/>
-</LinearLayout>
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"/>
+    </FrameLayout>
+</RelativeLayout>

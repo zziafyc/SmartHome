@@ -1,6 +1,6 @@
 package com.zhongyong.speechawake;
 
-public class Constant {
+public class Constants {
     public static final String EXTRA_KEY = "key";
     public static final String EXTRA_SECRET = "secret";
     public static final String EXTRA_SAMPLE = "sample";
@@ -35,13 +35,30 @@ public class Constant {
 
     public static final String VAD_SEARCH = "search";
     public static final String VAD_INPUT = "input";
-    public static final  String ZIGBEE_SN_01="111169";
-    public static final  String ZIGBEE_SN_02="111659";
-    public static final  String ZIGBEE_SN_03="111924";
-    public static final  String ZIGBEE_SN_04="111807";
+    public static final String ZIGBEE_NUMBER_01 = "111169";
+    public static final String ZIGBEE_NUMBER_02 = "111659";
+    public static final String ZIGBEE_NUMBER_03 = "111924";
+    public static final String ZIGBEE_NUMBER_04 = "111807";
 
-    public static final  String ZIGBEE_SN_LIBRARY="112e9112";
-    public static final  String ZIGBEE_SN_CLASSROOM="";
-    public static final  String ZIGBEE_SN_KITCHEN="";
-    public static final  String ZIGBEE_SN_LABORATORY="";
+    //zigbee项目
+    public static final String ZIGBEE_SN_LIBRARY = "112e9112";
+    public static final String ZIGBEE_SN_CLASSROOM = "";
+    public static final String ZIGBEE_SN_KITCHEN = "";
+    public static final String ZIGBEE_SN_LABORATORY = "";
+
+    //图书馆
+    public static final int LIBRARY_TWOSWITCH_LEFT_UID = 0;
+    public static final int LIBRARY_TWOSWITCH_RIGHT_UID = 0;
+    public static final int LIBRARY_THREESWITCH_LEFT_UID = 1201600;
+    public static final int LIBRARY_THREESWITCH_MIDDLE_UID = 1136064;
+    public static final int LIBRARY_THREESWITCH_RIGHT_UID = 1070528;
+    //教室
+    public static final int CLASSROOM_ONESWITCH_UID = 0;
+    public static final int CLASSROOM_TWOSWITCH_LEFT_UID = 0;
+    public static final int CLASSROOM_TWOSWITCH_RIGHT_UID = 0;
+    //厨房
+    public static final int KITCHEN_FLAMEABLE_GAS_UID = 0;
+    //实验室
+    public static final int KITCHEN_CO_GAS_UID = 0;
+    public static final int KITCHEN_SMOKE_GAS_UID = 0;
 }
