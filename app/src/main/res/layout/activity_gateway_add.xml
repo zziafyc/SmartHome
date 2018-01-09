@@ -18,7 +18,7 @@
             android:layout_marginTop="0.5dp"
             android:background="@drawable/bottom_border"
             android:gravity="center"
-            android:text="请输入网关名称"
+            android:text="请输入设备名称"
             android:textColor="@color/colorTitle"
             android:textSize="16sp"/>
 
@@ -28,7 +28,7 @@
             android:layout_height="45dp"
             android:layout_marginLeft="@dimen/margin_12"
             android:background="@drawable/bottom_border"
-            android:hint="输入网关名称"
+            android:hint="输入设备名称"
             android:paddingRight="@dimen/margin_12"
             android:singleLine="true"
             android:textColor="@color/colorText"
@@ -50,7 +50,7 @@
             android:layout_marginTop="0.5dp"
             android:background="@drawable/bottom_border"
             android:gravity="center"
-            android:text="请输入IP地址"
+            android:text="请绑定网关IP地址"
             android:textColor="@color/colorTitle"
             android:textSize="16sp"/>
 
@@ -81,7 +81,7 @@
             android:layout_marginTop="0.5dp"
             android:background="@drawable/bottom_border"
             android:gravity="center"
-            android:text="请输入单元ID"
+            android:text="请输入设备单元ID"
             android:textColor="@color/colorTitle"
             android:textSize="16sp"/>
 

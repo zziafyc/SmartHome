@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
@@ -31,6 +32,8 @@ import butterknife.Bind;
 public class ModBusGateWayActivity extends BaseActivity {
     @Bind(R.id.gatewaysLv)
     SwipeMenuListView mMenuListView;
+    @Bind(R.id.cab_titleBack_iv)
+    ImageView backIv;
     List<ModBusGateWayModel> mList = new ArrayList<>();
     BasicAdapter<ModBusGateWayModel> mAdapter;
     View footer;
@@ -45,6 +48,7 @@ public class ModBusGateWayActivity extends BaseActivity {
     @Override
     protected void initViews() {
         setCustomTitle("modBus网关");
+        backIv.setVisibility(View.VISIBLE);
         footer = LayoutInflater.from(this).inflate(R.layout.footer_gateway_add, null);
         Intent intent = getIntent();
         if (intent != null) {
@@ -122,6 +126,12 @@ public class ModBusGateWayActivity extends BaseActivity {
 
     @Override
     protected void initListener() {
+        backIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
     }
 

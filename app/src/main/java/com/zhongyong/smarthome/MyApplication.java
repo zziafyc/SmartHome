@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 
 public class MyApplication extends Application {
-    //语音部分
+    //飞比设备部分
     public static Serial mSerial;
     public static ArrayList<DeviceInfo> deviceInfos = new ArrayList<>();
     public static ArrayList<DeviceInfo> switchDeviceInfos = new ArrayList<>();
@@ -19,6 +19,7 @@ public class MyApplication extends Application {
     public static ArrayList<DeviceInfo> doorDeviceInfos = new ArrayList<>();
     public static ArrayList<DeviceInfo> gasDeviceInfos = new ArrayList<>();
     public static ArrayList<DeviceInfo> cogasDeviceInfos = new ArrayList<>();
+    public static ArrayList<DeviceInfo> smokeDeviceInfos = new ArrayList<>();
     public static GatewayInfo gatewayInfo;
     //主题设置
     public static MyPreference mPreference;

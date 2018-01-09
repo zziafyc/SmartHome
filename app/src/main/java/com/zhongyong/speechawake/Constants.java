@@ -42,23 +42,8 @@ public class Constants {
 
     //zigbee项目
     public static final String ZIGBEE_SN_LIBRARY = "112e9112";
-    public static final String ZIGBEE_SN_CLASSROOM = "";
-    public static final String ZIGBEE_SN_KITCHEN = "";
-    public static final String ZIGBEE_SN_LABORATORY = "";
+    public static final String ZIGBEE_SN_CLASSROOM = "112e9596";
+    public static final String ZIGBEE_SN_KITCHEN = "112e9793";
+    public static final String ZIGBEE_SN_LABORATORY = "112e9742";
 
-    //图书馆
-    public static final int LIBRARY_TWOSWITCH_LEFT_UID = 0;
-    public static final int LIBRARY_TWOSWITCH_RIGHT_UID = 0;
-    public static final int LIBRARY_THREESWITCH_LEFT_UID = 1201600;
-    public static final int LIBRARY_THREESWITCH_MIDDLE_UID = 1136064;
-    public static final int LIBRARY_THREESWITCH_RIGHT_UID = 1070528;
-    //教室
-    public static final int CLASSROOM_ONESWITCH_UID = 0;
-    public static final int CLASSROOM_TWOSWITCH_LEFT_UID = 0;
-    public static final int CLASSROOM_TWOSWITCH_RIGHT_UID = 0;
-    //厨房
-    public static final int KITCHEN_FLAMEABLE_GAS_UID = 0;
-    //实验室
-    public static final int KITCHEN_CO_GAS_UID = 0;
-    public static final int KITCHEN_SMOKE_GAS_UID = 0;
 }

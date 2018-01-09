@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.reflect.TypeToken;
@@ -27,6 +28,8 @@ import butterknife.Bind;
 public class CreateModbusActivity extends BaseActivity {
     @Bind(R.id.title_right)
     TextView rightTv;
+    @Bind(R.id.cab_titleBack_iv)
+    ImageView backIv;
     @Bind(R.id.acn_edt_ip)
     EditText ipEdt;
     @Bind(R.id.acn_edt_id)
@@ -45,7 +48,8 @@ public class CreateModbusActivity extends BaseActivity {
 
     @Override
     protected void initViews() {
-        titleTv.setText("编辑网关信息");
+        backIv.setVisibility(View.VISIBLE);
+        titleTv.setText("编辑设备信息");
         rightTv.setText("保存");
         rightTv.setVisibility(View.VISIBLE);
         Intent intent = getIntent();
@@ -70,11 +74,17 @@ public class CreateModbusActivity extends BaseActivity {
 
     @Override
     protected void initListener() {
+        backIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         rightTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (StringUtils.isEmpty(nameEdt.getText().toString())) {
-                    showToast("请输入网关名称");
+                    showToast("请输入设备名称");
                     return;
 
                 }

@@ -6,7 +6,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.zhongyong.jamod.model.EnvironmentFactorModel;
 import com.zhongyong.jamod.model.ModBusGateWayModel;
@@ -15,6 +17,7 @@ import com.zhongyong.smarthome.R;
 import com.zhongyong.smarthome.adapter.ViewHolder;
 import com.zhongyong.smarthome.base.BaseActivity;
 import com.zhongyong.smarthome.base.BasicAdapter;
+import com.zhongyong.smarthome.utils.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -32,6 +35,8 @@ public class EnvironmentDetectorDetailActivity extends BaseActivity {
     private static final int MESSAGE_WHAT_SEND = 1;
     @Bind(R.id.lv_factor)
     ListView mListView;
+    @Bind(R.id.progressBar)
+    ProgressBar mProgressBar;
     List<EnvironmentFactorModel> mList = new ArrayList<>();
     BasicAdapter<EnvironmentFactorModel> mAdapter;
     private Timer mTimer;
@@ -48,6 +53,9 @@ public class EnvironmentDetectorDetailActivity extends BaseActivity {
                     mList.clear();
                     mList.addAll((Collection<? extends EnvironmentFactorModel>) msg.obj);
                     mAdapter.notifyDataSetChanged();
+                    if (mProgressBar != null) {
+                        mProgressBar.setVisibility(View.GONE);
+                    }
                     break;
 
             }
@@ -61,6 +69,7 @@ public class EnvironmentDetectorDetailActivity extends BaseActivity {
 
     @Override
     protected void initViews() {
+        mProgressBar.setVisibility(View.VISIBLE);
         Intent intent = getIntent();
         if (intent != null) {
             Bundle bundle = intent.getExtras();
@@ -96,24 +105,40 @@ public class EnvironmentDetectorDetailActivity extends BaseActivity {
             @Override
             public void run() {
                 //这个两个参数需要传递
-                client = new ModBusTcpClientUtil(ip, uniId, 0, 6);
-                String response = client.sendRequest();
-                Log.e(TAG, "消息已发送！ ");
-                if (!TextUtils.isEmpty(response)) {
-                    //对该16进制数据进行处理
-                    String response2 = response.replaceAll(" ", "");
-                    List<EnvironmentFactorModel> list = dealWithData(response2);
-                    if (list != null) {
-                        Message message = new Message();
-                        message.what = MESSAGE_WHAT_SEND;
-                        message.obj = list;
-                        mHandler.sendMessage(message);
+                if (uniId == 1) {
+                    client = new ModBusTcpClientUtil(ip, uniId, 0, 6);
+                    String response = client.sendRequest();
+                    Log.e(TAG, "消息已发送！ ");
+                    if (!TextUtils.isEmpty(response)) {
+                        //对该16进制数据进行处理
+                        String response2 = response.replaceAll(" ", "");
+                        List<EnvironmentFactorModel> list = dealWithData(response2);
+                        if (list != null) {
+                            Message message = new Message();
+                            message.what = MESSAGE_WHAT_SEND;
+                            message.obj = list;
+                            mHandler.sendMessage(message);
+                        }
+                    }
+                } else {
+                    client = new ModBusTcpClientUtil(ip, uniId, 0, 2);
+                    String response = client.sendRequest();
+                    Log.e(TAG, "消息已发送！ ");
+                    if (!TextUtils.isEmpty(response)) {
+                        //对该16进制数据进行处理
+                        String response2 = response.replaceAll(" ", "");
+                        List<EnvironmentFactorModel> list = dealWithData2(response2);
+                        if (list != null) {
+                            Message message = new Message();
+                            message.what = MESSAGE_WHAT_SEND;
+                            message.obj = list;
+                            mHandler.sendMessage(message);
+                        }
                     }
                 }
             }
 
-        }, 1000, 5000);
-
+        }, 1000, 3000);
     }
 
     @Override
@@ -150,5 +175,28 @@ public class EnvironmentDetectorDetailActivity extends BaseActivity {
         }
         return null;
 
+    }
+
+    private List<EnvironmentFactorModel> dealWithData2(String response) {
+        List<EnvironmentFactorModel> list = new ArrayList<>();
+        //首先得到该字符串从第
+        String temp1 = response.substring(18, 22);
+        String temp2 = response.substring(22, 26);
+        if (!StringUtils.isEmpty(temp1) && !StringUtils.isEmpty(temp2)) {
+            int value = Integer.parseInt(temp2 + temp1, 16);
+            list.add(new EnvironmentFactorModel("智能电表读数", value / 10.0 + "kw.h"));
+        }
+        if (list != null && list.size() > 0) {
+            return list;
+        }
+        return null;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mTimer != null) {
+            mTimer.cancel();
+        }
     }
 }

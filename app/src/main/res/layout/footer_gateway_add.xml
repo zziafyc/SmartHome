@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/margin_12"
-            android:text="添加网关"
+            android:text="添加设备"
             android:textColor="@color/colorBlue"
             android:textSize="@dimen/fontSize_16"/>
 

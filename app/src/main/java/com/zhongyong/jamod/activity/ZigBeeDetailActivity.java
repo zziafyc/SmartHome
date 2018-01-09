@@ -1,5 +1,6 @@
 package com.zhongyong.jamod.activity;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -9,23 +10,24 @@ import android.support.design.widget.CoordinatorLayout;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.fbee.zllctl.Contants;
 import com.fbee.zllctl.DeviceInfo;
 import com.fbee.zllctl.GatewayInfo;
-import com.google.gson.reflect.TypeToken;
-import com.zhongyong.jamod.model.OneSwitchModel;
-import com.zhongyong.jamod.model.ThreeSwitchModel;
-import com.zhongyong.jamod.model.TwoSwitchModel;
-import com.zhongyong.jamod.model.ZigBeeSceneModel;
 import com.zhongyong.smarthome.MyApplication;
 import com.zhongyong.smarthome.R;
+import com.zhongyong.smarthome.adapter.ViewHolder;
 import com.zhongyong.smarthome.base.BaseActivity;
-import com.zhongyong.smarthome.utils.SharePreferenceUtils;
+import com.zhongyong.smarthome.base.BasicAdapter;
 import com.zhongyong.smarthome.utils.SnackBarUtils;
+import com.zhongyong.smarthome.utils.StringUtils;
 import com.zhongyong.speechawake.Constants;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 
@@ -34,19 +36,22 @@ import butterknife.Bind;
  */
 
 public class ZigBeeDetailActivity extends BaseActivity {
+    @Bind(R.id.cab_titleBack_iv)
+    ImageView backIv;
     @Bind(R.id.layout)
     CoordinatorLayout mCoordinatorLayout;
-    @Bind(R.id.modBusConnect)
-    LinearLayout mModBusConnectLayout;
-    @Bind(R.id.gatewayTv)
-    TextView mGatewayTv;
-    @Bind(R.id.connect_show)
-    TextView connectStateTv;
     @Bind(R.id.progressBar)
     ProgressBar mProgressBar;
+    @Bind(R.id.zigbee_device_lv)
+    ListView mListView;
+    TextView mGatewayTv;
+    TextView connectStateTv;
+    LinearLayout mModBusConnectLayout;
+    View headerView;
+    View footerView;
     private String flag;
-    private ZigBeeSceneModel mSceneModel;
-    private String preferenceZigBee;
+    List<DeviceInfo> mList = new ArrayList<>();
+    BasicAdapter<DeviceInfo> mAdapter;
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -59,6 +64,8 @@ public class ZigBeeDetailActivity extends BaseActivity {
                     int profileId = deviceInfo.getProfileId();
                     int ZoneType = deviceInfo.getZoneType();
                     if (isExist(uid) == -1) {
+                        mList.add(deviceInfo);
+                        mAdapter.notifyDataSetChanged();
                         MyApplication.deviceInfos.add(deviceInfo);
                         if (deviceType == 0x0000 || deviceType == 0x0002 || deviceType == 0x0009 || deviceType == 0x0202 || (deviceType == 0x0200 && profileId == 0x0104)) {
                             //开关设备
@@ -75,6 +82,9 @@ public class ZigBeeDetailActivity extends BaseActivity {
                         } else if (deviceType == 0x0402 && ZoneType == 0x8001) {
                             //一氧化碳传感器
                             MyApplication.cogasDeviceInfos.add(deviceInfo);
+                        } else if (deviceType == 0x0402 && (ZoneType == 0x0028 || ZoneType == 0x8000)) {
+                            //烟雾探测器
+                            MyApplication.smokeDeviceInfos.add(deviceInfo);
                         }
                     } else {
                         MyApplication.deviceInfos.set(isExist(uid), deviceInfo);
@@ -90,6 +100,18 @@ public class ZigBeeDetailActivity extends BaseActivity {
 
     @Override
     protected int getContentViewLayoutID() {
+        return R.layout.activity_zigbee_detail_library;
+    }
+
+    @Override
+    protected void initViews() {
+        headerView = getLayoutInflater().inflate(R.layout.header_zigbee, null);
+        footerView = getLayoutInflater().inflate(R.layout.foot_zigbee_device, null);
+        connectStateTv = (TextView) headerView.findViewById(R.id.connect_show);
+        mGatewayTv = (TextView) headerView.findViewById(R.id.gatewayTv);
+        mModBusConnectLayout = (LinearLayout) footerView.findViewById(R.id.modBusConnect);
+        //初始化相关view
+        backIv.setVisibility(View.VISIBLE);
         Intent intent = getIntent();
         if (intent != null) {
             Bundle bundle = intent.getExtras();
@@ -97,240 +119,68 @@ public class ZigBeeDetailActivity extends BaseActivity {
                 String scene = bundle.getString("scene");
                 if (scene.equals("library")) {
                     flag = "library";
-                    return R.layout.activity_zigbee_detail_library;
+                    setCustomTitle("图书馆");
                 } else if (scene.equals("classroom")) {
                     flag = "classroom";
-                    return R.layout.activity_zigbee_detail_classroom;
+                    setCustomTitle("教室");
                 } else if (scene.equals("kitchen")) {
                     flag = "kitchen";
-                    return R.layout.activity_zigbee_detail_kitchen;
+                    setCustomTitle("厨房");
                 } else if (scene.equals("laboratory")) {
                     flag = "laboratory";
-                    return R.layout.activity_zigbee_detail_laboratory;
+                    setCustomTitle("实验室");
                 }
             }
         }
-        return 0;
-    }
-
-    @Override
-    protected void initViews() {
-        //初始化相关view
-        if (flag.equals("library")) {
-            setCustomTitle("图书馆");
-            preferenceZigBee = "preferenceZigBee_library";
-            ZigBeeSceneModel sceneModel = (ZigBeeSceneModel) SharePreferenceUtils.get(ZigBeeDetailActivity.this, preferenceZigBee, new TypeToken<ZigBeeSceneModel>() {
-            }.getType());
-            if (sceneModel != null) {
-                mSceneModel = sceneModel;
-            } else {
-                mSceneModel = new ZigBeeSceneModel();
-            }
-            //二路墙面开关
-            TwoSwitchModel twoSwitchModel = mSceneModel.getTwoSwitchModel();
-            if (twoSwitchModel != null) {
-                ImageView imageView1 = (ImageView) findViewById(R.id.item1_Iv);
-                if (twoSwitchModel.getLeftState().equals("0")) {
-                    imageView1.setBackgroundResource(R.drawable.switch_close);
-                } else {
-                    imageView1.setBackgroundResource(R.drawable.switch_open);
-                }
-                ImageView imageView2 = (ImageView) findViewById(R.id.item2_Iv);
-                if (twoSwitchModel.getRightState().equals("0")) {
-                    imageView2.setBackgroundResource(R.drawable.switch_close);
-                } else {
-                    imageView2.setBackgroundResource(R.drawable.switch_open);
-                }
-            }
-            ImageView imageView1 = (ImageView) findViewById(R.id.item1_Iv);
-            imageView1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (twoSwitchModel.getLeftState().equals("0")) {
-                        imageView1.setBackgroundResource(R.drawable.switch_open);
-                        twoSwitchModel.setLeftState("1");
-                    } else {
-                        imageView1.setBackgroundResource(R.drawable.switch_close);
-                        twoSwitchModel.setLeftState("0");
-                    }
-                    changeDeviceState(Constants.LIBRARY_TWOSWITCH_LEFT_UID);
-                }
-            });
-            ImageView imageView2 = (ImageView) findViewById(R.id.item2_Iv);
-            imageView2.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (twoSwitchModel.getRightState().equals("0")) {
-                        imageView2.setBackgroundResource(R.drawable.switch_open);
-                        twoSwitchModel.setRightState("1");
-                    } else {
-                        imageView2.setBackgroundResource(R.drawable.switch_close);
-                        twoSwitchModel.setRightState("0");
-                    }
-                    changeDeviceState(Constants.LIBRARY_TWOSWITCH_RIGHT_UID);
-                }
-            });
-            //三路墙面开关
-            ThreeSwitchModel threeSwitchModel = mSceneModel.getThreeSwitchModel();
-            if (threeSwitchModel != null) {
-                ImageView imageView3 = (ImageView) findViewById(R.id.item3_Iv);
-                if (threeSwitchModel.getLeftState().equals("0")) {
-                    imageView3.setBackgroundResource(R.drawable.switch_close);
-                } else {
-                    imageView3.setBackgroundResource(R.drawable.switch_open);
-                }
-                ImageView imageView4 = (ImageView) findViewById(R.id.item4_Iv);
-                if (threeSwitchModel.getMiddleState().equals("0")) {
-                    imageView4.setBackgroundResource(R.drawable.switch_close);
-                } else {
-                    imageView4.setBackgroundResource(R.drawable.switch_open);
-                }
-                ImageView imageView5 = (ImageView) findViewById(R.id.item5_Iv);
-                if (threeSwitchModel.getRightState().equals("0")) {
-                    imageView5.setBackgroundResource(R.drawable.switch_close);
-                } else {
-                    imageView5.setBackgroundResource(R.drawable.switch_open);
-                }
-            }
-            ImageView imageView3 = (ImageView) findViewById(R.id.item3_Iv);
-            imageView3.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (threeSwitchModel.getLeftState().equals("0")) {
-                        imageView3.setBackgroundResource(R.drawable.switch_open);
-                        threeSwitchModel.setLeftState("1");
-                    } else {
-                        imageView3.setBackgroundResource(R.drawable.switch_close);
-                        threeSwitchModel.setLeftState("0");
-                    }
-                    changeDeviceState(Constants.LIBRARY_THREESWITCH_LEFT_UID);
-                }
-            });
-            ImageView imageView4 = (ImageView) findViewById(R.id.item4_Iv);
-            imageView4.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (threeSwitchModel.getMiddleState().equals("0")) {
-                        imageView4.setBackgroundResource(R.drawable.switch_open);
-                        threeSwitchModel.setMiddleState("1");
-                    } else {
-                        imageView4.setBackgroundResource(R.drawable.switch_close);
-                        threeSwitchModel.setMiddleState("0");
-                    }
-                    changeDeviceState(Constants.LIBRARY_THREESWITCH_MIDDLE_UID);
-                }
-            });
-            ImageView imageView5 = (ImageView) findViewById(R.id.item5_Iv);
-            imageView5.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (threeSwitchModel.getRightState().equals("0")) {
-                        imageView5.setBackgroundResource(R.drawable.switch_open);
-                        threeSwitchModel.setRightState("1");
-                    } else {
-                        imageView5.setBackgroundResource(R.drawable.switch_close);
-                        threeSwitchModel.setRightState("0");
-                    }
-                    changeDeviceState(Constants.LIBRARY_THREESWITCH_RIGHT_UID);
-                }
-            });
-        } else if (flag.equals("classroom")) {
-            setCustomTitle("教室");
-            preferenceZigBee = "preferenceZigBee_classroom";
-            ZigBeeSceneModel sceneModel = (ZigBeeSceneModel) SharePreferenceUtils.get(ZigBeeDetailActivity.this, preferenceZigBee, new TypeToken<ZigBeeSceneModel>() {
-            }.getType());
-            if (sceneModel != null) {
-                mSceneModel = sceneModel;
-            } else {
-                mSceneModel = new ZigBeeSceneModel();
-            }
-            //单面开关
-            OneSwitchModel oneSwitchModel = mSceneModel.getOneSwitchModel();
-            if (oneSwitchModel != null) {
-                ImageView imageView1 = (ImageView) findViewById(R.id.item1_classroom_Iv);
-                if (oneSwitchModel.getState().equals("0")) {
-                    imageView1.setBackgroundResource(R.drawable.switch_close);
-                } else {
-                    imageView1.setBackgroundResource(R.drawable.switch_open);
-                }
-            }
-            ImageView imageView1 = (ImageView) findViewById(R.id.item1_classroom_Iv);
-            imageView1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (oneSwitchModel.getState().equals("0")) {
-                        imageView1.setBackgroundResource(R.drawable.switch_open);
-                        oneSwitchModel.setState("1");
-                    } else {
-                        imageView1.setBackgroundResource(R.drawable.switch_close);
-                        oneSwitchModel.setState("0");
-                    }
-                    changeDeviceState(Constants.CLASSROOM_ONESWITCH_UID);
-                }
-            });
-            //二路墙面开关
-            TwoSwitchModel twoSwitchModel = mSceneModel.getTwoSwitchModel();
-            if (twoSwitchModel != null) {
-                ImageView imageView2 = (ImageView) findViewById(R.id.item2_classroom_Iv);
-                if (twoSwitchModel.getLeftState().equals("0")) {
-                    imageView2.setBackgroundResource(R.drawable.switch_close);
-                } else {
-                    imageView2.setBackgroundResource(R.drawable.switch_open);
-                }
-                ImageView imageView3 = (ImageView) findViewById(R.id.item3_classroom_Iv);
-                if (twoSwitchModel.getRightState().equals("0")) {
-                    imageView3.setBackgroundResource(R.drawable.switch_close);
-                } else {
-                    imageView3.setBackgroundResource(R.drawable.switch_open);
-                }
-            }
-            ImageView imageView2 = (ImageView) findViewById(R.id.item2_classroom_Iv);
-            imageView2.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (twoSwitchModel.getLeftState().equals("0")) {
-                        imageView2.setBackgroundResource(R.drawable.switch_open);
-                        twoSwitchModel.setLeftState("1");
-                    } else {
-                        imageView2.setBackgroundResource(R.drawable.switch_close);
-                        twoSwitchModel.setLeftState("0");
-                    }
-                    changeDeviceState(Constants.CLASSROOM_TWOSWITCH_LEFT_UID);
-                }
-            });
-            ImageView imageView3 = (ImageView) findViewById(R.id.item3_classroom_Iv);
-            imageView3.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (twoSwitchModel.getRightState().equals("0")) {
-                        imageView3.setBackgroundResource(R.drawable.switch_open);
-                        twoSwitchModel.setRightState("1");
-                    } else {
-                        imageView3.setBackgroundResource(R.drawable.switch_close);
-                        twoSwitchModel.setRightState("0");
-                    }
-                    changeDeviceState(Constants.CLASSROOM_TWOSWITCH_RIGHT_UID);
-                }
-            });
-        } else if (flag.equals("kitchen")) {
-            setCustomTitle("厨房");
-        } else if (flag.equals("laboratory")) {
-            setCustomTitle("实验室");
-        }
-
         //注册网关、连接网关
         registerReceiver(mReceiver, new IntentFilter(Contants.ACTION_CALLBACK));
-
     }
 
-    private void changeDeviceState(int uId) {
+    private void changeSwitchDeviceState(ViewHolder holder, DeviceInfo item) {
+        if (StringUtils.isEmpty(mGatewayTv.getText().toString())) {
+            showToast("请先连接网关！");
+            return;
+        }
+        ImageView imageView = holder.getSubView(R.id.item_Iv);
+        imageView.setVisibility(View.VISIBLE);
+        //开关设备
         if (MyApplication.switchDeviceInfos != null && MyApplication.switchDeviceInfos.size() > 0) {
             for (DeviceInfo deviceInfo : MyApplication.switchDeviceInfos) {
-                if (deviceInfo.getUId() == uId) {
+                if (deviceInfo.getUId() == item.getUId()) {
                     if (deviceInfo.getDeviceState() == 0) {
+                        MyApplication.mSerial.setDeviceState(deviceInfo, 1);
                         deviceInfo.setDeviceState((byte) 1);
+                        imageView.setBackgroundResource(R.drawable.switch_open);
+                        holder.setBackgroundImage(R.id.item_type_logo, R.drawable.icon_device_switch_normal);
                     } else {
+                        MyApplication.mSerial.setDeviceState(deviceInfo, 0);
                         deviceInfo.setDeviceState((byte) 0);
+                        imageView.setBackgroundResource(R.drawable.switch_close);
+                        holder.setBackgroundImage(R.id.item_type_logo, R.drawable.icon_device_switch_pressed);
+                    }
+                    break;
+                }
+            }
+        }
+    }
+
+    private void getSwitchDeviceState(ViewHolder holder, DeviceInfo item) {
+        ImageView imageView = holder.getSubView(R.id.item_Iv);
+        imageView.setVisibility(View.VISIBLE);
+        holder.setText(R.id.item_name, item.getDeviceName());
+        //开关设备
+        if (item.getDeviceState() == 1) {
+            holder.setBackgroundImage(R.id.item_type_logo, R.drawable.icon_device_switch_normal);
+        } else {
+            holder.setBackgroundImage(R.id.item_type_logo, R.drawable.icon_device_switch_pressed);
+        }
+        if (MyApplication.switchDeviceInfos != null && MyApplication.switchDeviceInfos.size() > 0) {
+            for (DeviceInfo deviceInfo : MyApplication.switchDeviceInfos) {
+                if (deviceInfo.getUId() == item.getUId()) {
+                    if (deviceInfo.getDeviceState() == 0) {
+                        imageView.setBackgroundResource(R.drawable.switch_close);
+                    } else {
+                        imageView.setBackgroundResource(R.drawable.switch_open);
                     }
                     break;
                 }
@@ -340,7 +190,77 @@ public class ZigBeeDetailActivity extends BaseActivity {
 
     @Override
     protected void initAdapter() {
-
+        mAdapter = new BasicAdapter<DeviceInfo>(this, mList, R.layout.item_zigbee_device) {
+            @SuppressLint("ResourceAsColor")
+            @Override
+            protected void render(ViewHolder holder, DeviceInfo item, int position) {
+                int deviceType = item.getDeviceId() & 0xFFFF;
+                int profileId = item.getProfileId() & 0xFFFF;
+                int ZoneType = item.getZoneType() & 0xFFFF;
+                if (deviceType == 0x0000 || deviceType == 0x0002 || deviceType == 0x0009 || deviceType == 0x0202 || (deviceType == 0x0200 && profileId == 0x0104)) {
+                    holder.getSubView(R.id.item_Iv).setVisibility(View.VISIBLE);
+                    TextView descriptionTv = holder.getSubView(R.id.item_description);
+                    descriptionTv.setVisibility(View.GONE);
+                    getSwitchDeviceState(holder, item);
+                    holder.onClick(R.id.item_Iv, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            changeSwitchDeviceState(holder, item);
+                        }
+                    });
+                } else {
+                    //传感器系列
+                    holder.getSubView(R.id.item_Iv).setVisibility(View.GONE);
+                    TextView descriptionTv = holder.getSubView(R.id.item_description);
+                    descriptionTv.setVisibility(View.VISIBLE);
+                    if (deviceType == 0x0302) {
+                        //温湿度传感器
+                    } else if (deviceType == 0x0402 && ZoneType == 0x0015) {
+                        //门磁传感器
+                    } else if (deviceType == 0x0402 && ZoneType == 0x002B) {
+                        //可燃气体传感器
+                        holder.setBackgroundImage(R.id.item_type_logo, R.drawable.icon_device_sensor_hvac_burn_gas_normal);
+                        holder.setText(R.id.item_name, item.getDeviceName());
+                        holder.getSubView(R.id.item_Iv).setVisibility(View.GONE);
+                        String data = Integer.toBinaryString(item.getSensordata());
+                        if (data.length() >= 2 && data.indexOf(data.length() - 2) == 1) {
+                            descriptionTv.setText("有可燃气体");
+                            descriptionTv.setTextColor(getResources().getColor(R.color.red));
+                        } else {
+                            descriptionTv.setText("正常");
+                            descriptionTv.setTextColor(getResources().getColor(R.color.colorBlue));
+                        }
+                    } else if (deviceType == 0x0402 && ZoneType == 0x8001) {
+                        //一氧化碳传感器
+                        holder.setBackgroundImage(R.id.item_type_logo, R.drawable.icon_device_sensor_co_normal);
+                        holder.setText(R.id.item_name, item.getDeviceName());
+                        String data = Integer.toBinaryString(item.getSensordata());
+                        if (data.length() >= 1 && data.indexOf(data.length() - 1) == 1) {
+                            descriptionTv.setText("有CO气体");
+                            descriptionTv.setTextColor(getResources().getColor(R.color.red));
+                        } else {
+                            descriptionTv.setText("正常");
+                            descriptionTv.setTextColor(getResources().getColor(R.color.colorBlue));
+                        }
+                    } else if (deviceType == 0x0402 && (ZoneType == 0x0028 || ZoneType == 0x8000)) {
+                        //烟雾探测器
+                        holder.setBackgroundImage(R.id.item_type_logo, R.drawable.icon_device_sensor_hvac_smog_normal);
+                        holder.setText(R.id.item_deviceName_tv, item.getDeviceName());
+                        String data = Integer.toBinaryString(item.getSensordata());
+                        if (data.length() > 1 && data.indexOf(data.length() - 1) == 1) {
+                            descriptionTv.setText("有烟雾");
+                            descriptionTv.setTextColor(getResources().getColor(R.color.red));
+                        } else {
+                            descriptionTv.setText("正常");
+                            descriptionTv.setTextColor(getResources().getColor(R.color.colorBlue));
+                        }
+                    }
+                }
+            }
+        };
+        mListView.setAdapter(mAdapter);
+        mListView.addHeaderView(headerView);
+        mListView.addFooterView(footerView);
     }
 
     @Override
@@ -350,6 +270,12 @@ public class ZigBeeDetailActivity extends BaseActivity {
 
     @Override
     protected void initListener() {
+        backIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         mModBusConnectLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -429,6 +355,13 @@ public class ZigBeeDetailActivity extends BaseActivity {
                 break;
             }
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mReceiver);
+        MyApplication.deviceInfos.clear();
     }
 }
 
