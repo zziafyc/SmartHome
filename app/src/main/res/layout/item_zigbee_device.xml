@@ -53,7 +53,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="24dp"
-                android:text="正常"
+                android:text="报警记录"
                 android:textColor="@color/colorBlue"
                 android:textSize="@dimen/fontSize_14"
                 android:visibility="gone"/>

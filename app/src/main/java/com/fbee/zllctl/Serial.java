@@ -883,11 +883,11 @@ public class Serial {
      * @param attribID 传感器数据类型：00 ： 温度 17：湿度
      */
     public void arriveReport_CallBack(int uId, int data, char clusterId, char attribID) {
-        Intent i = new Intent();
-        i.setAction(Contants.ACTION_CALLBACK);
-        i.putExtra("Type", Contants.ACTION_GET_GATEWAYINFO);
-        i.putExtra("data", data);
-        mContext.sendBroadcast(i);
+        DeviceInfo deviceInfo = new DeviceInfo(uId, data, (short) clusterId, (short) attribID);
+        Intent intent = new Intent();
+        intent.setAction(Contants.ACTION_ArriveReport);
+        intent.putExtra("updateData", deviceInfo);
+        mContext.sendBroadcast(intent);
     }
 
     /**

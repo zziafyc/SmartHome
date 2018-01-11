@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="65dp"
+              android:background="@drawable/bottom_border"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/margin_12"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/deviceInfo_state_Tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="气体传感器-燃气没有泄露"
+            android:textColor="@color/colorBlue"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/deviceInfo_time_Tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_8"
+            android:text="2018-01-11 09:04:50"
+            android:textSize="14sp"/>
+    </LinearLayout>
+
+</LinearLayout>

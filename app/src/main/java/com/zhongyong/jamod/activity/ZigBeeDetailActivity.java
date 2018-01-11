@@ -213,6 +213,14 @@ public class ZigBeeDetailActivity extends BaseActivity {
                     holder.getSubView(R.id.item_Iv).setVisibility(View.GONE);
                     TextView descriptionTv = holder.getSubView(R.id.item_description);
                     descriptionTv.setVisibility(View.VISIBLE);
+                    descriptionTv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("deviceInfo", item);
+                            go(RecordActicity.class, bundle);
+                        }
+                    });
                     if (deviceType == 0x0302) {
                         //温湿度传感器
                     } else if (deviceType == 0x0402 && ZoneType == 0x0015) {
@@ -222,38 +230,15 @@ public class ZigBeeDetailActivity extends BaseActivity {
                         holder.setBackgroundImage(R.id.item_type_logo, R.drawable.icon_device_sensor_hvac_burn_gas_normal);
                         holder.setText(R.id.item_name, item.getDeviceName());
                         holder.getSubView(R.id.item_Iv).setVisibility(View.GONE);
-                        String data = Integer.toBinaryString(item.getSensordata());
-                        if (data.length() >= 2 && data.indexOf(data.length() - 2) == 1) {
-                            descriptionTv.setText("有可燃气体");
-                            descriptionTv.setTextColor(getResources().getColor(R.color.red));
-                        } else {
-                            descriptionTv.setText("正常");
-                            descriptionTv.setTextColor(getResources().getColor(R.color.colorBlue));
-                        }
                     } else if (deviceType == 0x0402 && ZoneType == 0x8001) {
                         //一氧化碳传感器
                         holder.setBackgroundImage(R.id.item_type_logo, R.drawable.icon_device_sensor_co_normal);
                         holder.setText(R.id.item_name, item.getDeviceName());
-                        String data = Integer.toBinaryString(item.getSensordata());
-                        if (data.length() >= 1 && data.indexOf(data.length() - 1) == 1) {
-                            descriptionTv.setText("有CO气体");
-                            descriptionTv.setTextColor(getResources().getColor(R.color.red));
-                        } else {
-                            descriptionTv.setText("正常");
-                            descriptionTv.setTextColor(getResources().getColor(R.color.colorBlue));
-                        }
+
                     } else if (deviceType == 0x0402 && (ZoneType == 0x0028 || ZoneType == 0x8000)) {
                         //烟雾探测器
                         holder.setBackgroundImage(R.id.item_type_logo, R.drawable.icon_device_sensor_hvac_smog_normal);
                         holder.setText(R.id.item_deviceName_tv, item.getDeviceName());
-                        String data = Integer.toBinaryString(item.getSensordata());
-                        if (data.length() > 1 && data.indexOf(data.length() - 1) == 1) {
-                            descriptionTv.setText("有烟雾");
-                            descriptionTv.setTextColor(getResources().getColor(R.color.red));
-                        } else {
-                            descriptionTv.setText("正常");
-                            descriptionTv.setTextColor(getResources().getColor(R.color.colorBlue));
-                        }
                     }
                 }
             }
@@ -349,6 +334,7 @@ public class ZigBeeDetailActivity extends BaseActivity {
                                     .setMessage("已连接网关")
                                     .show();
                             MyApplication.mSerial.getDevices();
+                            MyApplication.mSerial.getGateWayInfo();
                         }
                     });
                 }
@@ -361,6 +347,7 @@ public class ZigBeeDetailActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         unregisterReceiver(mReceiver);
+        MyApplication.getInstance().exit();
         MyApplication.deviceInfos.clear();
     }
 }
