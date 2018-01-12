@@ -238,7 +238,7 @@ public class ZigBeeDetailActivity extends BaseActivity {
                     } else if (deviceType == 0x0402 && (ZoneType == 0x0028 || ZoneType == 0x8000)) {
                         //烟雾探测器
                         holder.setBackgroundImage(R.id.item_type_logo, R.drawable.icon_device_sensor_hvac_smog_normal);
-                        holder.setText(R.id.item_deviceName_tv, item.getDeviceName());
+                        holder.setText(R.id.item_name, item.getDeviceName());
                     }
                 }
             }

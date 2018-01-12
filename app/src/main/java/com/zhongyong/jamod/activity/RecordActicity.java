@@ -7,8 +7,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Vibrator;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.fbee.zllctl.Contants;
@@ -33,8 +33,8 @@ import butterknife.Bind;
  */
 
 public class RecordActicity extends BaseActivity {
-    @Bind(R.id.actionbar_back)
-    RelativeLayout backRv;
+    @Bind(R.id.cab_titleBack_iv)
+    ImageView backIv;
     @Bind(R.id.title_tv_message)
     TextView titleTv;
     @Bind(R.id.title_right)
@@ -56,6 +56,7 @@ public class RecordActicity extends BaseActivity {
         titleTv.setText("报警记录");
         rightTv.setVisibility(View.VISIBLE);
         rightTv.setText("删除");
+        backIv.setVisibility(View.VISIBLE);
         vibrator = (Vibrator) getSystemService(Service.VIBRATOR_SERVICE);
         deviceInfo = (DeviceInfo) getIntent().getSerializableExtra("deviceInfo");
         registerReceiver(mReceiver, new IntentFilter(Contants.ACTION_ArriveReport));
@@ -126,7 +127,7 @@ public class RecordActicity extends BaseActivity {
 
     @Override
     protected void initListener() {
-        backRv.setOnClickListener(new View.OnClickListener() {
+        backIv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -146,36 +147,38 @@ public class RecordActicity extends BaseActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             DeviceInfo data_deviceInfo = (DeviceInfo) intent.getSerializableExtra("updateData");
-            if (deviceInfo.getUId() != data_deviceInfo.getUId()) {
-                return;
-            }
-            vibrator.vibrate(500);
-            int deviceType = deviceInfo.getDeviceId() & 0xFFFF;
-            int ZoneType = deviceInfo.getZoneType() & 0xFFFF;
-            Record record = new Record();
-            record.setName(deviceInfo.getDeviceName());
-            record.setDeviceType(deviceType);
-            record.setZoneType(ZoneType);
-            if (deviceType == 0x0402 && ZoneType == 0x002B) {
-                if (data_deviceInfo.getSensordata() == 2) {
-                    record.setState("1");
-                } else {
-                    record.setState("0");
+            if (data_deviceInfo != null) {
+                if (deviceInfo.getUId() != data_deviceInfo.getUId()) {
+                    return;
                 }
-            } else {
-                if (data_deviceInfo.getSensordata() == 1) {
-                    record.setState("1");
+                vibrator.vibrate(500);
+                int deviceType = deviceInfo.getDeviceId() & 0xFFFF;
+                int ZoneType = deviceInfo.getZoneType() & 0xFFFF;
+                Record record = new Record();
+                record.setName(deviceInfo.getDeviceName());
+                record.setDeviceType(deviceType);
+                record.setZoneType(ZoneType);
+                if (deviceType == 0x0402 && ZoneType == 0x002B) {
+                    if (data_deviceInfo.getSensordata() == 2) {
+                        record.setState("1");
+                    } else {
+                        record.setState("0");
+                    }
                 } else {
-                    record.setState("0");
+                    if (data_deviceInfo.getSensordata() == 1) {
+                        record.setState("1");
+                    } else {
+                        record.setState("0");
+                    }
                 }
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                Date curDate = new Date(System.currentTimeMillis());//获取当前时间
+                String time = formatter.format(curDate);
+                record.setTime(time);
+                record.setUId(data_deviceInfo.getUId());
+                mRecordList.add(record);
+                mAdapter.notifyDataSetChanged();
             }
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date curDate = new Date(System.currentTimeMillis());//获取当前时间
-            String time = formatter.format(curDate);
-            record.setTime(time);
-            record.setUId(data_deviceInfo.getUId());
-            mRecordList.add(record);
-            mAdapter.notifyDataSetChanged();
         }
     };
 
