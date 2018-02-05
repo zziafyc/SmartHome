@@ -60,12 +60,12 @@
                 android:textColor="@color/colorTitle"
                 android:textSize="14sp"/>
 
-            <TextView
+            <EditText
                 android:id="@+id/gatewayTv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
-                android:hint="请连接网关"
+                android:hint="请输入网关IP"
                 android:textColor="@color/colorTitle"
                 android:textSize="14sp"/>
         </LinearLayout>

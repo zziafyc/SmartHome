@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">中用智能家居</string>
+    <string name="app_name">中用科技智能管家系统</string>
     <string name="common_no_network_msg">网络连接失败</string>
     <string name="common_error_msg">抱歉,系统出错了!\\n请点击屏幕重试~</string>
     <string name="common_empty_msg">抱歉,暂未获取到数据!\\n请点击屏幕重试~</string>

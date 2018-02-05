@@ -94,13 +94,13 @@ public class MainActivity extends BaseActivity {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.nb_rb_monitor:
-                        setCustomTitle("视频监控");
+                      //  setCustomTitle("视频监控");
                         addIv.setVisibility(View.GONE);
                         rightTv.setVisibility(View.GONE);
                         showFragment(mMonitorFragment);
                         break;
                     case R.id.nb_rb_device:
-                        setCustomTitle("智能设备");
+                        //setCustomTitle("智能设备");
                         addIv.setVisibility(View.GONE);
                         if (SearchDeviceActivity.count > 0) {
                             rightTv.setVisibility(View.VISIBLE);
@@ -110,13 +110,13 @@ public class MainActivity extends BaseActivity {
                         showFragment(mIntelligentCampusFragment);
                         break;
                     case R.id.nb_rb_scene:
-                        setCustomTitle("场景布置");
+                       // setCustomTitle("场景布置");
                         addIv.setVisibility(View.VISIBLE);
                         rightTv.setVisibility(View.GONE);
                         showFragment(mSceneFragment);
                         break;
                     case R.id.nb_rb_homePage:
-                        setCustomTitle("我的");
+                        //setCustomTitle("我的");
                         addIv.setVisibility(View.GONE);
                         rightTv.setVisibility(View.GONE);
                         showFragment(mHomeFragment);

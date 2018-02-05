@@ -8,6 +8,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -44,7 +45,7 @@ public class ZigBeeDetailActivity extends BaseActivity {
     ProgressBar mProgressBar;
     @Bind(R.id.zigbee_device_lv)
     ListView mListView;
-    TextView mGatewayTv;
+    EditText mGatewayTv;
     TextView connectStateTv;
     LinearLayout mModBusConnectLayout;
     View headerView;
@@ -100,7 +101,7 @@ public class ZigBeeDetailActivity extends BaseActivity {
 
     @Override
     protected int getContentViewLayoutID() {
-        return R.layout.activity_zigbee_detail_library;
+        return R.layout.activity_zigbee_detail;
     }
 
     @Override
@@ -108,7 +109,7 @@ public class ZigBeeDetailActivity extends BaseActivity {
         headerView = getLayoutInflater().inflate(R.layout.header_zigbee, null);
         footerView = getLayoutInflater().inflate(R.layout.foot_zigbee_device, null);
         connectStateTv = (TextView) headerView.findViewById(R.id.connect_show);
-        mGatewayTv = (TextView) headerView.findViewById(R.id.gatewayTv);
+        mGatewayTv = (EditText) headerView.findViewById(R.id.gatewayTv);
         mModBusConnectLayout = (LinearLayout) footerView.findViewById(R.id.modBusConnect);
         //初始化相关view
         backIv.setVisibility(View.VISIBLE);
@@ -138,7 +139,7 @@ public class ZigBeeDetailActivity extends BaseActivity {
 
     private void changeSwitchDeviceState(ViewHolder holder, DeviceInfo item) {
         if (StringUtils.isEmpty(mGatewayTv.getText().toString())) {
-            showToast("请先连接网关！");
+            showToast("请输入网关IP！");
             return;
         }
         ImageView imageView = holder.getSubView(R.id.item_Iv);
@@ -223,13 +224,15 @@ public class ZigBeeDetailActivity extends BaseActivity {
                     });
                     if (deviceType == 0x0302) {
                         //温湿度传感器
+                        holder.setBackgroundImage(R.id.item_type_logo, R.drawable.icon_device_sensor_temperature);
+                        holder.setText(R.id.item_name, item.getDeviceName());
+                        descriptionTv.setVisibility(View.GONE);
                     } else if (deviceType == 0x0402 && ZoneType == 0x0015) {
                         //门磁传感器
                     } else if (deviceType == 0x0402 && ZoneType == 0x002B) {
                         //可燃气体传感器
                         holder.setBackgroundImage(R.id.item_type_logo, R.drawable.icon_device_sensor_hvac_burn_gas_normal);
                         holder.setText(R.id.item_name, item.getDeviceName());
-                        holder.getSubView(R.id.item_Iv).setVisibility(View.GONE);
                     } else if (deviceType == 0x0402 && ZoneType == 0x8001) {
                         //一氧化碳传感器
                         holder.setBackgroundImage(R.id.item_type_logo, R.drawable.icon_device_sensor_co_normal);
@@ -272,7 +275,6 @@ public class ZigBeeDetailActivity extends BaseActivity {
         connectStateTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mProgressBar.setVisibility(View.VISIBLE);
                 connect();
             }
         });
@@ -291,23 +293,62 @@ public class ZigBeeDetailActivity extends BaseActivity {
     }
 
     private void connect() {
+        if (StringUtils.isEmpty(mGatewayTv.getText().toString())) {
+            showToast("请输入网关IP！");
+            return;
+        }
+        mProgressBar.setVisibility(View.VISIBLE);
         new Thread(new Runnable() {
             @Override
             public void run() {
                 int ret = MyApplication.mSerial.connectLANZll();  //本地连接
                 if (ret > 0) {
-                    final String[] boxip = MyApplication.mSerial.getGatewayIps(ret);
-                    final String[] boxsnid = MyApplication.mSerial.getBoxSnids(ret);
+                    /*final String[] boxip = MyApplication.mSerial.getGatewayIps(ret);
+                    final String[] boxsnid = MyApplication.mSerial.getBoxSnids(ret);*/
                     if (flag.equals("library")) {
+                        String[] boxip = {mGatewayTv.getText().toString()};
+                        String[] boxsnid = {Constants.ZIGBEE_SN_LIBRARY};
                         chooseConnect(boxip, boxsnid, Constants.ZIGBEE_SN_LIBRARY);
                     } else if (flag.equals("classroom")) {
+                        String[] boxip = {mGatewayTv.getText().toString()};
+                        String[] boxsnid = {Constants.ZIGBEE_SN_CLASSROOM};
                         chooseConnect(boxip, boxsnid, Constants.ZIGBEE_SN_CLASSROOM);
                     } else if (flag.equals("kitchen")) {
+                        String[] boxip = {mGatewayTv.getText().toString()};
+                        String[] boxsnid = {Constants.ZIGBEE_SN_KITCHEN};
                         chooseConnect(boxip, boxsnid, Constants.ZIGBEE_SN_KITCHEN);
                     } else if (flag.equals("laboratory")) {
+                        String[] boxip = {mGatewayTv.getText().toString()};
+                        String[] boxsnid = {Constants.ZIGBEE_SN_LABORATORY};
                         chooseConnect(boxip, boxsnid, Constants.ZIGBEE_SN_LABORATORY);
                     }
                 }
+                //互联网连接
+               /* int ret = 0;
+                if (flag.equals("library")) {
+                    // ret= MyApplication.mSerial.connectRemoteZll();
+                } else if (flag.equals("classroom")) {
+                    //ret= MyApplication.mSerial.connectRemoteZll();
+                } else if (flag.equals("kitchen")) {
+                    //ret= MyApplication.mSerial.connectRemoteZll();
+                } else if (flag.equals("laboratory")) {
+                    ret = MyApplication.mSerial.connectRemoteZll("111807", "e1wd");
+                }
+                if (ret > 0) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mProgressBar.setVisibility(View.GONE);
+                            connectStateTv.setText("已连接");
+                            SnackBarUtils.with(mCoordinatorLayout)
+                                    .setBgColor(SnackBarUtils.COLOR_WARNING)
+                                    .setMessage("已连接网关")
+                                    .show();
+                            MyApplication.mSerial.getDevices();
+                            MyApplication.mSerial.getGateWayInfo();
+                        }
+                    });
+                }*/
             }
         }).start();
     }
@@ -316,12 +357,12 @@ public class ZigBeeDetailActivity extends BaseActivity {
         for (int i = 0; i < boxsnid.length; i++) {
             if (boxsnid[i].equals(snId)) {
                 int k = i;
-                runOnUiThread(new Runnable() {
+              /*  runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         mGatewayTv.setText(boxip[k]);
                     }
-                });
+                });*/
                 int conRet = MyApplication.mSerial.connectLANZllByIp(boxip[i], boxsnid[i]);
                 if (conRet > 0) {
                     runOnUiThread(new Runnable() {
@@ -333,7 +374,7 @@ public class ZigBeeDetailActivity extends BaseActivity {
                                     .setBgColor(SnackBarUtils.COLOR_WARNING)
                                     .setMessage("已连接网关")
                                     .show();
-                            MyApplication.mSerial.getDevices();
+                            DeviceInfo[] deviceInfos = MyApplication.mSerial.getDevices();
                             MyApplication.mSerial.getGateWayInfo();
                         }
                     });
@@ -351,4 +392,3 @@ public class ZigBeeDetailActivity extends BaseActivity {
         MyApplication.deviceInfos.clear();
     }
 }
-
