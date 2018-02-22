@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="300dp"
+              android:layout_height="150dp"
+              android:background="@drawable/all_border"
+              android:gravity="center"
+              android:orientation="vertical">
+
+
+    <LinearLayout
+        android:id="@+id/connectNoInput"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:background="@drawable/all_border"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="局域网自动搜索IP连接"
+            android:textColor="@color/colorText"
+            android:textSize="@dimen/fontSize_16"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/connectInput"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/all_border"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="输入IP可跨网段连接"
+            android:textColor="@color/colorText"
+            android:textSize="@dimen/fontSize_16"/>
+    </LinearLayout>
+
+</LinearLayout>

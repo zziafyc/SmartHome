@@ -71,6 +71,7 @@
         <activity android:name="com.zhongyong.jamod.activity.ZigBeeDetailActivity"/>
         <activity android:name="com.zhongyong.jamod.activity.ModBusGateWayActivity"/>
         <activity android:name="com.zhongyong.jamod.activity.RecordActicity"/>
+        <activity android:name="com.zhongyong.jamod.activity.ZigBeeDetailActivity2"/>
     </application>
 
 

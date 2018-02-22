@@ -50,4 +50,10 @@
         <item name="android:layout_marginTop">@dimen/margin_10</item>
     </style>
 
+    <style name="NoTitleDialogStyle" parent="android:style/Theme.Dialog">
+        <item name="android:windowBackground">@color/windowTransaction</item>
+        <item name="android:windowNoTitle">true</item>
+        <!-- 去掉头部 -->
+    </style>
+
 </resources>
