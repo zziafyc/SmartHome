@@ -28,7 +28,7 @@ import com.fbee.zllctl.Contants;
 import com.fbee.zllctl.DeviceInfo;
 import com.fbee.zllctl.GatewayInfo;
 import com.fbee.zllctl.ZigbeeUtil;
-import com.zhongyong.smarthome.MyApplication;
+import com.zhongyong.smarthome.App;
 import com.zhongyong.smarthome.R;
 import com.zhongyong.smarthome.base.BaseActivity;
 
@@ -98,29 +98,29 @@ public class WakeUpActivity extends BaseActivity {
                     int profileId = deviceInfo.getProfileId();
                     int ZoneType = deviceInfo.getZoneType();
                     if (isExist(uid) == -1) {
-                        MyApplication.deviceInfos.add(deviceInfo);
+                        App.deviceInfos.add(deviceInfo);
                         if (deviceType == 0x0000 || deviceType == 0x0002 || deviceType == 0x0009 || deviceType == 0x0202 || (deviceType == 0x0200 && profileId == 0x0104)) {
                             //开关设备
-                            MyApplication.switchDeviceInfos.add(deviceInfo);
+                            App.switchDeviceInfos.add(deviceInfo);
                         } else if (deviceType == 0x0302) {
                             //温湿度传感器
-                            MyApplication.thtbDeviceInfos.add(deviceInfo);
+                            App.thtbDeviceInfos.add(deviceInfo);
                         } else if (deviceType == 0x0402 && ZoneType == 0x0015) {
                             //门磁传感器
-                            MyApplication.doorDeviceInfos.add(deviceInfo);
+                            App.doorDeviceInfos.add(deviceInfo);
                         } else if (deviceType == 0x0402 && ZoneType == 0x002B) {
                             //气体传感器
-                            MyApplication.gasDeviceInfos.add(deviceInfo);
+                            App.gasDeviceInfos.add(deviceInfo);
                         } else if (deviceType == 0x0402 && ZoneType == 0x8001) {
                             //一氧化碳传感器
-                            MyApplication.cogasDeviceInfos.add(deviceInfo);
+                            App.cogasDeviceInfos.add(deviceInfo);
                         }
                     } else {
-                        MyApplication.deviceInfos.set(isExist(uid), deviceInfo);
+                        App.deviceInfos.set(isExist(uid), deviceInfo);
                     }
                     break;
                 case Contants.ACTION_GET_GATEWAYINFO:
-                    MyApplication.gatewayInfo = (GatewayInfo) intent.getSerializableExtra("gatewayInfo");
+                    App.gatewayInfo = (GatewayInfo) intent.getSerializableExtra("gatewayInfo");
                     break;
 
             }
@@ -161,13 +161,13 @@ public class WakeUpActivity extends BaseActivity {
     }
 
     private boolean connect() {
-        int ret = MyApplication.mSerial.connectLANZll();  //本地连接
+        int ret = App.mSerial.connectLANZll();  //本地连接
         if (ret > 0) {
-            final String[] boxip = MyApplication.mSerial.getGatewayIps(ret);
-            final String[] boxsnid = MyApplication.mSerial.getBoxSnids(ret);
-            int conRet = MyApplication.mSerial.connectLANZllByIp(boxip[0], boxsnid[0]);
+            final String[] boxip = App.mSerial.getGatewayIps(ret);
+            final String[] boxsnid = App.mSerial.getBoxSnids(ret);
+            int conRet = App.mSerial.connectLANZllByIp(boxip[0], boxsnid[0]);
             if (conRet > 0) {
-                MyApplication.mSerial.getDevices();
+                App.mSerial.getDevices();
                 Log.e(TAG, "已连接该网关");
                 return true;
             }
@@ -408,17 +408,17 @@ public class WakeUpActivity extends BaseActivity {
                                 }
 
                             } else if (lastResult.contains("开关")) {
-                                if (MyApplication.switchDeviceInfos != null && MyApplication.switchDeviceInfos.size() > 0) {
+                                if (App.switchDeviceInfos != null && App.switchDeviceInfos.size() > 0) {
                                     if (lastResult.contains("打开")) {
                                         text = "请稍等，正在打开开关";
-                                        DeviceInfo deviceInfo = MyApplication.switchDeviceInfos.get(1);
-                                        MyApplication.mSerial.setDeviceState(deviceInfo, 1);
+                                        DeviceInfo deviceInfo = App.switchDeviceInfos.get(1);
+                                        App.mSerial.setDeviceState(deviceInfo, 1);
                                         deviceInfo.setDeviceStatus((byte) 1);
 
                                     } else {
                                         text = "请稍等，正在关闭开关";
-                                        DeviceInfo deviceInfo = MyApplication.switchDeviceInfos.get(1);
-                                        MyApplication.mSerial.setDeviceState(deviceInfo, 0);
+                                        DeviceInfo deviceInfo = App.switchDeviceInfos.get(1);
+                                        App.mSerial.setDeviceState(deviceInfo, 0);
                                         deviceInfo.setDeviceState((byte) 0);
                                     }
                                 } else {
@@ -426,13 +426,13 @@ public class WakeUpActivity extends BaseActivity {
                                     text = "sorry，没有搜索到设备";
                                 }
                             } else if (lastResult.contains("温湿度")) {
-                                DeviceInfo deviceInfo = MyApplication.thtbDeviceInfos.get(0);
+                                DeviceInfo deviceInfo = App.thtbDeviceInfos.get(0);
                                 int sensordata = deviceInfo.getSensordata();
                                 text = "当前温度：" + ZigbeeUtil.getThValue(sensordata) + ",湿度：" + ZigbeeUtil.getTbValue(sensordata);
 
                             } else if (lastResult.contains("门状态")) {
-                                if (MyApplication.doorDeviceInfos != null && MyApplication.doorDeviceInfos.size() > 0) {
-                                    DeviceInfo deviceInfo = MyApplication.doorDeviceInfos.get(0);
+                                if (App.doorDeviceInfos != null && App.doorDeviceInfos.size() > 0) {
+                                    DeviceInfo deviceInfo = App.doorDeviceInfos.get(0);
                                     if (deviceInfo.getSensordata() == 0) {
                                         text = "门当前状态为：关闭";
                                     } else {
@@ -600,7 +600,7 @@ public class WakeUpActivity extends BaseActivity {
         this.mWpEventManager.send("wp.stop", null, null, 0, 0);
         client.close();
         unregisterReceiver(mReceiver);
-        MyApplication.getInstance().exit();
+        App.getInstance().exit();
         super.onDestroy();
     }
 
@@ -637,10 +637,10 @@ public class WakeUpActivity extends BaseActivity {
     }
 
     private int isExist(int uid) {
-        int size = MyApplication.deviceInfos.size();
+        int size = App.deviceInfos.size();
         int positon = -1;
         for (int i = 0; i < size; i++) {
-            if (uid == MyApplication.deviceInfos.get(i).getUId()) {
+            if (uid == App.deviceInfos.get(i).getUId()) {
                 positon = i;
                 return positon;
             }

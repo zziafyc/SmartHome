@@ -14,6 +14,8 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.zhongyong.jamod.activity.LoginActivity;
+import com.zhongyong.jamod.model.User;
 import com.zhongyong.smarthome.activity.MyFamilyActivity;
 import com.zhongyong.smarthome.activity.NewSceneActivity;
 import com.zhongyong.smarthome.activity.SearchDeviceActivity;
@@ -25,6 +27,8 @@ import com.zhongyong.smarthome.fragment.MonitorFragment;
 import com.zhongyong.smarthome.fragment.SceneFragment;
 import com.zhongyong.smarthome.model.ColorManager;
 import com.zhongyong.smarthome.widget.ColorLinearLayout;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,8 +42,6 @@ public class MainActivity extends BaseActivity {
     RadioGroup mRadioGroup;
     @Bind(R.id.am_changeTheme_ll)
     LinearLayout changeThemeLay;
-    @Bind(R.id.nav_view)
-    NavigationView mNavigationView;
     @Bind(R.id.item1_rv)
     RelativeLayout item1;
     @Bind(R.id.item2_rv)
@@ -50,11 +52,16 @@ public class MainActivity extends BaseActivity {
     ImageView addIv;
     @Bind(R.id.title_right)
     TextView rightTv;
+    @Bind(R.id.nav_view)
+    NavigationView mNavigationView;
+    View header;
+    TextView loginTv;
+    TextView telephoneTv;
     HomeFragment mHomeFragment;
     MonitorFragment mMonitorFragment;
     //DeviceFragment mDeviceFragment;
     SceneFragment mSceneFragment;
-   // ModBusGatewayFragment mModBusGatewayFragment;
+    // ModBusGatewayFragment mModBusGatewayFragment;
     IntelligentCampusFragment mIntelligentCampusFragment;
     private FragmentManager mFragmentManager;
     private FragmentTransaction mFragmentTransaction;
@@ -67,6 +74,13 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initViews() {
+        header = mNavigationView.getHeaderView(0);
+        loginTv = (TextView) header.findViewById(R.id.nav_login);
+        telephoneTv = (TextView) header.findViewById(R.id.navi_telephone);
+        if (App.getUser() != null) {
+            loginTv.setText(App.getUser().getUserName());
+            telephoneTv.setText(App.getUser().getTelephone());
+        }
         initFragment();
         initTheme();
 
@@ -74,7 +88,7 @@ public class MainActivity extends BaseActivity {
 
     public void initTheme() {
         ColorManager.getInstance().setSkinColor(MainActivity.this,
-                MyApplication.mPreference.getSkinColorPosition());
+                App.mPreference.getSkinColorPosition());
     }
 
     @Override
@@ -94,7 +108,7 @@ public class MainActivity extends BaseActivity {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.nb_rb_monitor:
-                      //  setCustomTitle("视频监控");
+                        //  setCustomTitle("视频监控");
                         addIv.setVisibility(View.GONE);
                         rightTv.setVisibility(View.GONE);
                         showFragment(mMonitorFragment);
@@ -110,7 +124,7 @@ public class MainActivity extends BaseActivity {
                         showFragment(mIntelligentCampusFragment);
                         break;
                     case R.id.nb_rb_scene:
-                       // setCustomTitle("场景布置");
+                        // setCustomTitle("场景布置");
                         addIv.setVisibility(View.VISIBLE);
                         rightTv.setVisibility(View.GONE);
                         showFragment(mSceneFragment);
@@ -147,6 +161,12 @@ public class MainActivity extends BaseActivity {
                 go(NewSceneActivity.class);
             }
         });
+        loginTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                go(LoginActivity.class);
+            }
+        });
     }
 
     /* @Override
@@ -159,8 +179,8 @@ public class MainActivity extends BaseActivity {
         mFragmentManager = getSupportFragmentManager();
         mFragmentList = new ArrayList<>();
         mMonitorFragment = new MonitorFragment();
-       // mModBusGatewayFragment = new ModBusGatewayFragment();
-        mIntelligentCampusFragment=new IntelligentCampusFragment();
+        // mModBusGatewayFragment = new ModBusGatewayFragment();
+        mIntelligentCampusFragment = new IntelligentCampusFragment();
         //mDeviceFragment = new DeviceFragment();
         mSceneFragment = new SceneFragment();
         mHomeFragment = new HomeFragment();
@@ -201,4 +221,16 @@ public class MainActivity extends BaseActivity {
         mFragmentTransaction.commit();
     }
 
+    @Override
+    protected boolean isBindEventBusHere() {
+        return true;
+    }
+
+    @Subscribe
+    public void getUser(User user) {
+        if (App.getUser() != null) {
+            loginTv.setText(user.getUserName());
+            telephoneTv.setText("手机号:" + user.getTelephone());
+        }
+    }
 }

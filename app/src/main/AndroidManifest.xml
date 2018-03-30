@@ -27,7 +27,7 @@
         android:protectionLevel="signature"/>
 
     <application
-        android:name=".MyApplication"
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/logo"
         android:label="@string/app_name"
@@ -51,6 +51,7 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
@@ -65,14 +66,79 @@
         <activity android:name=".activity.NewSceneActivity"/>
         <activity android:name=".activity.AddDeviceActivity"/>
         <activity android:name=".activity.SearchDeviceActivity"/>
-        <activity android:name="com.zhongyong.jamod.activity.ModBusTestActivity"/>
         <activity android:name="com.zhongyong.jamod.activity.CreateModbusActivity"/>
         <activity android:name="com.zhongyong.jamod.activity.EnvironmentDetectorDetailActivity"/>
         <activity android:name="com.zhongyong.jamod.activity.ZigBeeDetailActivity"/>
-        <activity android:name="com.zhongyong.jamod.activity.ModBusGateWayActivity"/>
+        <activity android:name="com.zhongyong.jamod.activity.ModBusGateWayListActivity"/>
         <activity android:name="com.zhongyong.jamod.activity.RecordActicity"/>
         <activity android:name="com.zhongyong.jamod.activity.ZigBeeDetailActivity2"/>
-    </application>
+        <activity android:name="com.zhongyong.jamod.activity.StandardActivity">
+        </activity>
+        <activity
+            android:name="com.zhongyong.jamod.activity.LoginActivity"
+            android:launchMode="singleTask">
+        </activity>
+        <activity android:name="com.zhongyong.jamod.activity.RegisterActivity"/>
+        <!-- 友盟AKey -->
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="599bf751c62dca5040000e47">
+        </meta-data>
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="Umeng">
+        </meta-data>
+        <!-- 微信回调 -->
+        <activity
+            android:name="com.zhongyong.jamod.wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <!-- QQ -->
+        <activity
+            android:name="com.umeng.qq.tencent.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
 
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <data android:scheme="tencent100424468"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.umeng.qq.tencent.AssistActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <!-- 微博回调 -->
+        <activity
+            android:name="com.zhongyong.jamod.wbapi.WBShareActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+        </activity>
+        <activity
+            android:name="com.umeng.socialize.media.WBShareCallBackActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+        </activity>
+        <activity
+            android:name="com.sina.weibo.sdk.share.WbShareTransActivity"
+            android:launchMode="singleTask"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
+            <intent-filter>
+                <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+    </application>
 
 </manifest>

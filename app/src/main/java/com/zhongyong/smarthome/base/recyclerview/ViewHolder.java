@@ -24,7 +24,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
-import com.zhongyong.smarthome.MyApplication;
+import com.zhongyong.smarthome.App;
 import com.zhongyong.smarthome.R;
 
 
@@ -127,11 +127,11 @@ public class ViewHolder extends RecyclerView.ViewHolder {
     public void setCircleImage(int resId, String path) {
         if (path != null) {
             final ImageView imageView = getView(resId);
-            Glide.with(MyApplication.getInstance()).load(path).asBitmap().centerCrop().error(MyApplication.getInstance().getResources().getDrawable(R.drawable.login_tupian_def)).into(new BitmapImageViewTarget(imageView) {
+            Glide.with(App.getInstance()).load(path).asBitmap().centerCrop().error(App.getInstance().getResources().getDrawable(R.drawable.login_tupian_def)).into(new BitmapImageViewTarget(imageView) {
                 @Override
                 protected void setResource(Bitmap resource) {
                     RoundedBitmapDrawable circularBitmapDrawable =
-                            RoundedBitmapDrawableFactory.create(MyApplication.getInstance().getResources(), resource);
+                            RoundedBitmapDrawableFactory.create(App.getInstance().getResources(), resource);
                     circularBitmapDrawable.setCircular(true);
                     imageView.setImageDrawable(circularBitmapDrawable);
                 }

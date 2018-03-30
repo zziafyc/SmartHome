@@ -32,5 +32,20 @@
     <string name="familyPerson">家人</string>
     <string name="declare">使用权限开启后成员将有权使用所有设备，请谨慎选择</string>
 
+    <string name="registerNewAccount">注册新账户</string>
+    <string name="forgetPassword">忘记密码？</string>
+    <string name="otherLoginWay">其他登录方式</string>
+    <string name="weiXinLogin">微信登录</string>
+    <string name="qqLogin">QQ登录</string>
+    <string name="verificationCodeLogin">微博登录</string>
+    <string name="telephone">手机号</string>
+    <string name="inputTelephone">请输入手机号</string>
+
+    <string name="password">密码</string>
+    <string name="inputPassword">请输入密码</string>
+    <string name="login">登录</string>
+    <string name="inputMessage">请输入用户名或密码</string>
+    <string name="systemError">系统正忙</string>
+
 
 </resources>

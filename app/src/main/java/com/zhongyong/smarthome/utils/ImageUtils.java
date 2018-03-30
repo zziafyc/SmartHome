@@ -15,7 +15,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
-import com.zhongyong.smarthome.MyApplication;
+import com.zhongyong.smarthome.App;
 import com.zhongyong.smarthome.R;
 
 import java.io.ByteArrayOutputStream;
@@ -29,11 +29,11 @@ public class ImageUtils {
     //默认半径为5，需要的时候可以直接用
     public static void setCornerImage(final ImageView imageView, String path) {
         if (path != null) {
-            Glide.with(MyApplication.getInstance()).load(path).asBitmap().centerCrop().error(MyApplication.getInstance().getResources().getDrawable(R.drawable.avatar_default)).into(new BitmapImageViewTarget(imageView) {
+            Glide.with(App.getInstance()).load(path).asBitmap().centerCrop().error(App.getInstance().getResources().getDrawable(R.drawable.avatar_default)).into(new BitmapImageViewTarget(imageView) {
                 @Override
                 protected void setResource(Bitmap resource) {
                     RoundedBitmapDrawable circularBitmapDrawable =
-                            RoundedBitmapDrawableFactory.create(MyApplication.getInstance().getResources(), resource);
+                            RoundedBitmapDrawableFactory.create(App.getInstance().getResources(), resource);
                     circularBitmapDrawable.setCornerRadius(5);
                     imageView.setImageDrawable(circularBitmapDrawable);
                 }
@@ -44,11 +44,11 @@ public class ImageUtils {
     //这个可以自定义半径，需要的时候可以直接用
     public static void setCornerImage(final ImageView imageView, String path, final int radius) {
         if (path != null) {
-            Glide.with(MyApplication.getInstance()).load(path).asBitmap().centerCrop().error(MyApplication.getInstance().getResources().getDrawable(R.drawable.avatar_default)).into(new BitmapImageViewTarget(imageView) {
+            Glide.with(App.getInstance()).load(path).asBitmap().centerCrop().error(App.getInstance().getResources().getDrawable(R.drawable.avatar_default)).into(new BitmapImageViewTarget(imageView) {
                 @Override
                 protected void setResource(Bitmap resource) {
                     RoundedBitmapDrawable circularBitmapDrawable =
-                            RoundedBitmapDrawableFactory.create(MyApplication.getInstance().getResources(), resource);
+                            RoundedBitmapDrawableFactory.create(App.getInstance().getResources(), resource);
                     circularBitmapDrawable.setCornerRadius(radius);
                     imageView.setImageDrawable(circularBitmapDrawable);
                 }
@@ -59,11 +59,11 @@ public class ImageUtils {
     //轮播的特别设置的，半径20
     public static void setCornerImageNo(final ImageView imageView, String path) {
         if (path != null) {
-            Glide.with(MyApplication.getInstance()).load(path).asBitmap().centerCrop().error(MyApplication.getInstance().getResources().getDrawable(R.drawable.avatar_default)).into(new BitmapImageViewTarget(imageView) {
+            Glide.with(App.getInstance()).load(path).asBitmap().centerCrop().error(App.getInstance().getResources().getDrawable(R.drawable.avatar_default)).into(new BitmapImageViewTarget(imageView) {
                 @Override
                 protected void setResource(Bitmap resource) {
                     RoundedBitmapDrawable circularBitmapDrawable =
-                            RoundedBitmapDrawableFactory.create(MyApplication.getInstance().getResources(), resource);
+                            RoundedBitmapDrawableFactory.create(App.getInstance().getResources(), resource);
                     circularBitmapDrawable.setCornerRadius(20);
                     imageView.setImageDrawable(circularBitmapDrawable);
                 }
@@ -73,11 +73,11 @@ public class ImageUtils {
 
     public static void setCircleImage(final ImageView imageView, String path) {
         if (path != null) {
-            Glide.with(MyApplication.getInstance()).load(path).asBitmap().centerCrop().error(MyApplication.getInstance().getResources().getDrawable(R.drawable.login_tupian_def)).into(new BitmapImageViewTarget(imageView) {
+            Glide.with(App.getInstance()).load(path).asBitmap().centerCrop().error(App.getInstance().getResources().getDrawable(R.drawable.login_tupian_def)).into(new BitmapImageViewTarget(imageView) {
                 @Override
                 protected void setResource(Bitmap resource) {
                     RoundedBitmapDrawable circularBitmapDrawable =
-                            RoundedBitmapDrawableFactory.create(MyApplication.getInstance().getResources(), resource);
+                            RoundedBitmapDrawableFactory.create(App.getInstance().getResources(), resource);
                     circularBitmapDrawable.setCircular(true);
                     imageView.setImageDrawable(circularBitmapDrawable);
                 }

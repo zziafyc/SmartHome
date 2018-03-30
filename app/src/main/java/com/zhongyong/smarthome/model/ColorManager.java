@@ -2,7 +2,7 @@ package com.zhongyong.smarthome.model;
 
 import android.content.Context;
 
-import com.zhongyong.smarthome.MyApplication;
+import com.zhongyong.smarthome.App;
 import com.zhongyong.smarthome.R;
 
 import java.util.ArrayList;
@@ -55,8 +55,8 @@ public class ColorManager {
 	public void setSkinColor(Context context, int position) {
 		int[] colorArr = context.getResources().getIntArray(
 				R.array.default_color_array);
-		MyApplication.mPreference.setSkinColorValue(colorArr[position]);
-		MyApplication.mPreference.setSkinColorPosition(position);
+		App.mPreference.setSkinColorValue(colorArr[position]);
+		App.mPreference.setSkinColorPosition(position);
 		notifyColorChanged(colorArr[position]);
 	}
 

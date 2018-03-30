@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/base_main_lyt"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/colorContentBg"
+              android:orientation="vertical">
+
+    <!--导入标题-->
+    <include layout="@layout/common_app_bar"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_8"
+        android:background="@drawable/top_bottom_border"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/margin_12"
+        android:paddingRight="@dimen/margin_12">
+
+        <!--手机号输入-->
+        <RelativeLayout
+            android:id="@+id/arp_phoneNumber_lyt"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_45">
+
+            <TextView
+                android:id="@+id/arp_phoneNumber_label"
+                style="@style/labelItemStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/telephone"/>
+
+            <EditText
+                android:id="@+id/arp_phoneNumber_edit"
+                style="@style/EditItemStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/arp_phoneNumber_label"
+                android:hint="@string/inputTelephone"
+                android:inputType="number"
+                android:text=""
+                android:textSize="@dimen/font_size_16"/>
+
+
+            <RelativeLayout
+                android:id="@+id/arp_clear_phone_lyt"
+                android:layout_width="@dimen/margin_45"
+                android:layout_height="@dimen/margin_45"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:visibility="visible">
+
+                <ImageView
+                    android:layout_width="@dimen/margin_14"
+                    android:layout_height="@dimen/margin_14"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/login_qingchu"
+                    android:visibility="gone"/>
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_8"
+        android:background="@drawable/top_bottom_border"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/margin_12"
+        android:paddingRight="@dimen/margin_12">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_45">
+
+            <TextView
+                android:id="@+id/ar_verifyTx_tv"
+                style="@style/labelItemStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="昵称"/>
+
+            <EditText
+                android:id="@+id/arp_verifyTx_name"
+                style="@style/EditItemStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/ar_verifyTx_tv"
+                android:hint="输入昵称"
+                android:inputType="text"
+                android:text=""
+                android:textSize="@dimen/font_size_16"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_8"
+        android:background="@drawable/top_bottom_border"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/margin_12"
+        android:paddingRight="@dimen/margin_12">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_45">
+
+            <TextView
+                android:id="@+id/ar_verifyTx_passwordInput"
+                style="@style/labelItemStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="密码"/>
+
+            <EditText
+                android:id="@+id/arp_verifyTx_password"
+                style="@style/EditItemStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/ar_verifyTx_passwordInput"
+                android:hint="输入密码"
+                android:inputType="text"
+                android:text=""
+                android:textSize="@dimen/font_size_16"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+
+    <!--下一步-->
+    <TextView
+        android:id="@+id/arp_next_btn"
+        style="@style/ButtonBlueItemStyle"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_45"
+        android:text="完成"/>
+</LinearLayout>

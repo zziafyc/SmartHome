@@ -24,20 +24,20 @@
         android:layout_marginLeft="@dimen/margin_12">
 
         <TextView
-            android:id="@+id/name"
+            android:id="@+id/nav_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/margin_16"
-            android:text="春哥的family"
+            android:text="点击登录"
             android:textSize="@dimen/fontSize_16"/>
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/navi_telephone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/name"
+            android:layout_below="@+id/nav_login"
             android:layout_marginTop="@dimen/margin_12"
-            android:text="房主：方应春 "
+            android:text="手机号"
             android:textSize="@dimen/fontSize_16"/>
     </RelativeLayout>
 </LinearLayout>

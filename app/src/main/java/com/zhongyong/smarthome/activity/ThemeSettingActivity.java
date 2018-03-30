@@ -4,7 +4,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 
-import com.zhongyong.smarthome.MyApplication;
+import com.zhongyong.smarthome.App;
 import com.zhongyong.smarthome.R;
 import com.zhongyong.smarthome.base.BaseActivity;
 import com.zhongyong.smarthome.model.ColorManager;
@@ -32,7 +32,7 @@ public class ThemeSettingActivity extends BaseActivity {
             View color = view.findViewById(R.id.motive_item_color);
             View selected = view.findViewById(R.id.motive_item_selected);
             color.setBackgroundColor(colorArr[i]);
-            if (colorArr[i] == MyApplication.mPreference.getSkinColorValue()) {
+            if (colorArr[i] == App.mPreference.getSkinColorValue()) {
                 selected.setVisibility(View.VISIBLE);
             }
             color.setOnClickListener(new OnSkinColorClickListener(i));

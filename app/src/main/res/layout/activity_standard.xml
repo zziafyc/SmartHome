@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.zhongyong.jamod.activity.StandardActivity">
+
+    <include layout="@layout/common_app_bar"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_12"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginLeft="@dimen/margin_12"
+            android:layout_marginTop="0.5dp"
+            android:background="@drawable/bottom_border"
+            android:gravity="center"
+            android:text="请编辑标准值"
+            android:textColor="@color/colorTitle"
+            android:textSize="16sp"/>
+
+        <EditText
+            android:id="@+id/acn_edt_value"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginLeft="@dimen/margin_12"
+            android:background="@drawable/bottom_border"
+            android:hint="自定义标准值"
+            android:paddingRight="@dimen/margin_12"
+            android:singleLine="true"
+            android:textColor="@color/colorText"
+            android:textCursorDrawable="@drawable/edittext_cursor"
+            android:textSize="14sp"/>
+    </LinearLayout>
+
+</LinearLayout>

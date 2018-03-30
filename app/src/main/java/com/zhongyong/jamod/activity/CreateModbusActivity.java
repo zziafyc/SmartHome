@@ -8,8 +8,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.reflect.TypeToken;
+import com.zhongyong.jamod.apis.ApiClient;
+import com.zhongyong.jamod.apis.MySubscriber;
 import com.zhongyong.jamod.model.ModBusGateWayModel;
+import com.zhongyong.smarthome.App;
 import com.zhongyong.smarthome.R;
+import com.zhongyong.smarthome.api.HttpResult;
 import com.zhongyong.smarthome.base.BaseActivity;
 import com.zhongyong.smarthome.utils.SharePreferenceUtils;
 import com.zhongyong.smarthome.utils.StringUtils;
@@ -20,6 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
+
+import static com.zhongyong.jamod.apis.ApiClient.call;
 
 /**
  * Created by fyc on 2017/12/28.
@@ -40,6 +46,7 @@ public class CreateModbusActivity extends BaseActivity {
     TextView titleTv;
     List<ModBusGateWayModel> mModBusGateWayModels;
     String preferenceGateWay;
+    String sceneId;
 
     @Override
     protected int getContentViewLayoutID() {
@@ -57,6 +64,7 @@ public class CreateModbusActivity extends BaseActivity {
             Bundle bundle = intent.getExtras();
             if (bundle != null) {
                 preferenceGateWay = bundle.getString("preferenceGateWay");
+                sceneId = bundle.getString("sceneId");
             }
         }
 
@@ -99,15 +107,39 @@ public class CreateModbusActivity extends BaseActivity {
 
                 }
                 ModBusGateWayModel newModel = new ModBusGateWayModel(nameEdt.getText().toString(), ipEdt.getText().toString(), Integer.parseInt(idEdt.getText().toString()));
-                mModBusGateWayModels = (List<ModBusGateWayModel>) SharePreferenceUtils.get(CreateModbusActivity.this, preferenceGateWay, new TypeToken<List<ModBusGateWayModel>>() {
-                }.getType());
-                if (mModBusGateWayModels == null) {
-                    mModBusGateWayModels = new ArrayList<>();
+                if (App.getUser() != null) {
+                    newModel.setUserId(App.getUser().getUserId());
+                    newModel.setSceneId(sceneId);
+                    call(ApiClient.getApis().addModBus(newModel), new MySubscriber<HttpResult<Void>>() {
+                        @Override
+                        public void onError(Throwable e) {
+                            showToast(getResources().getString(R.string.systemError));
+                        }
+
+                        @Override
+                        public void onNext(HttpResult<Void> result) {
+                            if (result.getResultCode() == 200) {
+                                showToast(result.getMessage());
+                                newModel.setFlag(true);
+                                EventBus.getDefault().post(newModel);
+                                finish();
+                            } else {
+                                showToast(result.getMessage());
+                            }
+                        }
+                    });
+
+                } else {
+                    mModBusGateWayModels = (List<ModBusGateWayModel>) SharePreferenceUtils.get(CreateModbusActivity.this, preferenceGateWay, new TypeToken<List<ModBusGateWayModel>>() {
+                    }.getType());
+                    if (mModBusGateWayModels == null) {
+                        mModBusGateWayModels = new ArrayList<>();
+                    }
+                    mModBusGateWayModels.add(newModel);
+                    SharePreferenceUtils.put(CreateModbusActivity.this, preferenceGateWay, mModBusGateWayModels);
+                    EventBus.getDefault().post(newModel);
+                    finish();
                 }
-                mModBusGateWayModels.add(newModel);
-                SharePreferenceUtils.put(CreateModbusActivity.this, preferenceGateWay, mModBusGateWayModels);
-                EventBus.getDefault().post(newModel);
-                finish();
             }
         });
 

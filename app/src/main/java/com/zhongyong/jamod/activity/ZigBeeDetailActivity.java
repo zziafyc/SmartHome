@@ -18,7 +18,7 @@ import android.widget.TextView;
 import com.fbee.zllctl.Contants;
 import com.fbee.zllctl.DeviceInfo;
 import com.fbee.zllctl.GatewayInfo;
-import com.zhongyong.smarthome.MyApplication;
+import com.zhongyong.smarthome.App;
 import com.zhongyong.smarthome.R;
 import com.zhongyong.smarthome.adapter.ViewHolder;
 import com.zhongyong.smarthome.base.BaseActivity;
@@ -67,32 +67,32 @@ public class ZigBeeDetailActivity extends BaseActivity {
                     if (isExist(uid) == -1) {
                         mList.add(deviceInfo);
                         mAdapter.notifyDataSetChanged();
-                        MyApplication.deviceInfos.add(deviceInfo);
+                        App.deviceInfos.add(deviceInfo);
                         if (deviceType == 0x0000 || deviceType == 0x0002 || deviceType == 0x0009 || deviceType == 0x0202 || (deviceType == 0x0200 && profileId == 0x0104)) {
                             //开关设备
-                            MyApplication.switchDeviceInfos.add(deviceInfo);
+                            App.switchDeviceInfos.add(deviceInfo);
                         } else if (deviceType == 0x0302) {
                             //温湿度传感器
-                            MyApplication.thtbDeviceInfos.add(deviceInfo);
+                            App.thtbDeviceInfos.add(deviceInfo);
                         } else if (deviceType == 0x0402 && ZoneType == 0x0015) {
                             //门磁传感器
-                            MyApplication.doorDeviceInfos.add(deviceInfo);
+                            App.doorDeviceInfos.add(deviceInfo);
                         } else if (deviceType == 0x0402 && ZoneType == 0x002B) {
                             //气体传感器
-                            MyApplication.gasDeviceInfos.add(deviceInfo);
+                            App.gasDeviceInfos.add(deviceInfo);
                         } else if (deviceType == 0x0402 && ZoneType == 0x8001) {
                             //一氧化碳传感器
-                            MyApplication.cogasDeviceInfos.add(deviceInfo);
+                            App.cogasDeviceInfos.add(deviceInfo);
                         } else if (deviceType == 0x0402 && (ZoneType == 0x0028 || ZoneType == 0x8000)) {
                             //烟雾探测器
-                            MyApplication.smokeDeviceInfos.add(deviceInfo);
+                            App.smokeDeviceInfos.add(deviceInfo);
                         }
                     } else {
-                        MyApplication.deviceInfos.set(isExist(uid), deviceInfo);
+                        App.deviceInfos.set(isExist(uid), deviceInfo);
                     }
                     break;
                 case Contants.ACTION_GET_GATEWAYINFO:
-                    MyApplication.gatewayInfo = (GatewayInfo) intent.getSerializableExtra("gatewayInfo");
+                    App.gatewayInfo = (GatewayInfo) intent.getSerializableExtra("gatewayInfo");
                     break;
 
             }
@@ -145,16 +145,16 @@ public class ZigBeeDetailActivity extends BaseActivity {
         ImageView imageView = holder.getSubView(R.id.item_Iv);
         imageView.setVisibility(View.VISIBLE);
         //开关设备
-        if (MyApplication.switchDeviceInfos != null && MyApplication.switchDeviceInfos.size() > 0) {
-            for (DeviceInfo deviceInfo : MyApplication.switchDeviceInfos) {
+        if (App.switchDeviceInfos != null && App.switchDeviceInfos.size() > 0) {
+            for (DeviceInfo deviceInfo : App.switchDeviceInfos) {
                 if (deviceInfo.getUId() == item.getUId()) {
                     if (deviceInfo.getDeviceState() == 0) {
-                        MyApplication.mSerial.setDeviceState(deviceInfo, 1);
+                        App.mSerial.setDeviceState(deviceInfo, 1);
                         deviceInfo.setDeviceState((byte) 1);
                         imageView.setBackgroundResource(R.drawable.switch_open);
                         holder.setBackgroundImage(R.id.item_type_logo, R.drawable.icon_device_switch_normal);
                     } else {
-                        MyApplication.mSerial.setDeviceState(deviceInfo, 0);
+                        App.mSerial.setDeviceState(deviceInfo, 0);
                         deviceInfo.setDeviceState((byte) 0);
                         imageView.setBackgroundResource(R.drawable.switch_close);
                         holder.setBackgroundImage(R.id.item_type_logo, R.drawable.icon_device_switch_pressed);
@@ -175,8 +175,8 @@ public class ZigBeeDetailActivity extends BaseActivity {
         } else {
             holder.setBackgroundImage(R.id.item_type_logo, R.drawable.icon_device_switch_pressed);
         }
-        if (MyApplication.switchDeviceInfos != null && MyApplication.switchDeviceInfos.size() > 0) {
-            for (DeviceInfo deviceInfo : MyApplication.switchDeviceInfos) {
+        if (App.switchDeviceInfos != null && App.switchDeviceInfos.size() > 0) {
+            for (DeviceInfo deviceInfo : App.switchDeviceInfos) {
                 if (deviceInfo.getUId() == item.getUId()) {
                     if (deviceInfo.getDeviceState() == 0) {
                         imageView.setBackgroundResource(R.drawable.switch_close);
@@ -269,7 +269,7 @@ public class ZigBeeDetailActivity extends BaseActivity {
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 bundle.putString("scene", flag);
-                go(ModBusGateWayActivity.class, bundle);
+                go(ModBusGateWayListActivity.class, bundle);
             }
         });
         connectStateTv.setOnClickListener(new View.OnClickListener() {
@@ -281,10 +281,10 @@ public class ZigBeeDetailActivity extends BaseActivity {
     }
 
     private int isExist(int uid) {
-        int size = MyApplication.deviceInfos.size();
+        int size = App.deviceInfos.size();
         int positon = -1;
         for (int i = 0; i < size; i++) {
-            if (uid == MyApplication.deviceInfos.get(i).getUId()) {
+            if (uid == App.deviceInfos.get(i).getUId()) {
                 positon = i;
                 return positon;
             }
@@ -301,10 +301,10 @@ public class ZigBeeDetailActivity extends BaseActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                int ret = MyApplication.mSerial.connectLANZll();  //本地连接
+                int ret = App.mSerial.connectLANZll();  //本地连接
                 if (ret > 0) {
-                    /*final String[] boxip = MyApplication.mSerial.getGatewayIps(ret);
-                    final String[] boxsnid = MyApplication.mSerial.getBoxSnids(ret);*/
+                    /*final String[] boxip = App.mSerial.getGatewayIps(ret);
+                    final String[] boxsnid = App.mSerial.getBoxSnids(ret);*/
                     if (flag.equals("library")) {
                         String[] boxip = {mGatewayTv.getText().toString()};
                         String[] boxsnid = {Constants.ZIGBEE_SN_LIBRARY};
@@ -326,13 +326,13 @@ public class ZigBeeDetailActivity extends BaseActivity {
                 //互联网连接
                /* int ret = 0;
                 if (flag.equals("library")) {
-                    // ret= MyApplication.mSerial.connectRemoteZll();
+                    // ret= App.mSerial.connectRemoteZll();
                 } else if (flag.equals("classroom")) {
-                    //ret= MyApplication.mSerial.connectRemoteZll();
+                    //ret= App.mSerial.connectRemoteZll();
                 } else if (flag.equals("kitchen")) {
-                    //ret= MyApplication.mSerial.connectRemoteZll();
+                    //ret= App.mSerial.connectRemoteZll();
                 } else if (flag.equals("laboratory")) {
-                    ret = MyApplication.mSerial.connectRemoteZll("111807", "e1wd");
+                    ret = App.mSerial.connectRemoteZll("111807", "e1wd");
                 }
                 if (ret > 0) {
                     runOnUiThread(new Runnable() {
@@ -344,8 +344,8 @@ public class ZigBeeDetailActivity extends BaseActivity {
                                     .setBgColor(SnackBarUtils.COLOR_WARNING)
                                     .setMessage("已连接网关")
                                     .show();
-                            MyApplication.mSerial.getDevices();
-                            MyApplication.mSerial.getGateWayInfo();
+                            App.mSerial.getDevices();
+                            App.mSerial.getGateWayInfo();
                         }
                     });
                 }*/
@@ -363,7 +363,7 @@ public class ZigBeeDetailActivity extends BaseActivity {
                         mGatewayTv.setText(boxip[k]);
                     }
                 });*/
-                int conRet = MyApplication.mSerial.connectLANZllByIp(boxip[i], boxsnid[i]);
+                int conRet = App.mSerial.connectLANZllByIp(boxip[i], boxsnid[i]);
                 if (conRet > 0) {
                     runOnUiThread(new Runnable() {
                         @Override
@@ -374,8 +374,8 @@ public class ZigBeeDetailActivity extends BaseActivity {
                                     .setBgColor(SnackBarUtils.COLOR_WARNING)
                                     .setMessage("已连接网关")
                                     .show();
-                            DeviceInfo[] deviceInfos = MyApplication.mSerial.getDevices();
-                            MyApplication.mSerial.getGateWayInfo();
+                            DeviceInfo[] deviceInfos = App.mSerial.getDevices();
+                            App.mSerial.getGateWayInfo();
                         }
                     });
                 }
@@ -388,7 +388,7 @@ public class ZigBeeDetailActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         unregisterReceiver(mReceiver);
-        MyApplication.getInstance().exit();
-        MyApplication.deviceInfos.clear();
+        App.getInstance().exit();
+        App.deviceInfos.clear();
     }
 }

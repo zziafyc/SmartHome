@@ -55,5 +55,46 @@
         <item name="android:windowNoTitle">true</item>
         <!-- 去掉头部 -->
     </style>
+    <style name="labelItemStyle">
+        <item name="android:textColor">@color/colorText</item>
+        <item name="android:textSize">@dimen/font_size_16</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+    <style name="EditItemStyle">
+        <item name="android:textCursorDrawable">@drawable/edittext_cursor</item>
+        <item name="android:textColor">@color/colorText</item>
+        <item name="android:textSize">@dimen/font_size_16</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:textColorHint">@color/colorHint</item>
+        <item name="android:inputType">phone</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLength">50</item>
+        <item name="android:layout_marginLeft">@dimen/margin_8</item>
+        <item name="android:paddingLeft">@dimen/margin_8</item>
+        <item name="android:background">@drawable/left_border</item>
+    </style>
+    <style name="EditNameItemStyle">
+        <item name="android:textCursorDrawable">@drawable/edittext_cursor</item>
+        <item name="android:textColor">@color/colorText</item>
+        <item name="android:textSize">@dimen/font_size_16</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:textColorHint">@color/colorHint</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:layout_marginLeft">@dimen/margin_8</item>
+        <item name="android:paddingLeft">@dimen/margin_8</item>
+        <item name="android:background">@drawable/left_border</item>
+    </style>
+    <style name="ButtonBlueItemStyle">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/font_size_18</item>
+        <item name="android:layout_marginLeft">@dimen/margin_12</item>
+        <item name="android:layout_marginRight">@dimen/margin_12</item>
+        <item name="android:layout_marginTop">@dimen/dis_20</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/bg_button_blue</item>
+    </style>
 
 </resources>

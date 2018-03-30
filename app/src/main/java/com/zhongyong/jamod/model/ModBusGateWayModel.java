@@ -7,23 +7,38 @@ import java.io.Serializable;
  */
 
 public class ModBusGateWayModel implements Serializable {
+    private int id;
+    private String userId;
+    private String sceneId;
     private String name;
     private String ip;
-    private int ref;
-    private int count;
     private int unitId;
+    private boolean flag;  //true表示服务端数据，false表示本地数据
 
-    public ModBusGateWayModel(String name,String ip, int unitId) {
-        this.name=name;
+    public ModBusGateWayModel() {
+    }
+
+    public ModBusGateWayModel(String name, String ip, int unitId) {
+        this.name = name;
         this.ip = ip;
         this.unitId = unitId;
     }
 
-    public ModBusGateWayModel(String ip, int ref, int count, int unitId) {
+    public ModBusGateWayModel(int id, String userId, String sceneId, String name, String ip, int unitId) {
+        this.id = id;
+        this.userId = userId;
+        this.sceneId = sceneId;
+        this.name = name;
         this.ip = ip;
-        this.ref = ref;
-        this.count = count;
         this.unitId = unitId;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getIp() {
@@ -32,22 +47,6 @@ public class ModBusGateWayModel implements Serializable {
 
     public void setIp(String ip) {
         this.ip = ip;
-    }
-
-    public int getRef() {
-        return ref;
-    }
-
-    public void setRef(int ref) {
-        this.ref = ref;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
     }
 
     public int getUnitId() {
@@ -64,5 +63,30 @@ public class ModBusGateWayModel implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+
+    public String getSceneId() {
+        return sceneId;
+    }
+
+    public void setSceneId(String sceneId) {
+        this.sceneId = sceneId;
+    }
+
+    public boolean isFlag() {
+        return flag;
+    }
+
+    public void setFlag(boolean flag) {
+        this.flag = flag;
     }
 }

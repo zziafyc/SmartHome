@@ -45,5 +45,15 @@ public class Constants {
     public static final String ZIGBEE_SN_CLASSROOM = "112e9596";
     public static final String ZIGBEE_SN_KITCHEN = "112e9793";
     public static final String ZIGBEE_SN_LABORATORY = "112e9742";
+    public static final String MODEBUS_STANDARD_PM = "150.0";
+    public static final String MODEBUS_STANDARD_CO2 = "2000.0";
+    public static final String MODEBUS_STANDARD_VOC = "0.75";
+    public static final String MODEBUS_STANDARD_HCHO = "0.1";
+    public static final String MODEBUS_STANDARD_TEMP = "无";
+    public static final String MODEBUS_STANDARD_HUMI = "无";
+
+    //后台访问地址
+    public static final String API_URL = "http://192.168.1.89:8080/";
+
 
 }
