@@ -230,7 +230,7 @@ public class MainActivity extends BaseActivity {
     public void getUser(User user) {
         if (App.getUser() != null) {
             loginTv.setText(user.getUserName());
-            telephoneTv.setText("手机号:" + user.getTelephone());
+           // telephoneTv.setText("手机号:" + user.getTelephone());
         }
     }
 }

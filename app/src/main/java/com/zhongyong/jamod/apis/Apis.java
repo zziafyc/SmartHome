@@ -42,7 +42,7 @@ public interface Apis {
     Observable<HttpResult<Void>> deleteModBus(@Query("id") int id);
 
     //这个登录
-    @GET("authWeb4/UserInfo")
+    @GET("authWeb4/UserInfo/")
     String loginToNiagara(@Header("authorization") String auth);
 
 

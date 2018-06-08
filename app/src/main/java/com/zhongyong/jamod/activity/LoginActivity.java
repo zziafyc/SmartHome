@@ -28,16 +28,23 @@ import com.zhongyong.smarthome.R;
 import com.zhongyong.smarthome.api.HttpResult;
 import com.zhongyong.smarthome.base.BaseActivity;
 import com.zhongyong.smarthome.utils.StringUtils;
+import com.zhongyong.speechawake.Constants;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.io.IOException;
 import java.util.Map;
 
 import butterknife.Bind;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import rx.Observable;
 import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 import static com.zhongyong.jamod.apis.ApiClient.call;
@@ -251,52 +258,57 @@ public class LoginActivity extends BaseActivity {
         Observable.create(new Observable.OnSubscribe<String>() {
             @Override
             public void call(Subscriber<? super String> subscriber) {
-                String result = ApiClient.getApis().loginToNiagara(auth);
-                if (result.contains("ok")) {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            showToast("绿能授权成功");
-                        }
-                    });
-                    subscriber.onNext(result);
-                } else {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            showToast("绿能平台授权失败！");
-                            return;
-                        }
-                    });
-                }
-            }
-        }).subscribeOn(Schedulers.newThread())
-                .observeOn(Schedulers.newThread())
-                .doOnNext(new Action1<String>() {
-                    @Override
-                    public void call(String s) {
-                        ApiClient.call(ApiClient.getApis().login(mUser), new MySubscriber<HttpResult<User>>() {
-                            @Override
-                            public void onError(Throwable e) {
-                                showToast(getResources().getString(R.string.systemError));
-                            }
+                OkHttpClient client = new OkHttpClient();
+                Request request = new Request.Builder()
+                        .url(Constants.API_URL_NIAGARA)
+                        .get()
+                        .addHeader("Authorization", auth)
+                        .addHeader("Cache-Control", "no-cache").build();
 
+                try {
+                    Response response = client.newCall(request).execute();
+                    String message = response.message();
+                    if (message.contains("OK")) {
+                        runOnUiThread(new Runnable() {
                             @Override
-                            public void onNext(HttpResult<User> result) {
-                                if (result.getResultCode() == 200) {
-                                    showToast(result.getMessage());
-                                    App.setUser(result.data);
-                                    EventBus.getDefault().post(result.data);
-                                    finish();
-                                } else {
-                                    showToast(result.getMessage());
-                                }
+                            public void run() {
+                                showToast("绿能平台授权成功！");
                             }
                         });
+                    } else {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                showToast("绿能平台授权失败！");
+                            }
+                        });
+                        return;
+                    }
+                    subscriber.onNext(response.message());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).flatMap(new Func1<String, Observable<HttpResult<User>>>() {
+            @Override
+            public Observable<HttpResult<User>> call(String s) {
+                return ApiClient.getApis().login(mUser);
+            }
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<HttpResult<User>>() {
+                    @Override
+                    public void call(HttpResult<User> result) {
+                        if (result.getResultCode() == 200) {
+                            showToast(result.getMessage());
+                            App.setUser(result.data);
+                            EventBus.getDefault().post(result.data);
+                            finish();
+                        } else {
+                            showToast(result.getMessage());
+                        }
                     }
                 });
-
-
     }
 
     private void register() {

@@ -27,9 +27,9 @@
             android:id="@+id/nav_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="@dimen/margin_16"
+            android:paddingTop="@dimen/margin_12"
             android:text="点击登录"
-            android:textSize="@dimen/fontSize_16"/>
+            android:textSize="@dimen/fontSize_18"/>
 
         <TextView
             android:id="@+id/navi_telephone"
@@ -38,6 +38,7 @@
             android:layout_below="@+id/nav_login"
             android:layout_marginTop="@dimen/margin_12"
             android:text="手机号"
-            android:textSize="@dimen/fontSize_16"/>
+            android:textSize="@dimen/fontSize_16"
+            android:visibility="gone"/>
     </RelativeLayout>
 </LinearLayout>

@@ -190,7 +190,6 @@ public class EnvironmentDetectorDetailActivity extends BaseActivity {
         });
 
     }
-
     private List<EnvironmentFactorModel> dealWithData(String response) {
         List<EnvironmentFactorModel> list = new ArrayList<>();
         //首先得到该字符串从第
@@ -272,15 +271,6 @@ public class EnvironmentDetectorDetailActivity extends BaseActivity {
         return true;
     }
 
-    @Subscribe
-    public void setStandard(StandardEvent event) {
-        if (event.getName().equals("standardValue")) {
-            mList.get(clickPosition).setStandard(event.getValue());
-            mAdapter.notifyDataSetChanged();
-        }
-
-    }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -290,5 +280,14 @@ public class EnvironmentDetectorDetailActivity extends BaseActivity {
         if (client != null) {
             client.close();
         }
+    }
+
+    @Subscribe
+    public void setStandard(StandardEvent event) {
+        if (event.getName().equals("standardValue")) {
+            mList.get(clickPosition).setStandard(event.getValue());
+            mAdapter.notifyDataSetChanged();
+        }
+
     }
 }

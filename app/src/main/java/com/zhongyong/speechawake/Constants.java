@@ -53,7 +53,8 @@ public class Constants {
     public static final String MODEBUS_STANDARD_HUMI = "无";
 
     //后台访问地址
-    public static final String API_URL = "http://192.168.1.89:8080/";
+    public static final String API_URL = "http://10.160.148.31:8080/";
+    public static final String API_URL_NIAGARA = "http://10.160.148.31/authWeb4/UserInfo/";
 
 
 }

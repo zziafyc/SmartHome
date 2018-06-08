@@ -53,7 +53,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/al_code_label_lyt"
-                android:hint="请输入用户名"/>
+                android:hint="请输入用户名"
+                android:inputType="text"/>
 
             <RelativeLayout
                 android:id="@+id/al_clear_phone_lyt"
