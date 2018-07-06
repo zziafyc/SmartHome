@@ -108,6 +108,7 @@
     <dimen name="dis_19">19dp</dimen>
     <dimen name="dis_17">17dp</dimen>
     <dimen name="dis_320">320dp</dimen>
+    <dimen name="dis_repair">60dp</dimen>
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>

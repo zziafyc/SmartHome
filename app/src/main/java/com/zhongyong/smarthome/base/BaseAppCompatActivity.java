@@ -44,7 +44,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         mContext = this;
         TAG = this.getClass().getSimpleName();
-        //设置为横屏
+        //设置为竖屏
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         //设置转场动画
         if (isOverridePendingTransition()) {

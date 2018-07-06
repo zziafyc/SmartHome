@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dis_repair"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/item_applyTime"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:background="@drawable/top_left_right"
+            android:gravity="center"
+            android:text="2018-06-01 10:03:17	"/>
+
+        <TextView
+            android:id="@+id/item_deviceNum"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/top_left_right"
+            android:gravity="center"
+            android:text="SSH-11001"/>
+
+        <TextView
+            android:id="@+id/item_sure"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dis_repair"
+            android:layout_weight="1"
+            android:background="@drawable/top_left_right"
+            android:gravity="center"
+            android:text="确认"
+            android:textColor="@color/colorBlue"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>

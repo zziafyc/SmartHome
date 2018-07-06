@@ -54,6 +54,7 @@ public class Constants {
 
     //后台访问地址
     public static final String API_URL = "http://10.160.148.31:8080/";
+    public static final String API_REPAIR_URL = "http://192.168.1.193:9095/";
     public static final String API_URL_NIAGARA = "http://10.160.148.31/authWeb4/UserInfo/";
 
 

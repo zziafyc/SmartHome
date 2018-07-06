@@ -1,90 +1,213 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorContentBg"
+    android:orientation="vertical"
+    android:scrollbars="none">
 
-    <!--实时监控部分-->
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/margin_65"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:paddingBottom="1dp">
 
-
-        <ImageView
-            android:id="@+id/fh_video_iv"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:background="@mipmap/room"/>
-
-        <ImageView
-
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_centerInParent="true"
-            android:background="@drawable/pause"/>
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/fh_bottom_ll"
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:layout_below="@+id/fh_video_iv"
-        android:background="@color/black"
-        android:visibility="gone">
-
-        <ImageView
-            android:id="@+id/fh_select_iv"
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
-            android:background="@drawable/pause2"/>
-
-        <TextView
-            android:id="@+id/fh_mode_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="高清"
-            android:textColor="@color/white"
-            android:textSize="18sp"/>
-
-        <ImageView
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            android:layout_alignBottom="@+id/fh_mode_tv"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginEnd="20dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/quanping"/>
-
-    </RelativeLayout>
-    <!--主页面下面模块-->
-
-    <!--滑动解锁模块-->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:id="@+id/imageView"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="右滑召唤小度"
-            android:textColor="@color/white"
-            android:textSize="@dimen/fontSize_15"/>
-    </RelativeLayout>
+            android:background="@drawable/bottom_border"
+            android:padding="@dimen/margin_12">
 
-</LinearLayout>
+            <ImageView
+                android:id="@+id/fm_head_img"
+                android:layout_width="@dimen/margin_65"
+                android:layout_height="@dimen/margin_65"
+                android:layout_marginRight="@dimen/margin_10"
+                android:src="@drawable/avatar_default"/>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:layout_toRightOf="@id/fm_head_img"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/fm_username_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="@dimen/dis_3"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:maxEms="10"
+                    android:paddingLeft="2.5dp"
+                    android:singleLine="true"
+                    android:text="管理员"
+                    android:textColor="@color/colorText"
+                    android:textSize="@dimen/font_size_16"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="2.5dp">
+
+                    <LinearLayout
+                        android:id="@+id/fm_editFile_lyt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="编辑资料"
+                            android:textColor="@color/colorBlue"
+                            android:textSize="@dimen/font_size_12"/>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="0.7dp"
+                        android:layout_height="@dimen/dis_13"
+                        android:layout_marginLeft="@dimen/margin_12"
+
+                        android:background="@color/colorBorder"/>
+
+                    <LinearLayout
+                        android:id="@+id/fm_myCard_lyt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/fm_confirm_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/margin_12"
+                            android:text="我的名片"
+                            android:textColor="@color/colorBlue"
+                            android:textSize="@dimen/font_size_12"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dis_20">
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/top_bottom_border"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/margin_12"
+            android:paddingTop="@dimen/dis_1">
+
+            <RelativeLayout
+
+                android:id="@+id/fm_repair_lyt"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_45"
+                android:background="@drawable/bottom_border"
+                android:paddingLeft="@dimen/dis_15"
+                android:paddingRight="@dimen/margin_12">
+
+                <ImageView
+                    android:id="@+id/fm_release_img"
+                    android:layout_width="@dimen/dis_20"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/repair"/>
+
+                <TextView
+                    style="@style/labelItemStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dis_27"
+                    android:layout_toRightOf="@id/fm_release_img"
+                    android:text="维修申请"/>
+
+                <ImageView
+                    android:layout_width="@dimen/margin_8"
+                    android:layout_height="@dimen/margin_14"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/login_zhankai"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/fm_maintenance_lyt"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_45"
+                android:background="@drawable/bottom_border"
+                android:paddingLeft="@dimen/dis_15"
+                android:paddingRight="@dimen/margin_12">
+
+                <ImageView
+                    android:id="@+id/fm_participation_img"
+                    android:layout_width="@dimen/dis_20"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/maintenance"/>
+
+                <TextView
+                    style="@style/labelItemStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dis_27"
+                    android:layout_toRightOf="@id/fm_participation_img"
+                    android:text="保养申请"/>
+
+                <ImageView
+                    android:layout_width="@dimen/margin_8"
+                    android:layout_height="@dimen/margin_14"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/login_zhankai"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/fm_setting_lyt"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_45"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/top_bottom_border"
+            android:paddingLeft="@dimen/dis_27"
+            android:paddingRight="@dimen/margin_12">
+
+            <ImageView
+                android:id="@+id/fm_setting_img"
+                android:layout_width="@dimen/dis_20"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@drawable/me_shezhi"/>
+
+            <TextView
+                style="@style/labelItemStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dis_27"
+                android:layout_toRightOf="@id/fm_setting_img"
+                android:text="推送设置"/>
+
+            <ImageView
+                android:layout_width="@dimen/margin_8"
+                android:layout_height="@dimen/margin_14"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/login_zhankai"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+</ScrollView>

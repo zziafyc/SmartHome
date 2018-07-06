@@ -1,23 +1,26 @@
 package com.zhongyong.smarthome.fragment;
 
-import android.os.Vibrator;
-import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.zhongyong.smarthome.R;
+import com.zhongyong.smarthome.activity.MaintenanceActivity;
+import com.zhongyong.smarthome.activity.PushSettingActivity;
+import com.zhongyong.smarthome.activity.RepairActivity;
 import com.zhongyong.smarthome.base.BaseFragment;
 
 import butterknife.Bind;
-
-import static android.content.Context.VIBRATOR_SERVICE;
 
 /**
  * Created by fyc on 2017/7/26.
  */
 
 public class HomeFragment extends BaseFragment {
-    @Bind(R.id.imageView)
-    ImageView imageView;
-    private Vibrator vibrator;
+    @Bind(R.id.fm_repair_lyt)
+    RelativeLayout repairLayout;
+    @Bind(R.id.fm_maintenance_lyt)
+    RelativeLayout maintenanceLayout;
+    @Bind(R.id.fm_setting_lyt)
+    RelativeLayout pushSettingLayout;
 
     @Override
     protected int getContentViewLayout() {
@@ -26,8 +29,6 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     protected void initViews() {
-        // 获取系统振动器服务
-        vibrator = (Vibrator) getActivity().getSystemService(VIBRATOR_SERVICE);
 
     }
 
@@ -43,7 +44,15 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     protected void initListener() {
-        // 设置滑动解锁-解锁的监听
+        repairLayout.setOnClickListener(v -> {
+            go(RepairActivity.class);
+        });
+        maintenanceLayout.setOnClickListener(v->{
+            go(MaintenanceActivity.class);
+        });
+        pushSettingLayout.setOnClickListener(v->{
+            go(PushSettingActivity.class);
+        });
     }
 
     @Override
